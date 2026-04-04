@@ -36,4 +36,7 @@ RUN chmod +x /entrypoint.sh
 RUN echo "memory_limit=-1" > /usr/local/etc/php/conf.d/docker-php-memlimit.ini \
     && echo "max_execution_time=0" >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini
 
+RUN sed -ri -e 's!/var/www/html!/var/www/html/pillbox/public!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/html!/var/www/html/pillbox/public!g' /etc/apache2/apache2.conf
+
 ENTRYPOINT ["/entrypoint.sh"]
