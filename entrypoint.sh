@@ -2,11 +2,12 @@
 set -e
 
 echo "Configurando permisos..."
+# Damos la propiedad a www-data (el usuario de Apache)
 chown -R www-data:www-data /var/www/html
 
-# Si ya existe Laravel, ajustamos storage
-if [ -d "/var/www/html/storage" ]; then
-    chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+# Permisos específicos para Laravel
+if [ -d "/var/www/html/pillbox/storage" ]; then
+    chmod -R 775 /var/www/html/pillbox/storage /var/www/html/pillbox/bootstrap/cache
 fi
 
 echo "Iniciando Apache..."
