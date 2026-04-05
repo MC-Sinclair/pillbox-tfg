@@ -2,6 +2,9 @@ FROM php:8.3-apache
 
 RUN apt-get update && apt-get install -y \
     git zip unzip libzip-dev libonig-dev \
+    curl \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
     && docker-php-ext-install pdo pdo_mysql zip opcache \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 

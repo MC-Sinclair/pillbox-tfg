@@ -9,6 +9,12 @@ if [ -d "/var/www/html/pillbox" ]; then
     cd /var/www/html/pillbox
     composer install --no-dev --optimize-autoloader --no-interaction
 
+    echo "Instalando dependencias de Node..."
+    npm install
+
+    echo "Compilando assets con Vite..."
+    npm run build
+
     echo "Ejecutando migraciones..."
     php artisan migrate --force
 
