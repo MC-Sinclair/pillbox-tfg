@@ -5,6 +5,10 @@ echo "Configurando permisos de la raíz..."
 chown -R www-data:www-data /var/www/html
 
 if [ -d "/var/www/html/pillbox" ]; then
+    echo "Instalando dependencias de Composer..."
+    cd /var/www/html/pillbox
+    composer install --no-dev --optimize-autoloader --no-interaction
+
     echo "Ajustando permisos de escritura para Laravel en Pillbox..."
     chmod -R 775 /var/www/html/pillbox/storage
     chmod -R 775 /var/www/html/pillbox/bootstrap/cache
