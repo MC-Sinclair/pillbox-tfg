@@ -36,4 +36,6 @@ RUN chmod +x /entrypoint.sh
 RUN echo "memory_limit=-1" > /usr/local/etc/php/conf.d/docker-php-memlimit.ini \
     && echo "max_execution_time=0" >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini
 
+# Copiamos nuestra configuración de Apache al contenedor
+COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 ENTRYPOINT ["/entrypoint.sh"]
