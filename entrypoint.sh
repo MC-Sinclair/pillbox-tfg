@@ -5,8 +5,9 @@ echo "Configurando permisos de la raíz..."
 chown -R www-data:www-data /var/www/html
 
 if [ -d "/var/www/html/pillbox" ]; then
-    echo "Instalando dependencias de Composer..."
     cd /var/www/html/pillbox
+
+    echo "Instalando dependencias de Composer..."
     composer install --no-dev --optimize-autoloader --no-interaction
 
     echo "Instalando dependencias de Node..."
@@ -14,6 +15,9 @@ if [ -d "/var/www/html/pillbox" ]; then
 
     echo "Compilando assets con Vite..."
     npm run build
+
+    echo "Configurando HTTPS..."
+    php artisan config:cache
 
     echo "Ejecutando migraciones..."
     php artisan migrate --force
