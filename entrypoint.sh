@@ -9,6 +9,9 @@ if [ -d "/var/www/html/pillbox" ]; then
     cd /var/www/html/pillbox
     composer install --no-dev --optimize-autoloader --no-interaction
 
+    echo "Ejecutando migraciones..."
+    php artisan migrate --force
+
     echo "Ajustando permisos de escritura para Laravel en Pillbox..."
     chmod -R 775 /var/www/html/pillbox/storage
     chmod -R 775 /var/www/html/pillbox/bootstrap/cache
