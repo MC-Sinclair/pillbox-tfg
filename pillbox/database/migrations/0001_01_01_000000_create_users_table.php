@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['gerocultora', 'medico', 'admin']);
+            $table->boolean('active')->default(true);
+            $table->foreignId('residence_id')->constrained()->cascadeOnDelete();
             $table->rememberToken();
             $table->timestamps();
         });

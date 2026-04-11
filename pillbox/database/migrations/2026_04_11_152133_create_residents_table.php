@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('residents', function (Blueprint $table) {
             $table->id();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->date('birth_date');
+            $table->string('room');
+            $table->string('photo')->nullable();
+            $table->string('doctor')->nullable();
+            $table->enum('status', ['active', 'inactive', 'deceased', 'transferred'])->default('active');
+            $table->foreignId('residence_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('administrations', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('prescription_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
+            $table->datetime('scheduled_at');
+            $table->datetime('administered_at')->nullable();
+            $table->enum('status', ['pending', 'administered', 'refused', 'difficulty'])->default('pending');
+            $table->text('notes')->nullable();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 
