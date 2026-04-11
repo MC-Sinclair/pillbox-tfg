@@ -31,4 +31,20 @@ class User extends Authenticatable
             'two_factor_confirmed_at' => 'datetime',
         ];
     }
+
+    public function residence(){
+        return $this->belongsTo(Residence::class);
+    }
+
+    public function prescriptions(){
+        return $this->hasMany(Prescription::class);
+    }
+
+    public function administrations(){
+        return $this->hasMany(Administration::class);
+    }
+
+    public function resident(){
+        return $this->belongsToMany(Resident::class);
+    }
 }
