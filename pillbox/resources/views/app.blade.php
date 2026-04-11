@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Klk menol</h2>
+    <h2>PillBox llega pronto...</h2>
 </body>
 </html>
