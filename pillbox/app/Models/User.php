@@ -11,24 +11,20 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 
-#[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, TwoFactorAuthenticatable;
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    protected $guarded = ['id'];
+
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'email_verified_at'       => 'datetime',
             'two_factor_confirmed_at' => 'datetime',
+            'password'                => 'hashed',
+            'active'                  => 'boolean',
         ];
     }
 
@@ -44,7 +40,8 @@ class User extends Authenticatable
         return $this->hasMany(Administration::class);
     }
 
-    public function resident(){
+    public function residents(){
         return $this->belongsToMany(Resident::class);
     }
+    
 }

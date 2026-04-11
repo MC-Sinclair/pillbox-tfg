@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Residence extends Model
 {
     //
+    protected $guarded = ['id'];
+
     public function users(){
         return $this->hasMany(User::class);
     }

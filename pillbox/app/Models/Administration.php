@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Administration extends Model
 {
     //
+    protected $guarded = ['id'];
+    protected function casts(): array{
+        return [
+            'scheduled_at'    => 'datetime',
+            'administered_at' => 'datetime',
+        ];
+    }
     public function prescription(){
         return $this->belongsTo(Prescription::class);
     }
