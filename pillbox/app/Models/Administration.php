@@ -8,6 +8,7 @@ class Administration extends Model
 {
     //
     protected $guarded = ['id'];
+    const UPDATED_AT = null;
     protected function casts(): array{
         return [
             'scheduled_at'    => 'datetime',

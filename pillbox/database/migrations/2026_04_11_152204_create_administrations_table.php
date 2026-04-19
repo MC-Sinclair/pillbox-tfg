@@ -19,7 +19,7 @@ return new class extends Migration
             $table->datetime('administered_at')->nullable();
             $table->enum('status', ['pending', 'administered', 'refused', 'difficulty'])->default('pending');
             $table->text('notes')->nullable();
-            $table->timestamp('created_at')->useCurrent();
+            $table->timestamps();
         });
     }
 
