@@ -5,7 +5,11 @@ use App\Http\Controllers\Medico;
 use App\Http\Controllers\PanelController;
 use Illuminate\Support\Facades\Route;
 
-Route::inertia('/', 'Landing')->name('landing');
+Route::inertia('/', 'Landing')->name('home');
+
+Route::middleware(['auth'])->group(function () {
+    Route::inertia('dashboard', 'dashboard')->name('dashboard');
+});
 
 Route::middleware(['auth', 'role:gerocultora'])->group(function () {
     Route::get('/panel', [PanelController::class, 'index'])->name('panel.index');
