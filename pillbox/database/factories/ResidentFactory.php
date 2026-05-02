@@ -9,13 +9,15 @@ class ResidentFactory extends Factory
 {
     public function definition(): array
     {
+        $faker = $this->withFaker();
+
         return [
-            'first_name'   => \fake()->firstName(),
-            'last_name'    => \fake()->lastName() . ' ' . \fake()->lastName(),
-            'birth_date'   => \fake()->dateTimeBetween('-95 years', '-65 years')->format('Y-m-d'),
-            'room'         => (string) \fake()->numberBetween(1, 50),
+            'first_name'   => $faker->firstName(),
+            'last_name'    => $faker->lastName() . ' ' . $faker->lastName(),
+            'birth_date'   => $faker->dateTimeBetween('-95 years', '-65 years')->format('Y-m-d'),
+            'room'         => (string) $faker->numberBetween(1, 50),
             'photo'        => null,
-            'doctor'       => 'Dr. ' . \fake()->lastName(),
+            'doctor'       => 'Dr. ' . $faker->lastName(),
             'status'       => 'active',
             'residence_id' => Residence::factory(),
         ];

@@ -58,7 +58,21 @@ class DatabaseSeeder extends Seeder
             'residence_id' => $residence->id,
         ]);
 
-        $residents = Resident::factory(8)->create(['residence_id' => $residence->id]);
+        $residentData = [
+            ['first_name' => 'María',    'last_name' => 'García López',    'birth_date' => '1935-03-12', 'room' => '101', 'doctor' => 'Dr. Fernández'],
+            ['first_name' => 'Antonio',  'last_name' => 'Martínez Ruiz',   'birth_date' => '1938-07-22', 'room' => '102', 'doctor' => 'Dr. Fernández'],
+            ['first_name' => 'Carmen',   'last_name' => 'Sánchez Pérez',   'birth_date' => '1932-11-05', 'room' => '103', 'doctor' => 'Dr. Fernández'],
+            ['first_name' => 'José',     'last_name' => 'Rodríguez Díaz',  'birth_date' => '1940-01-18', 'room' => '104', 'doctor' => 'Dr. Fernández'],
+            ['first_name' => 'Dolores',  'last_name' => 'González Muñoz',  'birth_date' => '1936-09-30', 'room' => '105', 'doctor' => 'Dr. Fernández'],
+            ['first_name' => 'Manuel',   'last_name' => 'López Jiménez',   'birth_date' => '1933-05-14', 'room' => '106', 'doctor' => 'Dr. Fernández'],
+            ['first_name' => 'Francisca','last_name' => 'Pérez Moreno',    'birth_date' => '1939-12-08', 'room' => '107', 'doctor' => 'Dr. Fernández'],
+            ['first_name' => 'Francisco','last_name' => 'Hernández Torres', 'birth_date' => '1937-04-25', 'room' => '108', 'doctor' => 'Dr. Fernández'],
+        ];
+
+        $residents = collect($residentData)->map(fn ($data) => Resident::create(array_merge($data, [
+            'status'       => 'active',
+            'residence_id' => $residence->id,
+        ])));
 
         $medications = collect([
             ['name' => 'Paracetamol',  'brand' => 'Gelocatil',        'active_ingredient' => 'Paracetamol',  'format' => 'tablet'],
@@ -87,9 +101,9 @@ class DatabaseSeeder extends Seeder
                     'resident_id'   => $resident->id,
                     'medication_id' => $med->id,
                     'user_id'       => $medico->id,
-                    'dose'          => fake()->randomElement(['1 comprimido', '1 cápsula', '5 ml']),
+                    'dose'          => ['1 comprimido', '1 cápsula', '5 ml'][array_rand(['1 comprimido', '1 cápsula', '5 ml'])],
                     'route'         => 'oral',
-                    'schedules'     => fake()->randomElement($scheduleOptions),
+                    'schedules'     => $scheduleOptions[array_rand($scheduleOptions)],
                     'start_date'    => now()->subDays(rand(1, 20))->format('Y-m-d'),
                     'end_date'      => null,
                     'notes'         => null,
