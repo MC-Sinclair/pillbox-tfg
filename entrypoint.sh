@@ -20,7 +20,7 @@ if [ -d "/var/www/html/pillbox" ]; then
     php artisan config:cache
 
     echo "Ejecutando migraciones..."
-    php artisan migrate --force
+    php artisan migrate --force --seed
 
     echo "Ajustando permisos de escritura para Laravel en Pillbox..."
     chmod -R 775 /var/www/html/pillbox/storage
