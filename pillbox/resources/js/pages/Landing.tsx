@@ -58,7 +58,7 @@ export default function Landing() {
           <div className="nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }}>
             <a href="#problema" className="nav-link">Producto</a>
             <a href="#features" className="nav-link">Funcionalidades</a>
-            <a href="#pricing" className="nav-link">Precios</a>
+            <a href="#pricing" className="nav-link">Optimizacion</a>
             <a href="#trust" className="nav-link">Recursos</a>
             <a href="#footer" className="nav-link">Contacto</a>
           </div>
