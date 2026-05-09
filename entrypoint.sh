@@ -13,8 +13,10 @@ if [ -d "/var/www/html/pillbox" ]; then
     echo "Compilando assets con Vite..."
     npm run build
 
-    echo "Generando APP_KEY si no existe..."
-    php artisan key:generate --no-interaction --force
+    if [ -z "$APP_KEY" ]; then
+        echo "Generando APP_KEY..."
+        php artisan key:generate --no-interaction --force
+    fi
 
     echo "Cacheando configuracion..."
     php artisan config:cache
