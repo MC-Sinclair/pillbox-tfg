@@ -52,7 +52,17 @@ export default function Landing() {
   return (
     <>
       {/* ── NAVBAR ─────────────────────────────────────────────────── */}
-      <nav id="navbar" aria-label="Navegación principal" className={navScrolled ? 'scrolled' : ''}>
+      <nav
+        id="navbar"
+        aria-label="Navegación principal"
+        className={navScrolled ? 'scrolled' : ''}
+        style={navScrolled ? {
+          background: 'rgba(216, 218, 222, 0.43)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          boxShadow: '0 1px 0 rgba(255, 255, 255, 0.08)',
+        } : {}}
+      >
         <div className="max-content" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '1.25rem', paddingBottom: '1.25rem' }}>
           <a href="#" className="nav-logo" aria-label="PillBox – inicio">PillBox</a>
           <div className="nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }}>
