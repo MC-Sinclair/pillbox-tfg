@@ -154,6 +154,8 @@ body {
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   box-shadow: none;
+  border-radius: 0;
+  padding: 0;
 }
 
 #navbar.scrolled #log {
