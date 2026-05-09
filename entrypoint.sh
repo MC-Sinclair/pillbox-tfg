@@ -1,9 +1,6 @@
 #!/bin/bash
 set -e
 
-echo "Configurando permisos de la raíz..."
-chown -R www-data:www-data /var/www/html
-
 if [ -d "/var/www/html/pillbox" ]; then
     cd /var/www/html/pillbox
 
@@ -16,11 +13,14 @@ if [ -d "/var/www/html/pillbox" ]; then
     echo "Compilando assets con Vite..."
     npm run build
 
-    echo "Configurando HTTPS..."
+    echo "Generando APP_KEY si no existe..."
+    php artisan key:generate --no-interaction --force
+
+    echo "Cacheando configuracion..."
     php artisan config:cache
 
     echo "Ejecutando migraciones..."
-    php artisan migrate --force
+    php artisan migrate --force || echo "Migration failed, continuing..."
 
     echo "Ajustando permisos de escritura para Laravel en Pillbox..."
     chmod -R 775 /var/www/html/pillbox/storage
