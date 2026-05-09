@@ -57,7 +57,7 @@ export default function Landing() {
         aria-label="Navegación principal"
         className={navScrolled ? 'scrolled' : ''}
         style={navScrolled ? {
-          background: 'rgba(216, 218, 222, 0.43)',
+          background: 'rgba(216, 218, 222, 0.17)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
           boxShadow: '0 1px 0 rgba(255, 255, 255, 0.08)',
