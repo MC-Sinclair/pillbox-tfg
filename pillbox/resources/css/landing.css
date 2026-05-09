@@ -132,15 +132,21 @@ body {
 }
 
 #navbar.scrolled {
-  background: rgba(246, 246, 247, 0.199);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.158);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 #navbar.scrolled .nav-link {
   background-color: rgba(0, 0, 0, 0);
   color: #f7f7f7;
+}
+
+#navbar.scrolled .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.158);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 }
 
 #navbar.scrolled .nav-links-desktop {
@@ -185,8 +191,9 @@ body {
 .nav-links-desktop {
   background-color: rgba(255, 255, 255, 0.158);
   backdrop-filter: blur(15px);
-  border-radius: 20px;
+  border-radius: 200px;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
+  padding: 5px;
 }
 
 /* Drawer */
@@ -480,7 +487,7 @@ body {
 .solucion-card {
   border-radius: 1.5rem;
   padding: 2.5rem;
-  background: rgb(193, 222, 247);
+  background: rgb(255, 254, 238);
   box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.363);
   transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
@@ -494,7 +501,7 @@ body {
   font-family: var(--font-heading);
   font-style: italic;
   font-size: 3.5rem;
-  color: #e48555;
+  color: #55abe4;
   line-height: 1;
   margin-bottom: 1rem;
 }
@@ -545,10 +552,10 @@ body {
 .feature-label {
   font-family: var(--font-body);
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: bold;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(248, 177, 110, 0.85);
+  color: rgb(242, 156, 6);
   margin-bottom: 1rem;
 }
 
@@ -1127,15 +1134,34 @@ body {
 }
 
 @media (max-width: 900px) {
-  #footer { padding: 200px 1.25rem 1.25rem; }
-  .footer-panel { padding: 2.5rem 2rem 1.5rem; }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  #footer {
+    padding: 200px 1.25rem 1.25rem;
+  }
+
+  .footer-panel {
+    padding: 2.5rem 2rem 1.5rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
 }
 
 @media (max-width: 540px) {
-  #footer { padding: 160px 0.75rem 0.75rem; }
-  .footer-panel { padding: 2rem 1.5rem 1.5rem; border-radius: 12px; }
-  .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+  #footer {
+    padding: 160px 0.75rem 0.75rem;
+  }
+
+  .footer-panel {
+    padding: 2rem 1.5rem 1.5rem;
+    border-radius: 12px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
 }
 
 /* ─── Stats ──────────────────────────────────────────────────────────── */
