@@ -11,7 +11,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     const getInitials = useInitials()
 
     return (
-        <div className="min-h-screen bg-background flex flex-col">
+        <div className="min-h-screen flex flex-col">
             <header className="border-b border-border/60 bg-background/95 backdrop-blur-sm sticky top-0 z-10">
                 <div className="mx-auto flex h-14 max-w-5xl items-center px-6">
                     <div className="flex items-center gap-2">

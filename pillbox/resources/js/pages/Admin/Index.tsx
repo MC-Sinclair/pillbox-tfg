@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Badge } from '@/components/ui/badge'
-import '@/../../resources/css/admin.css'
+import '@/../css/admin.css'
 
 type User = {
     id: number
@@ -66,20 +66,17 @@ function TabNav({ active }: { active: string }) {
         { key: 'medicamentos', label: 'Medicamentos', href: '/admin/medicamentos' },
     ]
     return (
-        <div className="flex gap-6 border-b mb-6">
+        <nav className="admin-tabs">
             {tabs.map((t) => (
                 <Link
                     key={t.key}
                     href={t.href}
-                    className={`pb-2 text-sm font-medium transition-colors ${active === t.key
-                            ? 'border-b-2 border-primary text-primary'
-                            : 'text-muted-foreground hover:text-foreground'
-                        }`}
+                    className={`admin-tab${active === t.key ? ' active' : ''}`}
                 >
                     {t.label}
                 </Link>
             ))}
-        </div>
+        </nav>
     )
 }
 
@@ -132,24 +129,24 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
     }
 
     return (
-        <div className="relative">
-            <div className="flex flex-col gap-3">
+        <div className="admin-user-section">
+            <ul className="admin-user-list">
                 {users.map((user) => (
-                    <div key={user.id} className="flex items-center gap-4 rounded-xl border bg-card p-4">
-                        <div className="text-muted-foreground">
+                    <li key={user.id} className="admin-user-card">
+                        <div className="admin-user-avatar">
                             <UserCircle size={48} />
                         </div>
-                        <div className="flex-1 min-w-0">
-                            <p className="font-semibold truncate">{user.name}</p>
-                            <p className="text-sm text-muted-foreground truncate">{user.email}</p>
-                            <div className="flex gap-2 mt-1">
+                        <div className="admin-user-info">
+                            <p className="admin-user-name">{user.name}</p>
+                            <p className="admin-user-email">{user.email}</p>
+                            <div className="admin-user-badges">
                                 <Badge variant="secondary">{ROLE_LABELS[user.role] ?? user.role}</Badge>
                                 <Badge variant={user.active ? 'default' : 'destructive'}>
                                     {user.active ? 'Activo' : 'Inactivo'}
                                 </Badge>
                             </div>
                         </div>
-                        <div className="flex gap-2 shrink-0">
+                        <div className="admin-user-actions">
                             <Button size="sm" className="bg-green-500 hover:bg-green-600 text-white" onClick={() => openAssign(user)}>
                                 Pacientes asignados
                             </Button>
@@ -160,15 +157,11 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
                                 Eliminar
                             </Button>
                         </div>
-                    </div>
+                    </li>
                 ))}
-            </div>
+            </ul>
 
-            {/* Botón añadir */}
-            <button
-                onClick={() => setAddOpen(true)}
-                className="fixed bottom-8 right-8 w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg flex items-center justify-center"
-            >
+            <button className="admin-fab" onClick={() => setAddOpen(true)}>
                 <Plus size={24} />
             </button>
 
@@ -303,19 +296,19 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
 // ── Tab Residentes (stub — misma estructura) ─────────────────────────────────
 function TabResidentes({ residents = [], gerocultoras = [] }: { residents: Resident[]; gerocultoras: { id: number; name: string }[] }) {
     return (
-        <div className="text-muted-foreground text-sm">
+        <div className="admin-stub">
             <p>Tab Residentes — proximamente</p>
-            <p className="mt-1">{residents.length} residentes · {gerocultoras.length} gerocultoras disponibles</p>
+            <p>{residents.length} residentes · {gerocultoras.length} gerocultoras disponibles</p>
         </div>
     )
 }
 
-// ── Tab Medicamentos (stub — misma estructura) ───────────────────────────────
+// ── Tab Medicamentos (stub) ──────────────────────────────────────────────────
 function TabMedicamentos({ medications = [] }: { medications: Medication[] }) {
     return (
-        <div className="text-muted-foreground text-sm">
+        <div className="admin-stub">
             <p>Tab Medicamentos — proximamente</p>
-            <p className="mt-1">{medications.length} medicamentos</p>
+            <p>{medications.length} medicamentos</p>
         </div>
     )
 }
@@ -323,8 +316,8 @@ function TabMedicamentos({ medications = [] }: { medications: Medication[] }) {
 // ── Page ─────────────────────────────────────────────────────────────────────
 export default function AdminIndex({ tab, users = [], residents = [], gerocultoras = [], medications = [] }: Props) {
     return (
-        <div className="p-6 max-w-5xl mx-auto">
-            <h1 className="text-2xl font-bold mb-6">Panel de administración</h1>
+        <div className="admin-page">
+            <h1 className="admin-title">Panel de administración</h1>
             <TabNav active={tab} />
             {tab === 'usuarios' && <TabUsuarios users={users} residents={residents} />}
             {tab === 'residentes' && <TabResidentes residents={residents} gerocultoras={gerocultoras} />}
