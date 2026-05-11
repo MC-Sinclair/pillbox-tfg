@@ -16,9 +16,21 @@ Route::middleware(['auth', 'role:gerocultora'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/usuarios',     [Admin\UserController::class,      'index'])->name('usuarios.index');
-    Route::get('/residentes',   [Admin\ResidentController::class,  'index'])->name('residentes.index');
-    Route::get('/medicamentos', [Admin\MedicationController::class,'index'])->name('medicamentos.index');
+    Route::get('/usuarios',          [Admin\UserController::class,      'index'])->name('usuarios.index');
+    Route::post('/usuarios',         [Admin\UserController::class,      'store'])->name('usuarios.store');
+    Route::put('/usuarios/{user}',   [Admin\UserController::class,      'update'])->name('usuarios.update');
+    Route::delete('/usuarios/{user}',[Admin\UserController::class,      'destroy'])->name('usuarios.destroy');
+
+    Route::get('/residentes',                          [Admin\ResidentController::class, 'index'])->name('residentes.index');
+    Route::post('/residentes',                         [Admin\ResidentController::class, 'store'])->name('residentes.store');
+    Route::put('/residentes/{resident}',               [Admin\ResidentController::class, 'update'])->name('residentes.update');
+    Route::delete('/residentes/{resident}',            [Admin\ResidentController::class, 'destroy'])->name('residentes.destroy');
+    Route::post('/residentes/{resident}/gerocultoras', [Admin\ResidentController::class, 'assignGerocultoras'])->name('residentes.gerocultoras');
+
+    Route::get('/medicamentos',              [Admin\MedicationController::class, 'index'])->name('medicamentos.index');
+    Route::post('/medicamentos',             [Admin\MedicationController::class, 'store'])->name('medicamentos.store');
+    Route::put('/medicamentos/{medication}', [Admin\MedicationController::class, 'update'])->name('medicamentos.update');
+    Route::delete('/medicamentos/{medication}', [Admin\MedicationController::class, 'destroy'])->name('medicamentos.destroy');
 });
 
 Route::middleware(['auth', 'role:medico'])->prefix('medico')->name('medico.')->group(function () {
