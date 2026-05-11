@@ -4,14 +4,20 @@ set -e
 if [ -d "/var/www/html/pillbox" ]; then
     cd /var/www/html/pillbox
 
-    echo "Instalando dependencias de Composer..."
-    composer install --no-dev --optimize-autoloader --no-interaction
+    if [ ! -d "vendor" ]; then
+        echo "Instalando dependencias de Composer..."
+        composer install --no-dev --optimize-autoloader --no-interaction
+    fi
 
-    echo "Instalando dependencias de Node..."
-    npm install
+    if [ ! -d "node_modules" ]; then
+        echo "Instalando dependencias de Node..."
+        npm install
+    fi
 
-    echo "Compilando assets con Vite..."
-    npm run build
+    if [ ! -d "public/build" ]; then
+        echo "Compilando assets con Vite..."
+        npm run build
+    fi
 
     if [ -z "$APP_KEY" ]; then
         echo "Generando APP_KEY..."
