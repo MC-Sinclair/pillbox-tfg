@@ -147,27 +147,27 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
 
             {/* Modal Añadir */}
             <Dialog open={addOpen} onOpenChange={setAddOpen}>
-                <DialogContent className="max-w-md">
+                <DialogContent className="max-w-md modal-usuario">
                     <DialogHeader>
                         <DialogTitle>Añadir usuario</DialogTitle>
                     </DialogHeader>
-                    <div className="flex justify-center mb-4">
+                    <div className="flex justify-center mb-4 modal-avatar">
                         <UserCircle size={64} className="text-muted-foreground" />
                     </div>
-                    <form onSubmit={submitAdd} className="flex flex-col gap-4">
-                        <div className="grid gap-1">
+                    <form onSubmit={submitAdd} className="flex flex-col gap-4 modal-form">
+                        <div className="grid gap-1 modal-field">
                             <Label>Nombre</Label>
                             <Input value={addForm.data.name} onChange={(e) => addForm.setData('name', e.target.value)} />
                         </div>
-                        <div className="grid gap-1">
+                        <div className="grid gap-1 modal-field">
                             <Label>Email</Label>
                             <Input type="email" value={addForm.data.email} onChange={(e) => addForm.setData('email', e.target.value)} />
                         </div>
-                        <div className="grid gap-1">
+                        <div className="grid gap-1 modal-field">
                             <Label>Contraseña</Label>
                             <Input type="password" value={addForm.data.password} onChange={(e) => addForm.setData('password', e.target.value)} />
                         </div>
-                        <div className="grid gap-1">
+                        <div className="grid gap-1 modal-field">
                             <Label>Rol</Label>
                             <Select value={addForm.data.role} onValueChange={(v) => addForm.setData('role', v)}>
                                 <SelectTrigger><SelectValue placeholder="Seleccionar rol" /></SelectTrigger>
@@ -178,7 +178,7 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
                                 </SelectContent>
                             </Select>
                         </div>
-                        <div className="grid gap-1">
+                        <div className="grid gap-1 modal-field">
                             <Label>Estado</Label>
                             <Select value={addForm.data.active ? 'true' : 'false'} onValueChange={(v) => addForm.setData('active', v === 'true')}>
                                 <SelectTrigger><SelectValue /></SelectTrigger>
@@ -188,7 +188,7 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
                                 </SelectContent>
                             </Select>
                         </div>
-                        <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white mt-2" disabled={addForm.processing}>
+                        <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white mt-2 modal-submit" disabled={addForm.processing}>
                             Guardar
                         </Button>
                     </form>
@@ -197,23 +197,23 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
 
             {/* Modal Modificar */}
             <Dialog open={!!editUser} onOpenChange={(o) => { if (!o) { setEditUser(null) } }}>
-                <DialogContent className="max-w-md">
+                <DialogContent className="max-w-md modal-usuario">
                     <DialogHeader>
                         <DialogTitle>Modificar usuario</DialogTitle>
                     </DialogHeader>
-                    <div className="flex justify-center mb-4">
+                    <div className="flex justify-center mb-4 modal-avatar">
                         <UserCircle size={64} className="text-muted-foreground" />
                     </div>
-                    <form onSubmit={submitEdit} className="flex flex-col gap-4">
-                        <div className="grid gap-1">
+                    <form onSubmit={submitEdit} className="flex flex-col gap-4 modal-form">
+                        <div className="grid gap-1 modal-field">
                             <Label>Nombre</Label>
                             <Input value={editForm.data.name} onChange={(e) => editForm.setData('name', e.target.value)} />
                         </div>
-                        <div className="grid gap-1">
+                        <div className="grid gap-1 modal-field">
                             <Label>Email</Label>
                             <Input type="email" value={editForm.data.email} onChange={(e) => editForm.setData('email', e.target.value)} />
                         </div>
-                        <div className="grid gap-1">
+                        <div className="grid gap-1 modal-field">
                             <Label>Rol</Label>
                             <Select value={editForm.data.role} onValueChange={(v) => editForm.setData('role', v)}>
                                 <SelectTrigger><SelectValue /></SelectTrigger>
@@ -224,7 +224,7 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
                                 </SelectContent>
                             </Select>
                         </div>
-                        <div className="grid gap-1">
+                        <div className="grid gap-1 modal-field">
                             <Label>Estado</Label>
                             <Select value={editForm.data.active ? 'true' : 'false'} onValueChange={(v) => editForm.setData('active', v === 'true')}>
                                 <SelectTrigger><SelectValue /></SelectTrigger>
@@ -234,7 +234,7 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
                                 </SelectContent>
                             </Select>
                         </div>
-                        <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white mt-2" disabled={editForm.processing}>
+                        <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white mt-2 modal-submit" disabled={editForm.processing}>
                             Guardar
                         </Button>
                     </form>
@@ -243,27 +243,27 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
 
             {/* Modal Pacientes asignados */}
             <Dialog open={!!assignUser} onOpenChange={(o) => { if (!o) { setAssignUser(null) } }}>
-                <DialogContent className="max-w-md">
+                <DialogContent className="max-w-md modal-pacientes">
                     <DialogHeader>
                         <DialogTitle>Pacientes asignados — {assignUser?.name}</DialogTitle>
                     </DialogHeader>
-                    <form onSubmit={submitAssign} className="flex flex-col gap-3">
-                        <div className="flex flex-col gap-2 max-h-72 overflow-y-auto">
+                    <form onSubmit={submitAssign} className="flex flex-col gap-3 modal-form">
+                        <div className="flex flex-col gap-2 max-h-72 overflow-y-auto modal-resident-list">
                             {residents.map((r) => {
                                 const assigned = assignForm.data.resident_ids.includes(r.id)
                                 return (
-                                    <div key={r.id} className={`flex items-center gap-3 rounded-lg border p-3 cursor-pointer transition-colors ${assigned ? 'border-green-500 bg-green-50 dark:bg-green-950' : ''}`} onClick={() => toggleResident(r.id)}>
+                                    <div key={r.id} className={`flex items-center gap-3 rounded-lg border p-3 cursor-pointer transition-colors modal-resident-row ${assigned ? 'border-green-500 bg-green-50 dark:bg-green-950 selected' : ''}`} onClick={() => toggleResident(r.id)}>
                                         <UserCircle size={36} className="text-muted-foreground shrink-0" />
-                                        <div className="flex-1 min-w-0">
-                                            <p className="font-medium text-sm">{r.first_name} {r.last_name}</p>
-                                            <p className="text-xs text-muted-foreground">Habitación {r.room}</p>
+                                        <div className="flex-1 min-w-0 modal-resident-info">
+                                            <p className="font-medium text-sm modal-resident-name">{r.first_name} {r.last_name}</p>
+                                            <p className="text-xs text-muted-foreground modal-resident-room">Habitación {r.room}</p>
                                         </div>
                                         {assigned && <X size={16} className="text-green-600 shrink-0" />}
                                     </div>
                                 )
                             })}
                         </div>
-                        <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white mt-2" disabled={assignForm.processing}>
+                        <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white mt-2 modal-submit" disabled={assignForm.processing}>
                             Guardar
                         </Button>
                     </form>

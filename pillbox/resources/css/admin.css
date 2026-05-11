@@ -15,7 +15,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 70px;
+    height: 90px;
     padding: 0 2rem;
 }
 
@@ -73,9 +73,11 @@ body {
     color: black;
     letter-spacing: 1px;
 }
-.admin-tab:hover{
+
+.admin-tab:hover {
     background-color: #d1d1d1;
 }
+
 .admin-tab.active {}
 
 /* ── Lista de usuarios ──────────────────────────────────────────────────── */
@@ -171,3 +173,46 @@ body {
 
 /* ── Stubs (tabs pendientes) ────────────────────────────────────────────── */
 .admin-stub {}
+
+/* ── Modales ────────────────────────────────────────────────────────────── */
+.modal-usuario {
+    height: 600px;
+    padding: 20px;
+}
+
+/* contenedor modal añadir/modificar */
+.modal-pacientes {}
+
+/* contenedor modal pacientes asignados */
+
+.modal-avatar {}
+
+/* zona del icono de usuario */
+.modal-form {}
+
+/* el <form> interior */
+.modal-field {}
+
+/* cada grupo label + input */
+.modal-submit {
+    cursor: pointer;
+}
+
+/* botón guardar */
+
+/* Modal pacientes */
+.modal-resident-list {}
+
+/* lista de residentes */
+.modal-resident-row {}
+
+/* fila de residente */
+.modal-resident-row.selected {}
+
+/* fila cuando está seleccionado */
+.modal-resident-info {}
+
+/* nombre + habitación */
+.modal-resident-name {}
+
+.modal-resident-room {}
