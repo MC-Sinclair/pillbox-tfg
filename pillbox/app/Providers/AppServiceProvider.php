@@ -3,19 +3,32 @@
 namespace App\Providers;
 
 use Carbon\CarbonImmutable;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
+use Laravel\Fortify\Contracts\LoginResponse;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
-        //
+        $this->app->singleton(LoginResponse::class, function () {
+            return new class implements LoginResponse {
+                public function toResponse($request): mixed
+                {
+                    $role = $request->user()?->role;
+
+                    return redirect()->intended(match ($role) {
+                        'admin'       => '/admin/usuarios',
+                        'medico'      => '/medico/pautas',
+                        'gerocultora' => '/panel',
+                        default       => '/dashboard',
+                    });
+                }
+            };
+        });
     }
 
     /**

@@ -169,7 +169,9 @@ body {
     cursor: pointer;
 }
 
-.admin-fab:hover {}
+.admin-fab:hover {
+    background-color: #1c9d4b;
+}
 
 /* ── Stubs (tabs pendientes) ────────────────────────────────────────────── */
 .admin-stub {}
