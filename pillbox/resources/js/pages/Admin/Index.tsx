@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Badge } from '@/components/ui/badge'
+import '@/../../resources/css/admin.css'
 
 type User = {
     id: number
@@ -70,11 +71,10 @@ function TabNav({ active }: { active: string }) {
                 <Link
                     key={t.key}
                     href={t.href}
-                    className={`pb-2 text-sm font-medium transition-colors ${
-                        active === t.key
+                    className={`pb-2 text-sm font-medium transition-colors ${active === t.key
                             ? 'border-b-2 border-primary text-primary'
                             : 'text-muted-foreground hover:text-foreground'
-                    }`}
+                        }`}
                 >
                     {t.label}
                 </Link>
