@@ -15,14 +15,35 @@ class UserController extends Controller
 {
     public function index(Request $request): Response
     {
-        $users = User::where('residence_id', $request->user()->residence_id)
+        $residenceId = $request->user()->residence_id;
+
+        $users = User::where('residence_id', $residenceId)
+            ->with('residents:id,first_name,last_name,room')
             ->orderBy('name')
             ->get(['id', 'name', 'email', 'role', 'active', 'created_at']);
 
+        $residents = \App\Models\Resident::where('residence_id', $residenceId)
+            ->where('status', 'active')
+            ->orderBy('last_name')
+            ->get(['id', 'first_name', 'last_name', 'room']);
+
         return Inertia::render('Admin/Index', [
-            'tab'   => 'usuarios',
-            'users' => $users,
+            'tab'       => 'usuarios',
+            'users'     => $users,
+            'residents' => $residents,
         ]);
+    }
+
+    public function assignResidents(Request $request, User $user): RedirectResponse
+    {
+        $request->validate([
+            'resident_ids'   => ['array'],
+            'resident_ids.*' => ['exists:residents,id'],
+        ]);
+
+        $user->residents()->sync($request->resident_ids ?? []);
+
+        return back();
     }
 
     public function store(Request $request): RedirectResponse

@@ -1,0 +1,334 @@
+import { useState } from 'react'
+import { Link, useForm, router } from '@inertiajs/react'
+import { UserCircle, Plus, X } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Badge } from '@/components/ui/badge'
+
+type User = {
+    id: number
+    name: string
+    email: string
+    role: string
+    active: boolean
+    residents: Resident[]
+}
+
+type Resident = {
+    id: number
+    first_name: string
+    last_name: string
+    room: string
+}
+
+type Medication = {
+    id: number
+    name: string
+    brand: string
+    active_ingredient: string
+    format: string
+    description: string
+}
+
+type Props = {
+    tab: 'usuarios' | 'residentes' | 'medicamentos'
+    users?: User[]
+    residents?: Resident[]
+    gerocultoras?: { id: number; name: string }[]
+    medications?: Medication[]
+}
+
+const ROLE_LABELS: Record<string, string> = {
+    admin: 'Admin',
+    medico: 'Médico',
+    gerocultora: 'Gerocultora',
+}
+
+const FORMAT_LABELS: Record<string, string> = {
+    tablet: 'Comprimido',
+    capsule: 'Cápsula',
+    syrup: 'Jarabe',
+    injection: 'Inyección',
+    drops: 'Gotas',
+    patch: 'Parche',
+    other: 'Otro',
+}
+
+// ── Tab navigation ──────────────────────────────────────────────────────────
+function TabNav({ active }: { active: string }) {
+    const tabs = [
+        { key: 'usuarios', label: 'Usuarios', href: '/admin/usuarios' },
+        { key: 'residentes', label: 'Pacientes', href: '/admin/residentes' },
+        { key: 'medicamentos', label: 'Medicamentos', href: '/admin/medicamentos' },
+    ]
+    return (
+        <div className="flex gap-6 border-b mb-6">
+            {tabs.map((t) => (
+                <Link
+                    key={t.key}
+                    href={t.href}
+                    className={`pb-2 text-sm font-medium transition-colors ${
+                        active === t.key
+                            ? 'border-b-2 border-primary text-primary'
+                            : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                >
+                    {t.label}
+                </Link>
+            ))}
+        </div>
+    )
+}
+
+// ── Tab Usuarios ─────────────────────────────────────────────────────────────
+function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents: Resident[] }) {
+    const [addOpen, setAddOpen] = useState(false)
+    const [editUser, setEditUser] = useState<User | null>(null)
+    const [assignUser, setAssignUser] = useState<User | null>(null)
+
+    const addForm = useForm({ name: '', email: '', password: '', role: '', active: true })
+    const editForm = useForm({ name: '', email: '', password: '', role: '', active: true })
+    const assignForm = useForm<{ resident_ids: number[] }>({ resident_ids: [] })
+
+    function openEdit(user: User) {
+        editForm.setData({ name: user.name, email: user.email, password: '', role: user.role, active: user.active })
+        setEditUser(user)
+    }
+
+    function openAssign(user: User) {
+        assignForm.setData({ resident_ids: user.residents.map((r) => r.id) })
+        setAssignUser(user)
+    }
+
+    function submitAdd(e: React.FormEvent) {
+        e.preventDefault()
+        addForm.post('/admin/usuarios', { onSuccess: () => { setAddOpen(false); addForm.reset() } })
+    }
+
+    function submitEdit(e: React.FormEvent) {
+        e.preventDefault()
+        if (!editUser) { return }
+        editForm.put(`/admin/usuarios/${editUser.id}`, { onSuccess: () => setEditUser(null) })
+    }
+
+    function submitAssign(e: React.FormEvent) {
+        e.preventDefault()
+        if (!assignUser) { return }
+        assignForm.post(`/admin/usuarios/${assignUser.id}/residentes`, { onSuccess: () => setAssignUser(null) })
+    }
+
+    function toggleResident(id: number) {
+        const ids = assignForm.data.resident_ids
+        assignForm.setData('resident_ids', ids.includes(id) ? ids.filter((i) => i !== id) : [...ids, id])
+    }
+
+    function deleteUser(id: number) {
+        if (confirm('¿Eliminar este usuario?')) {
+            router.delete(`/admin/usuarios/${id}`)
+        }
+    }
+
+    return (
+        <div className="relative">
+            <div className="flex flex-col gap-3">
+                {users.map((user) => (
+                    <div key={user.id} className="flex items-center gap-4 rounded-xl border bg-card p-4">
+                        <div className="text-muted-foreground">
+                            <UserCircle size={48} />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                            <p className="font-semibold truncate">{user.name}</p>
+                            <p className="text-sm text-muted-foreground truncate">{user.email}</p>
+                            <div className="flex gap-2 mt-1">
+                                <Badge variant="secondary">{ROLE_LABELS[user.role] ?? user.role}</Badge>
+                                <Badge variant={user.active ? 'default' : 'destructive'}>
+                                    {user.active ? 'Activo' : 'Inactivo'}
+                                </Badge>
+                            </div>
+                        </div>
+                        <div className="flex gap-2 shrink-0">
+                            <Button size="sm" className="bg-green-500 hover:bg-green-600 text-white" onClick={() => openAssign(user)}>
+                                Pacientes asignados
+                            </Button>
+                            <Button size="sm" className="bg-yellow-400 hover:bg-yellow-500 text-white" onClick={() => openEdit(user)}>
+                                Modificar
+                            </Button>
+                            <Button size="sm" variant="destructive" onClick={() => deleteUser(user.id)}>
+                                Eliminar
+                            </Button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            {/* Botón añadir */}
+            <button
+                onClick={() => setAddOpen(true)}
+                className="fixed bottom-8 right-8 w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg flex items-center justify-center"
+            >
+                <Plus size={24} />
+            </button>
+
+            {/* Modal Añadir */}
+            <Dialog open={addOpen} onOpenChange={setAddOpen}>
+                <DialogContent className="max-w-md">
+                    <DialogHeader>
+                        <DialogTitle>Añadir usuario</DialogTitle>
+                    </DialogHeader>
+                    <div className="flex justify-center mb-4">
+                        <UserCircle size={64} className="text-muted-foreground" />
+                    </div>
+                    <form onSubmit={submitAdd} className="flex flex-col gap-4">
+                        <div className="grid gap-1">
+                            <Label>Nombre</Label>
+                            <Input value={addForm.data.name} onChange={(e) => addForm.setData('name', e.target.value)} />
+                        </div>
+                        <div className="grid gap-1">
+                            <Label>Email</Label>
+                            <Input type="email" value={addForm.data.email} onChange={(e) => addForm.setData('email', e.target.value)} />
+                        </div>
+                        <div className="grid gap-1">
+                            <Label>Contraseña</Label>
+                            <Input type="password" value={addForm.data.password} onChange={(e) => addForm.setData('password', e.target.value)} />
+                        </div>
+                        <div className="grid gap-1">
+                            <Label>Rol</Label>
+                            <Select value={addForm.data.role} onValueChange={(v) => addForm.setData('role', v)}>
+                                <SelectTrigger><SelectValue placeholder="Seleccionar rol" /></SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="admin">Admin</SelectItem>
+                                    <SelectItem value="medico">Médico</SelectItem>
+                                    <SelectItem value="gerocultora">Gerocultora</SelectItem>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <div className="grid gap-1">
+                            <Label>Estado</Label>
+                            <Select value={addForm.data.active ? 'true' : 'false'} onValueChange={(v) => addForm.setData('active', v === 'true')}>
+                                <SelectTrigger><SelectValue /></SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="true">Activo</SelectItem>
+                                    <SelectItem value="false">Inactivo</SelectItem>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white mt-2" disabled={addForm.processing}>
+                            Guardar
+                        </Button>
+                    </form>
+                </DialogContent>
+            </Dialog>
+
+            {/* Modal Modificar */}
+            <Dialog open={!!editUser} onOpenChange={(o) => { if (!o) { setEditUser(null) } }}>
+                <DialogContent className="max-w-md">
+                    <DialogHeader>
+                        <DialogTitle>Modificar usuario</DialogTitle>
+                    </DialogHeader>
+                    <div className="flex justify-center mb-4">
+                        <UserCircle size={64} className="text-muted-foreground" />
+                    </div>
+                    <form onSubmit={submitEdit} className="flex flex-col gap-4">
+                        <div className="grid gap-1">
+                            <Label>Nombre</Label>
+                            <Input value={editForm.data.name} onChange={(e) => editForm.setData('name', e.target.value)} />
+                        </div>
+                        <div className="grid gap-1">
+                            <Label>Email</Label>
+                            <Input type="email" value={editForm.data.email} onChange={(e) => editForm.setData('email', e.target.value)} />
+                        </div>
+                        <div className="grid gap-1">
+                            <Label>Rol</Label>
+                            <Select value={editForm.data.role} onValueChange={(v) => editForm.setData('role', v)}>
+                                <SelectTrigger><SelectValue /></SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="admin">Admin</SelectItem>
+                                    <SelectItem value="medico">Médico</SelectItem>
+                                    <SelectItem value="gerocultora">Gerocultora</SelectItem>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <div className="grid gap-1">
+                            <Label>Estado</Label>
+                            <Select value={editForm.data.active ? 'true' : 'false'} onValueChange={(v) => editForm.setData('active', v === 'true')}>
+                                <SelectTrigger><SelectValue /></SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="true">Activo</SelectItem>
+                                    <SelectItem value="false">Inactivo</SelectItem>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white mt-2" disabled={editForm.processing}>
+                            Guardar
+                        </Button>
+                    </form>
+                </DialogContent>
+            </Dialog>
+
+            {/* Modal Pacientes asignados */}
+            <Dialog open={!!assignUser} onOpenChange={(o) => { if (!o) { setAssignUser(null) } }}>
+                <DialogContent className="max-w-md">
+                    <DialogHeader>
+                        <DialogTitle>Pacientes asignados — {assignUser?.name}</DialogTitle>
+                    </DialogHeader>
+                    <form onSubmit={submitAssign} className="flex flex-col gap-3">
+                        <div className="flex flex-col gap-2 max-h-72 overflow-y-auto">
+                            {residents.map((r) => {
+                                const assigned = assignForm.data.resident_ids.includes(r.id)
+                                return (
+                                    <div key={r.id} className={`flex items-center gap-3 rounded-lg border p-3 cursor-pointer transition-colors ${assigned ? 'border-green-500 bg-green-50 dark:bg-green-950' : ''}`} onClick={() => toggleResident(r.id)}>
+                                        <UserCircle size={36} className="text-muted-foreground shrink-0" />
+                                        <div className="flex-1 min-w-0">
+                                            <p className="font-medium text-sm">{r.first_name} {r.last_name}</p>
+                                            <p className="text-xs text-muted-foreground">Habitación {r.room}</p>
+                                        </div>
+                                        {assigned && <X size={16} className="text-green-600 shrink-0" />}
+                                    </div>
+                                )
+                            })}
+                        </div>
+                        <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white mt-2" disabled={assignForm.processing}>
+                            Guardar
+                        </Button>
+                    </form>
+                </DialogContent>
+            </Dialog>
+        </div>
+    )
+}
+
+// ── Tab Residentes (stub — misma estructura) ─────────────────────────────────
+function TabResidentes({ residents = [], gerocultoras = [] }: { residents: Resident[]; gerocultoras: { id: number; name: string }[] }) {
+    return (
+        <div className="text-muted-foreground text-sm">
+            <p>Tab Residentes — proximamente</p>
+            <p className="mt-1">{residents.length} residentes · {gerocultoras.length} gerocultoras disponibles</p>
+        </div>
+    )
+}
+
+// ── Tab Medicamentos (stub — misma estructura) ───────────────────────────────
+function TabMedicamentos({ medications = [] }: { medications: Medication[] }) {
+    return (
+        <div className="text-muted-foreground text-sm">
+            <p>Tab Medicamentos — proximamente</p>
+            <p className="mt-1">{medications.length} medicamentos</p>
+        </div>
+    )
+}
+
+// ── Page ─────────────────────────────────────────────────────────────────────
+export default function AdminIndex({ tab, users = [], residents = [], gerocultoras = [], medications = [] }: Props) {
+    return (
+        <div className="p-6 max-w-5xl mx-auto">
+            <h1 className="text-2xl font-bold mb-6">Panel de administración</h1>
+            <TabNav active={tab} />
+            {tab === 'usuarios' && <TabUsuarios users={users} residents={residents} />}
+            {tab === 'residentes' && <TabResidentes residents={residents} gerocultoras={gerocultoras} />}
+            {tab === 'medicamentos' && <TabMedicamentos medications={medications} />}
+        </div>
+    )
+}

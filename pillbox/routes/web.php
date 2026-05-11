@@ -16,10 +16,11 @@ Route::middleware(['auth', 'role:gerocultora'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/usuarios',          [Admin\UserController::class,      'index'])->name('usuarios.index');
-    Route::post('/usuarios',         [Admin\UserController::class,      'store'])->name('usuarios.store');
-    Route::put('/usuarios/{user}',   [Admin\UserController::class,      'update'])->name('usuarios.update');
-    Route::delete('/usuarios/{user}',[Admin\UserController::class,      'destroy'])->name('usuarios.destroy');
+    Route::get('/usuarios',                        [Admin\UserController::class, 'index'])->name('usuarios.index');
+    Route::post('/usuarios',                       [Admin\UserController::class, 'store'])->name('usuarios.store');
+    Route::put('/usuarios/{user}',                 [Admin\UserController::class, 'update'])->name('usuarios.update');
+    Route::delete('/usuarios/{user}',              [Admin\UserController::class, 'destroy'])->name('usuarios.destroy');
+    Route::post('/usuarios/{user}/residentes',     [Admin\UserController::class, 'assignResidents'])->name('usuarios.residentes');
 
     Route::get('/residentes',                          [Admin\ResidentController::class, 'index'])->name('residentes.index');
     Route::post('/residentes',                         [Admin\ResidentController::class, 'store'])->name('residentes.store');
