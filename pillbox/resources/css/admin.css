@@ -5,23 +5,49 @@
     font-family: sans-serif;
 }
 
-/*Header*/
-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80px;
+/* ── Header ─────────────────────────────────────────────────────────────── */
+#admin-header {
+    background-color: black;
+    margin-bottom: 20px;
 }
 
-#nav {
+#admin-header-inner {
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    height: 70px;
+    padding: 0 2rem;
 }
+
+#admin-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+#admin-logo img {
+    height: 36px;
+    width: auto;
+}
+
+#admin-logo span {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+#admin-user {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+#admin-user-name {}
 
 /*--Body*/
 
 body {
-    background-color: white;
+    background-color: rgb(187, 187, 187);
 }
 
 /* ── Página ─────────────────────────────────────────────────────────────── */
@@ -32,10 +58,24 @@ body {
 }
 
 /* ── Tabs de navegación ─────────────────────────────────────────────────── */
-.admin-tabs {}
+.admin-tabs {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 30px;
+}
 
-.admin-tab {}
 
+.admin-tab {
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 10px;
+    color: black;
+    letter-spacing: 1px;
+}
+.admin-tab:hover{
+    background-color: #d1d1d1;
+}
 .admin-tab.active {}
 
 /* ── Lista de usuarios ──────────────────────────────────────────────────── */
@@ -57,6 +97,7 @@ body {
     width: 50%;
     height: 150px;
     border-radius: 15px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.252);
 }
 
 .contend-info {

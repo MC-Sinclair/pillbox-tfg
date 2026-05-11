@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useForm, router } from '@inertiajs/react'
+import { useForm, router } from '@inertiajs/react'
 import { UserCircle, Plus, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
@@ -56,28 +56,6 @@ const FORMAT_LABELS: Record<string, string> = {
     drops: 'Gotas',
     patch: 'Parche',
     other: 'Otro',
-}
-
-// ── Tab navigation ──────────────────────────────────────────────────────────
-function TabNav({ active }: { active: string }) {
-    const tabs = [
-        { key: 'usuarios', label: 'Usuarios', href: '/admin/usuarios' },
-        { key: 'residentes', label: 'Pacientes', href: '/admin/residentes' },
-        { key: 'medicamentos', label: 'Medicamentos', href: '/admin/medicamentos' },
-    ]
-    return (
-        <nav className="admin-tabs">
-            {tabs.map((t) => (
-                <Link
-                    key={t.key}
-                    href={t.href}
-                    className={`admin-tab${active === t.key ? ' active' : ''}`}
-                >
-                    {t.label}
-                </Link>
-            ))}
-        </nav>
-    )
 }
 
 // ── Tab Usuarios ─────────────────────────────────────────────────────────────
@@ -319,8 +297,6 @@ function TabMedicamentos({ medications = [] }: { medications: Medication[] }) {
 export default function AdminIndex({ tab, users = [], residents = [], gerocultoras = [], medications = [] }: Props) {
     return (
         <div className="admin-page">
-            <h1 className="admin-title">Panel de administración</h1>
-            <TabNav active={tab} />
             {tab === 'usuarios' && <TabUsuarios users={users} residents={residents} />}
             {tab === 'residentes' && <TabResidentes residents={residents} gerocultoras={gerocultoras} />}
             {tab === 'medicamentos' && <TabMedicamentos medications={medications} />}
