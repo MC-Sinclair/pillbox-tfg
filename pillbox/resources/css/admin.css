@@ -1,37 +1,42 @@
-
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: sans-serif;
 }
+
 /*Header*/
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
+
+#nav {
+    display: flex;
+    justify-content: space-between;
+}
+
 /*--Body*/
 
 body {
     background-color: white;
 }
-/* ── Página ─────────────────────────────────────────────────────────────── */
-.admin-page {
 
-}
+/* ── Página ─────────────────────────────────────────────────────────────── */
+.admin-page {}
 
 .admin-title {
     color: black;
 }
 
 /* ── Tabs de navegación ─────────────────────────────────────────────────── */
-.admin-tabs {
+.admin-tabs {}
 
-}
+.admin-tab {}
 
-.admin-tab {
-
-}
-
-.admin-tab.active {
-
-}
+.admin-tab.active {}
 
 /* ── Lista de usuarios ──────────────────────────────────────────────────── */
 .admin-user-list {
@@ -46,35 +51,60 @@ body {
 
 .admin-user-card {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     background-color: rgb(0, 0, 0);
     width: 50%;
+    height: 150px;
     border-radius: 15px;
+}
+
+.contend-info {
+    display: flex;
+    gap: 20px;
+}
+
+.badge-info {
+    padding: 5px;
 }
 
 .admin-user-avatar {
     color: #dcdcdc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .admin-user-info {
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
 }
 
 .admin-user-name {
-
+    font-weight: bold;
+    font-size: 1.1rem;
 }
 
-.admin-user-email {
-
-}
+.admin-user-email {}
 
 .admin-user-badges {
-
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .admin-user-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
 
+.admin-user-actions .boton {
+    padding: 20px 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
 }
 
 /* ── Botón flotante añadir ──────────────────────────────────────────────── */
@@ -96,11 +126,7 @@ body {
     cursor: pointer;
 }
 
-.admin-fab:hover {
-
-}
+.admin-fab:hover {}
 
 /* ── Stubs (tabs pendientes) ────────────────────────────────────────────── */
-.admin-stub {
-
-}
+.admin-stub {}

@@ -133,27 +133,29 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
             <ul className="admin-user-list">
                 {users.map((user) => (
                     <li key={user.id} className="admin-user-card">
-                        <div className="admin-user-avatar">
-                            <UserCircle size={48} />
-                        </div>
-                        <div className="admin-user-info">
-                            <p className="admin-user-name">{user.name}</p>
-                            <p className="admin-user-email">{user.email}</p>
-                            <div className="admin-user-badges">
-                                <Badge variant="secondary">{ROLE_LABELS[user.role] ?? user.role}</Badge>
-                                <Badge variant={user.active ? 'default' : 'destructive'}>
-                                    {user.active ? 'Activo' : 'Inactivo'}
-                                </Badge>
+                        <div className='contend-info'>
+                            <div className="admin-user-avatar">
+                                <UserCircle size={58} />
+                            </div>
+                            <div className="admin-user-info">
+                                <p className="admin-user-name">{user.name}</p>
+                                <p className="admin-user-email">{user.email}</p>
+                                <div className="admin-user-badges">
+                                    <Badge variant="secondary" className='badge-info'>{ROLE_LABELS[user.role] ?? user.role}</Badge>
+                                    <Badge variant={user.active ? 'default' : 'destructive'} className='badge-info'>
+                                        {user.active ? 'Activo' : 'Inactivo'}
+                                    </Badge>
+                                </div>
                             </div>
                         </div>
                         <div className="admin-user-actions">
-                            <Button size="sm" className="bg-green-500 hover:bg-green-600 text-white" onClick={() => openAssign(user)}>
+                            <Button size="sm" className="bg-green-500 hover:bg-green-600 text-white boton" onClick={() => openAssign(user)}>
                                 Pacientes asignados
                             </Button>
-                            <Button size="sm" className="bg-yellow-400 hover:bg-yellow-500 text-white" onClick={() => openEdit(user)}>
+                            <Button size="sm" className="bg-yellow-400 hover:bg-yellow-500 text-white boton" onClick={() => openEdit(user)}>
                                 Modificar
                             </Button>
-                            <Button size="sm" variant="destructive" onClick={() => deleteUser(user.id)}>
+                            <Button size="sm" className='boton' variant="destructive" onClick={() => deleteUser(user.id)}>
                                 Eliminar
                             </Button>
                         </div>

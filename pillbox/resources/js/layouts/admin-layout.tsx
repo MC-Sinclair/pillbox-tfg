@@ -13,7 +13,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     return (
         <div className="min-h-screen flex flex-col">
             <header className="border-b border-border/60 bg-background/95 backdrop-blur-sm sticky top-0 z-10">
-                <div className="mx-auto flex h-14 max-w-5xl items-center px-6">
+                <div className="mx-auto flex h-14 max-w-5xl items-center px-6" id='nav'>
                     <div className="flex items-center gap-2">
                         <div className="flex size-7 items-center justify-center rounded-md bg-sidebar-primary">
                             <AppLogoIcon className="size-4 fill-current text-white dark:text-black" />
