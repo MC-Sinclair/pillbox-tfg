@@ -120,7 +120,7 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
                                 <p className="admin-user-email">{user.email}</p>
                                 <div className="admin-user-badges">
                                     <Badge variant="secondary" className='badge-info'>{ROLE_LABELS[user.role] ?? user.role}</Badge>
-                                    <Badge variant={user.active ? 'default' : 'destructive'} className='badge-info'>
+                                    <Badge variant={user.active ? 'default' : 'destructive'} className='badge-info color'>
                                         {user.active ? 'Activo' : 'Inactivo'}
                                     </Badge>
                                 </div>
