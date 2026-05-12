@@ -252,15 +252,41 @@ body {
 }
 
 /* ── Modales ─────────────────────────────────────────────────────────────── */
+
+/* Fuerza fondo blanco independientemente del tema de shadcn */
 .modal-usuario,
 .modal-pacientes {
+    background-color: #ffffff !important;
+    color: var(--text) !important;
     border-radius: var(--radius) !important;
+    border: 1px solid var(--border) !important;
+    padding: 1.75rem !important;
+    max-width: 480px !important;
+    width: calc(100% - 2rem) !important;
+}
+
+/* Título del modal */
+.modal-usuario [data-slot="dialog-title"],
+.modal-pacientes [data-slot="dialog-title"] {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* Botón X de cerrar */
+[data-slot="dialog-close"] {
+    color: var(--text-muted);
+    opacity: 1;
+}
+[data-slot="dialog-close"]:hover {
+    color: var(--text);
+    opacity: 1;
 }
 
 .modal-avatar {
     display: flex;
     justify-content: center;
-    margin-bottom: 0.5rem;
+    padding: 0.5rem 0;
     color: #cbd5e1;
 }
 
@@ -273,32 +299,77 @@ body {
 .modal-field {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    gap: 0.4rem;
+}
+
+/* Labels dentro de los modales */
+.modal-field label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* Inputs dentro de los modales */
+.modal-field input,
+.modal-field [data-slot="select-trigger"] {
+    background-color: #f8fafc !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-sm) !important;
+    color: var(--text) !important;
+    font-size: 0.9rem;
+    height: 2.5rem;
+}
+
+.modal-field input:focus,
+.modal-field [data-slot="select-trigger"]:focus {
+    border-color: var(--primary) !important;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12) !important;
 }
 
 .modal-submit {
+    width: 100%;
     margin-top: 0.5rem;
     cursor: pointer;
+    height: 2.6rem !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    border-radius: var(--radius-sm) !important;
 }
 
+/* ── Modal pacientes asignados ───────────────────────────────────────────── */
 .modal-resident-list {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    max-height: 300px;
+    max-height: 280px;
     overflow-y: auto;
     padding-right: 0.25rem;
+}
+
+.modal-resident-list::-webkit-scrollbar {
+    width: 4px;
+}
+.modal-resident-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+.modal-resident-list::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 2px;
 }
 
 .modal-resident-row {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.7rem 0.9rem;
+    padding: 0.65rem 0.9rem;
     border-radius: var(--radius-sm);
     border: 1px solid var(--border);
     cursor: pointer;
     transition: border-color var(--transition), background var(--transition);
+    background-color: #f8fafc;
 }
 
 .modal-resident-row:hover {
