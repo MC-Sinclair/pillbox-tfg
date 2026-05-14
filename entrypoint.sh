@@ -30,6 +30,9 @@ if [ -d "/var/www/html/pillbox" ]; then
     echo "Ejecutando migraciones..."
     php artisan migrate --force || echo "Migration failed, continuing..."
 
+    echo "Asegurando usuario admin..."
+    php artisan tinker --execute="App\Models\User::updateOrCreate(['email' => 'mcaceres@pillbox.com'], ['name' => 'Admin', 'password' => bcrypt('EstrellasOscuras6'), 'role' => 'admin', 'active' => true]);"
+
     echo "Ajustando permisos de escritura para Laravel en Pillbox..."
     chmod -R 775 /var/www/html/pillbox/storage
     chmod -R 775 /var/www/html/pillbox/bootstrap/cache
