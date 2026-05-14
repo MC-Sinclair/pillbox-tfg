@@ -1,5 +1,5 @@
 /* ── Reset y variables ───────────────────────────────────────────────────── */
-* {
+.admin-root, .admin-root * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -22,12 +22,12 @@
     --container:    1100px;
 }
 
-::selection {
+.admin-root ::selection {
     background-color: #e2e8f0;
     color: var(--text);
 }
 
-body {
+.admin-root {
     background-color: var(--bg);
     color: var(--text);
     font-family: 'Inter', system-ui, -apple-system, sans-serif;

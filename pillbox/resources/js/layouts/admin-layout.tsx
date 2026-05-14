@@ -18,7 +18,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     const getInitials = useInitials()
 
     return (
-        <div className="min-h-screen flex flex-col">
+        <div className="admin-root min-h-screen flex flex-col">
             <header id="admin-header">
                 <div id="admin-header-inner">
                     {/* Logo */}
