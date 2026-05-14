@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Carbon\CarbonImmutable;
+use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -37,6 +38,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+
+        RedirectIfAuthenticated::redirectUsing(function (Request $request): string {
+            return match ($request->user()?->role) {
+                'admin'       => '/admin/usuarios',
+                'medico'      => '/medico/pautas',
+                'gerocultora' => '/panel',
+                default       => '/dashboard',
+            };
+        });
     }
 
     /**
