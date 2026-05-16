@@ -266,7 +266,8 @@
 .modal-usuario,
 .modal-pacientes,
 .modal-residente,
-.modal-gerocultoras {
+.modal-gerocultoras,
+.modal-medicamento {
     background-color: #ffffff !important;
     color: var(--text) !important;
     border-radius: var(--radius) !important;
@@ -280,7 +281,8 @@
 .modal-usuario [data-slot="dialog-title"],
 .modal-pacientes [data-slot="dialog-title"],
 .modal-residente [data-slot="dialog-title"],
-.modal-gerocultoras [data-slot="dialog-title"] {
+.modal-gerocultoras [data-slot="dialog-title"],
+.modal-medicamento [data-slot="dialog-title"] {
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--text);
@@ -340,6 +342,12 @@
     border-color: #cbd5e1 !important;
     outline: none;
     box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06) !important;
+}
+
+.modal-error {
+    font-size: 0.78rem;
+    color: #ef4444;
+    margin-top: 0.15rem;
 }
 
 .modal-submit {

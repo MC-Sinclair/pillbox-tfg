@@ -167,19 +167,22 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
                     <form onSubmit={submitAdd} className="flex flex-col gap-4 modal-form">
                         <div className="grid gap-1 modal-field">
                             <Label>Nombre</Label>
-                            <Input value={addForm.data.name} onChange={(e) => addForm.setData('name', e.target.value)} />
+                            <Input required value={addForm.data.name} onChange={(e) => addForm.setData('name', e.target.value)} />
+                            {addForm.errors.name && <p className="modal-error">{addForm.errors.name}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Email</Label>
-                            <Input type="email" value={addForm.data.email} onChange={(e) => addForm.setData('email', e.target.value)} />
+                            <Input required type="email" value={addForm.data.email} onChange={(e) => addForm.setData('email', e.target.value)} />
+                            {addForm.errors.email && <p className="modal-error">{addForm.errors.email}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Contraseña</Label>
-                            <Input type="password" value={addForm.data.password} onChange={(e) => addForm.setData('password', e.target.value)} />
+                            <Input required type="password" value={addForm.data.password} onChange={(e) => addForm.setData('password', e.target.value)} />
+                            {addForm.errors.password && <p className="modal-error">{addForm.errors.password}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Rol</Label>
-                            <Select value={addForm.data.role} onValueChange={(v) => addForm.setData('role', v)}>
+                            <Select required value={addForm.data.role} onValueChange={(v) => addForm.setData('role', v)}>
                                 <SelectTrigger><SelectValue placeholder="Seleccionar rol" /></SelectTrigger>
                                 <SelectContent>
                                     <SelectItem value="admin">Admin</SelectItem>
@@ -187,6 +190,7 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
                                     <SelectItem value="gerocultora">Gerocultora</SelectItem>
                                 </SelectContent>
                             </Select>
+                            {addForm.errors.role && <p className="modal-error">{addForm.errors.role}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Estado</Label>
@@ -217,15 +221,17 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
                     <form onSubmit={submitEdit} className="flex flex-col gap-4 modal-form">
                         <div className="grid gap-1 modal-field">
                             <Label>Nombre</Label>
-                            <Input value={editForm.data.name} onChange={(e) => editForm.setData('name', e.target.value)} />
+                            <Input required value={editForm.data.name} onChange={(e) => editForm.setData('name', e.target.value)} />
+                            {editForm.errors.name && <p className="modal-error">{editForm.errors.name}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Email</Label>
-                            <Input type="email" value={editForm.data.email} onChange={(e) => editForm.setData('email', e.target.value)} />
+                            <Input required type="email" value={editForm.data.email} onChange={(e) => editForm.setData('email', e.target.value)} />
+                            {editForm.errors.email && <p className="modal-error">{editForm.errors.email}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Rol</Label>
-                            <Select value={editForm.data.role} onValueChange={(v) => editForm.setData('role', v)}>
+                            <Select required value={editForm.data.role} onValueChange={(v) => editForm.setData('role', v)}>
                                 <SelectTrigger><SelectValue /></SelectTrigger>
                                 <SelectContent>
                                     <SelectItem value="admin">Admin</SelectItem>
@@ -233,6 +239,7 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
                                     <SelectItem value="gerocultora">Gerocultora</SelectItem>
                                 </SelectContent>
                             </Select>
+                            {editForm.errors.role && <p className="modal-error">{editForm.errors.role}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Estado</Label>
@@ -395,23 +402,28 @@ function TabResidentes({ residents = [], gerocultoras = [] }: { residents: Resid
                     <form onSubmit={submitAdd} className="flex flex-col gap-4 modal-form">
                         <div className="grid gap-1 modal-field">
                             <Label>Nombre</Label>
-                            <Input value={addForm.data.first_name} onChange={(e) => addForm.setData('first_name', e.target.value)} />
+                            <Input required value={addForm.data.first_name} onChange={(e) => addForm.setData('first_name', e.target.value)} />
+                            {addForm.errors.first_name && <p className="modal-error">{addForm.errors.first_name}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Apellidos</Label>
-                            <Input value={addForm.data.last_name} onChange={(e) => addForm.setData('last_name', e.target.value)} />
+                            <Input required value={addForm.data.last_name} onChange={(e) => addForm.setData('last_name', e.target.value)} />
+                            {addForm.errors.last_name && <p className="modal-error">{addForm.errors.last_name}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Habitación</Label>
-                            <Input value={addForm.data.room} onChange={(e) => addForm.setData('room', e.target.value)} />
+                            <Input required value={addForm.data.room} onChange={(e) => addForm.setData('room', e.target.value)} />
+                            {addForm.errors.room && <p className="modal-error">{addForm.errors.room}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Fecha de nacimiento</Label>
-                            <Input type="date" value={addForm.data.birth_date} onChange={(e) => addForm.setData('birth_date', e.target.value)} />
+                            <Input required type="date" value={addForm.data.birth_date} onChange={(e) => addForm.setData('birth_date', e.target.value)} />
+                            {addForm.errors.birth_date && <p className="modal-error">{addForm.errors.birth_date}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Médico responsable</Label>
                             <Input value={addForm.data.doctor} onChange={(e) => addForm.setData('doctor', e.target.value)} />
+                            {addForm.errors.doctor && <p className="modal-error">{addForm.errors.doctor}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Estado</Label>
@@ -443,23 +455,28 @@ function TabResidentes({ residents = [], gerocultoras = [] }: { residents: Resid
                     <form onSubmit={submitEdit} className="flex flex-col gap-4 modal-form">
                         <div className="grid gap-1 modal-field">
                             <Label>Nombre</Label>
-                            <Input value={editForm.data.first_name} onChange={(e) => editForm.setData('first_name', e.target.value)} />
+                            <Input required value={editForm.data.first_name} onChange={(e) => editForm.setData('first_name', e.target.value)} />
+                            {editForm.errors.first_name && <p className="modal-error">{editForm.errors.first_name}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Apellidos</Label>
-                            <Input value={editForm.data.last_name} onChange={(e) => editForm.setData('last_name', e.target.value)} />
+                            <Input required value={editForm.data.last_name} onChange={(e) => editForm.setData('last_name', e.target.value)} />
+                            {editForm.errors.last_name && <p className="modal-error">{editForm.errors.last_name}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Habitación</Label>
-                            <Input value={editForm.data.room} onChange={(e) => editForm.setData('room', e.target.value)} />
+                            <Input required value={editForm.data.room} onChange={(e) => editForm.setData('room', e.target.value)} />
+                            {editForm.errors.room && <p className="modal-error">{editForm.errors.room}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Fecha de nacimiento</Label>
-                            <Input type="date" value={editForm.data.birth_date} onChange={(e) => editForm.setData('birth_date', e.target.value)} />
+                            <Input required type="date" value={editForm.data.birth_date} onChange={(e) => editForm.setData('birth_date', e.target.value)} />
+                            {editForm.errors.birth_date && <p className="modal-error">{editForm.errors.birth_date}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Médico responsable</Label>
                             <Input value={editForm.data.doctor} onChange={(e) => editForm.setData('doctor', e.target.value)} />
+                            {editForm.errors.doctor && <p className="modal-error">{editForm.errors.doctor}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Estado</Label>
@@ -510,12 +527,167 @@ function TabResidentes({ residents = [], gerocultoras = [] }: { residents: Resid
     )
 }
 
-// ── Tab Medicamentos (stub) ──────────────────────────────────────────────────
+// ── Tab Medicamentos ─────────────────────────────────────────────────────────
 function TabMedicamentos({ medications = [] }: { medications: Medication[] }) {
+    const [addOpen, setAddOpen] = useState(false)
+    const [editMedication, setEditMedication] = useState<Medication | null>(null)
+
+    const addForm = useForm({ name: '', brand: '', active_ingredient: '', format: 'tablet', description: '' })
+    const editForm = useForm({ name: '', brand: '', active_ingredient: '', format: 'tablet', description: '' })
+
+    function openEdit(med: Medication) {
+        editForm.setData({
+            name:              med.name,
+            brand:             med.brand ?? '',
+            active_ingredient: med.active_ingredient ?? '',
+            format:            med.format,
+            description:       med.description ?? '',
+        })
+        setEditMedication(med)
+    }
+
+    function submitAdd(e: React.FormEvent) {
+        e.preventDefault()
+        addForm.post('/admin/medicamentos', { onSuccess: () => { setAddOpen(false); addForm.reset() } })
+    }
+
+    function submitEdit(e: React.FormEvent) {
+        e.preventDefault()
+        if (!editMedication) { return }
+        editForm.put(`/admin/medicamentos/${editMedication.id}`, { onSuccess: () => setEditMedication(null) })
+    }
+
+    function deleteMedication(id: number) {
+        if (confirm('¿Eliminar este medicamento?')) {
+            router.delete(`/admin/medicamentos/${id}`)
+        }
+    }
+
     return (
-        <div className="admin-stub">
-            <p>Tab Medicamentos — proximamente</p>
-            <p>{medications.length} medicamentos</p>
+        <div className="admin-user-section">
+            <ul className="admin-user-list">
+                {medications.map((med) => (
+                    <li key={med.id} className="admin-user-card">
+                        <div className="contend-info">
+                            <div className="admin-user-info">
+                                <p className="admin-user-name">{med.name}</p>
+                                <p className="admin-user-email">
+                                    {med.active_ingredient || '—'}{med.brand ? ` · ${med.brand}` : ''}
+                                </p>
+                                <div className="admin-user-badges">
+                                    <Badge variant="secondary" className="badge-info">
+                                        {FORMAT_LABELS[med.format] ?? med.format}
+                                    </Badge>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="admin-user-actions">
+                            <Button size="sm" className="bg-yellow-400 hover:bg-yellow-500 text-white boton" onClick={() => openEdit(med)}>
+                                Modificar
+                            </Button>
+                            <Button size="sm" className="boton" variant="destructive" onClick={() => deleteMedication(med.id)}>
+                                Eliminar
+                            </Button>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+
+            <button className="admin-fab" onClick={() => setAddOpen(true)}>
+                <Plus size={24} />
+            </button>
+
+            {/* Modal Añadir */}
+            <Dialog open={addOpen} onOpenChange={setAddOpen}>
+                <DialogContent className="max-w-md modal-medicamento">
+                    <DialogHeader>
+                        <DialogTitle>Añadir medicamento</DialogTitle>
+                    </DialogHeader>
+                    <form onSubmit={submitAdd} className="flex flex-col gap-4 modal-form">
+                        <div className="grid gap-1 modal-field">
+                            <Label>Nombre</Label>
+                            <Input required value={addForm.data.name} onChange={(e) => addForm.setData('name', e.target.value)} />
+                            {addForm.errors.name && <p className="modal-error">{addForm.errors.name}</p>}
+                        </div>
+                        <div className="grid gap-1 modal-field">
+                            <Label>Marca</Label>
+                            <Input value={addForm.data.brand} onChange={(e) => addForm.setData('brand', e.target.value)} />
+                            {addForm.errors.brand && <p className="modal-error">{addForm.errors.brand}</p>}
+                        </div>
+                        <div className="grid gap-1 modal-field">
+                            <Label>Principio activo</Label>
+                            <Input value={addForm.data.active_ingredient} onChange={(e) => addForm.setData('active_ingredient', e.target.value)} />
+                            {addForm.errors.active_ingredient && <p className="modal-error">{addForm.errors.active_ingredient}</p>}
+                        </div>
+                        <div className="grid gap-1 modal-field">
+                            <Label>Formato</Label>
+                            <Select required value={addForm.data.format} onValueChange={(v) => addForm.setData('format', v)}>
+                                <SelectTrigger><SelectValue /></SelectTrigger>
+                                <SelectContent>
+                                    {Object.entries(FORMAT_LABELS).map(([val, label]) => (
+                                        <SelectItem key={val} value={val}>{label}</SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                            {addForm.errors.format && <p className="modal-error">{addForm.errors.format}</p>}
+                        </div>
+                        <div className="grid gap-1 modal-field">
+                            <Label>Descripción</Label>
+                            <Input value={addForm.data.description} onChange={(e) => addForm.setData('description', e.target.value)} />
+                            {addForm.errors.description && <p className="modal-error">{addForm.errors.description}</p>}
+                        </div>
+                        <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white mt-2 modal-submit" disabled={addForm.processing}>
+                            Guardar
+                        </Button>
+                    </form>
+                </DialogContent>
+            </Dialog>
+
+            {/* Modal Modificar */}
+            <Dialog open={!!editMedication} onOpenChange={(o) => { if (!o) { setEditMedication(null) } }}>
+                <DialogContent className="max-w-md modal-medicamento">
+                    <DialogHeader>
+                        <DialogTitle>Modificar medicamento</DialogTitle>
+                    </DialogHeader>
+                    <form onSubmit={submitEdit} className="flex flex-col gap-4 modal-form">
+                        <div className="grid gap-1 modal-field">
+                            <Label>Nombre</Label>
+                            <Input required value={editForm.data.name} onChange={(e) => editForm.setData('name', e.target.value)} />
+                            {editForm.errors.name && <p className="modal-error">{editForm.errors.name}</p>}
+                        </div>
+                        <div className="grid gap-1 modal-field">
+                            <Label>Marca</Label>
+                            <Input value={editForm.data.brand} onChange={(e) => editForm.setData('brand', e.target.value)} />
+                            {editForm.errors.brand && <p className="modal-error">{editForm.errors.brand}</p>}
+                        </div>
+                        <div className="grid gap-1 modal-field">
+                            <Label>Principio activo</Label>
+                            <Input value={editForm.data.active_ingredient} onChange={(e) => editForm.setData('active_ingredient', e.target.value)} />
+                            {editForm.errors.active_ingredient && <p className="modal-error">{editForm.errors.active_ingredient}</p>}
+                        </div>
+                        <div className="grid gap-1 modal-field">
+                            <Label>Formato</Label>
+                            <Select required value={editForm.data.format} onValueChange={(v) => editForm.setData('format', v)}>
+                                <SelectTrigger><SelectValue /></SelectTrigger>
+                                <SelectContent>
+                                    {Object.entries(FORMAT_LABELS).map(([val, label]) => (
+                                        <SelectItem key={val} value={val}>{label}</SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                            {editForm.errors.format && <p className="modal-error">{editForm.errors.format}</p>}
+                        </div>
+                        <div className="grid gap-1 modal-field">
+                            <Label>Descripción</Label>
+                            <Input value={editForm.data.description} onChange={(e) => editForm.setData('description', e.target.value)} />
+                            {editForm.errors.description && <p className="modal-error">{editForm.errors.description}</p>}
+                        </div>
+                        <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white mt-2 modal-submit" disabled={editForm.processing}>
+                            Guardar
+                        </Button>
+                    </form>
+                </DialogContent>
+            </Dialog>
         </div>
     )
 }
