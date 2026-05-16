@@ -35,9 +35,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 });
 
 Route::middleware(['auth', 'role:medico'])->prefix('medico')->name('medico.')->group(function () {
-    Route::get('/pautas',       [Medico\PrescriptionController::class, 'index'])->name('pautas.index');
-    Route::get('/historial',    [Medico\HistorialController::class,    'index'])->name('historial.index');
-    Route::get('/medicamentos', [Medico\MedicationController::class,   'index'])->name('medicamentos.index');
+    Route::get('/pautas',                        [Medico\PrescriptionController::class, 'index'])->name('pautas.index');
+    Route::post('/pautas',                       [Medico\PrescriptionController::class, 'store'])->name('pautas.store');
+    Route::put('/pautas/{prescription}',         [Medico\PrescriptionController::class, 'update'])->name('pautas.update');
+    Route::delete('/pautas/{prescription}',      [Medico\PrescriptionController::class, 'destroy'])->name('pautas.destroy');
+
+    Route::get('/historial',    [Medico\HistorialController::class,  'index'])->name('historial.index');
+    Route::get('/medicamentos', [Medico\MedicationController::class, 'index'])->name('medicamentos.index');
 });
 
 require __DIR__.'/settings.php';

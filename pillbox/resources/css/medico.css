@@ -1,0 +1,458 @@
+/* ── Reset y variables ───────────────────────────────────────────────────── */
+.medico-root, .medico-root * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg:           #f1f5f9;
+    --surface:      #ffffff;
+    --header-bg:    #0f172a;
+    --header-text:  #f8fafc;
+    --text:         #1e293b;
+    --text-muted:   #64748b;
+    --border:       #e2e8f0;
+    --primary:      #6366f1;
+    --shadow-sm:    0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md:    0 4px 12px rgba(0,0,0,0.1);
+    --radius:       14px;
+    --radius-sm:    8px;
+    --transition:   0.18s ease;
+    --container:    1100px;
+}
+
+.medico-root {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.medico-root ::selection {
+    background-color: #e2e8f0;
+    color: var(--text);
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+#medico-header {
+    background-color: var(--header-bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+}
+
+#medico-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 2rem;
+    gap: 1.5rem;
+}
+
+#medico-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+#medico-logo img {
+    height: 40px;
+    width: auto;
+}
+
+#medico-logo span {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--header-text);
+    letter-spacing: -0.01em;
+}
+
+/* ── Tabs ────────────────────────────────────────────────────────────────── */
+.medico-tabs {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    flex: 1;
+    justify-content: center;
+}
+
+.medico-tab {
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(248, 250, 252, 0.6);
+    text-decoration: none;
+    transition: background var(--transition), color var(--transition);
+    white-space: nowrap;
+}
+
+.medico-tab:hover {
+    background-color: rgba(255,255,255,0.08);
+    color: var(--header-text);
+}
+
+.medico-tab.active {
+    background-color: rgba(255,255,255,0.15);
+    color: var(--header-text);
+    font-weight: 600;
+}
+
+/* ── Usuario ─────────────────────────────────────────────────────────────── */
+#medico-user {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-shrink: 0;
+}
+
+#medico-user-name {
+    font-size: 0.95rem;
+    color: rgba(248, 250, 252, 0.7);
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ── Contenido ───────────────────────────────────────────────────────────── */
+.medico-page {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 2.5rem 2rem 7rem;
+}
+
+.medico-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 2rem;
+}
+
+/* ── Cards de pautas ─────────────────────────────────────────────────────── */
+.medico-card-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.medico-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.4rem 1.75rem;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.medico-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.medico-card-icon {
+    color: #6366f1;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+.medico-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.medico-card-title {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text);
+}
+
+.medico-card-sub {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+}
+
+.medico-card-badges {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.2rem;
+    flex-wrap: wrap;
+}
+
+.medico-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.medico-card-actions .boton {
+    font-size: 0.9rem;
+    padding: 0.55rem 1rem;
+    height: auto;
+    cursor: pointer;
+}
+
+/* ── Botón flotante ──────────────────────────────────────────────────────── */
+.medico-fab {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+    background-color: #6366f1;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.medico-fab:hover {
+    background-color: #4f46e5;
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+}
+
+/* ── Modales ─────────────────────────────────────────────────────────────── */
+.modal-pauta,
+.modal-medico-med {
+    background-color: #ffffff !important;
+    color: var(--text) !important;
+    border-radius: var(--radius) !important;
+    border: 1px solid var(--border) !important;
+    padding: 1.75rem !important;
+    max-width: 520px !important;
+    width: calc(100% - 2rem) !important;
+}
+
+.modal-pauta [data-slot="dialog-title"],
+.modal-medico-med [data-slot="dialog-title"] {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+[data-slot="dialog-close"] {
+    color: var(--text-muted);
+    opacity: 1;
+}
+[data-slot="dialog-close"]:hover {
+    color: var(--text);
+    opacity: 1;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.modal-field label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.modal-field input,
+.modal-field textarea,
+.modal-field [data-slot="select-trigger"] {
+    background-color: #f8fafc !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-sm) !important;
+    color: var(--text) !important;
+    font-size: 0.9rem;
+}
+
+.modal-field input,
+.modal-field [data-slot="select-trigger"] {
+    height: 2.5rem;
+}
+
+.modal-field textarea {
+    padding: 0.5rem 0.75rem;
+    resize: vertical;
+    min-height: 72px;
+}
+
+.modal-field input:focus,
+.modal-field textarea:focus,
+.modal-field [data-slot="select-trigger"]:focus {
+    border-color: #cbd5e1 !important;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.06) !important;
+}
+
+.modal-error {
+    font-size: 0.78rem;
+    color: #ef4444;
+    margin-top: 0.15rem;
+}
+
+.modal-submit {
+    width: 100%;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    height: 2.6rem !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    border-radius: var(--radius-sm) !important;
+}
+
+/* ── Horarios ────────────────────────────────────────────────────────────── */
+.schedules-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.4rem;
+}
+
+.schedule-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background-color: #eef2ff;
+    border: 1px solid #c7d2fe;
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #4338ca;
+}
+
+.schedule-chip button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #6366f1;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    line-height: 1;
+}
+
+.schedule-chip button:hover {
+    color: #ef4444;
+}
+
+.schedule-add-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-top: 0.25rem;
+}
+
+.schedule-add-row input[type="time"] {
+    flex: 1;
+}
+
+/* ── Stub ────────────────────────────────────────────────────────────────── */
+.medico-stub {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 4rem 2rem;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+}
+
+/* ── Historial ───────────────────────────────────────────────────────────── */
+.historial-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+.historial-table th {
+    background-color: #f8fafc;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.85rem 1.25rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.historial-table td {
+    padding: 0.9rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: middle;
+}
+
+.historial-table tr:last-child td {
+    border-bottom: none;
+}
+
+.historial-table tr:hover td {
+    background-color: #f8fafc;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    #medico-header-inner { padding: 0 1rem; }
+    #medico-logo span { display: none; }
+    #medico-user-name { display: none; }
+    .medico-tab { padding: 0.35rem 0.65rem; font-size: 0.8rem; }
+    .medico-page { padding: 1.25rem 1rem 6rem; }
+    .medico-card { flex-wrap: wrap; gap: 0.75rem; }
+    .medico-card-actions {
+        width: 100%;
+        justify-content: flex-end;
+        border-top: 1px solid var(--border);
+        padding-top: 0.75rem;
+    }
+    .historial-table { display: block; overflow-x: auto; }
+}
+
+@media (max-width: 480px) {
+    .medico-tabs { gap: 0.1rem; }
+    .medico-tab { padding: 0.3rem 0.5rem; font-size: 0.75rem; }
+    .medico-card-actions .boton { flex: 1; min-width: fit-content; justify-content: center; }
+    .medico-fab { bottom: 1.25rem; right: 1.25rem; width: 3rem; height: 3rem; }
+}
