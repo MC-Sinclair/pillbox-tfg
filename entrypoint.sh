@@ -32,7 +32,7 @@ if [ -d "/var/www/html/pillbox" ]; then
 
     if [ -n "$ADMIN_EMAIL" ] && [ -n "$ADMIN_PASSWORD" ]; then
         echo "Asegurando usuario admin..."
-        php artisan tinker --execute="App\Models\User::updateOrCreate(['email' => '${ADMIN_EMAIL}'], ['name' => 'Admin', 'password' => bcrypt('${ADMIN_PASSWORD}'), 'role' => 'admin', 'active' => true]);"
+        php artisan tinker --execute="\$r = App\Models\Residence::firstOrCreate(['name' => 'Principal']); App\Models\User::updateOrCreate(['email' => '${ADMIN_EMAIL}'], ['name' => 'Admin', 'password' => bcrypt('${ADMIN_PASSWORD}'), 'role' => 'admin', 'active' => true, 'residence_id' => \$r->id]);" || echo "Admin user setup skipped."
     fi
 
     echo "Ajustando permisos de escritura para Laravel en Pillbox..."
