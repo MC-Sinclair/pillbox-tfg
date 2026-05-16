@@ -56,6 +56,8 @@ class ResidentController extends Controller
 
     public function update(Request $request, Resident $resident): RedirectResponse
     {
+        abort_if($resident->residence_id !== $request->user()->residence_id, 403);
+
         $validated = $request->validate([
             'first_name' => ['required', 'string', 'max:100'],
             'last_name'  => ['required', 'string', 'max:100'],
@@ -70,8 +72,10 @@ class ResidentController extends Controller
         return back();
     }
 
-    public function destroy(Resident $resident): RedirectResponse
+    public function destroy(Request $request, Resident $resident): RedirectResponse
     {
+        abort_if($resident->residence_id !== $request->user()->residence_id, 403);
+
         $resident->delete();
 
         return back();
@@ -79,6 +83,8 @@ class ResidentController extends Controller
 
     public function assignGerocultoras(Request $request, Resident $resident): RedirectResponse
     {
+        abort_if($resident->residence_id !== $request->user()->residence_id, 403);
+
         $request->validate([
             'gerocultora_ids'   => ['array'],
             'gerocultora_ids.*' => ['exists:users,id'],

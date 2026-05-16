@@ -264,7 +264,9 @@
 
 /* Fuerza fondo blanco independientemente del tema de shadcn */
 .modal-usuario,
-.modal-pacientes {
+.modal-pacientes,
+.modal-residente,
+.modal-gerocultoras {
     background-color: #ffffff !important;
     color: var(--text) !important;
     border-radius: var(--radius) !important;
@@ -276,7 +278,9 @@
 
 /* Título del modal */
 .modal-usuario [data-slot="dialog-title"],
-.modal-pacientes [data-slot="dialog-title"] {
+.modal-pacientes [data-slot="dialog-title"],
+.modal-residente [data-slot="dialog-title"],
+.modal-gerocultoras [data-slot="dialog-title"] {
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--text);

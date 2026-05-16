@@ -44,6 +44,8 @@ class MedicationController extends Controller
 
     public function update(Request $request, Medication $medication): RedirectResponse
     {
+        abort_if($medication->residence_id !== $request->user()->residence_id, 403);
+
         $validated = $request->validate([
             'name'              => ['required', 'string', 'max:100'],
             'brand'             => ['nullable', 'string', 'max:100'],
@@ -57,8 +59,10 @@ class MedicationController extends Controller
         return back();
     }
 
-    public function destroy(Medication $medication): RedirectResponse
+    public function destroy(Request $request, Medication $medication): RedirectResponse
     {
+        abort_if($medication->residence_id !== $request->user()->residence_id, 403);
+
         $medication->delete();
 
         return back();

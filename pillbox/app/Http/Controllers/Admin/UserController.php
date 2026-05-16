@@ -36,6 +36,8 @@ class UserController extends Controller
 
     public function assignResidents(Request $request, User $user): RedirectResponse
     {
+        abort_if($user->residence_id !== $request->user()->residence_id, 403);
+
         $request->validate([
             'resident_ids'   => ['array'],
             'resident_ids.*' => ['exists:residents,id'],
@@ -70,6 +72,8 @@ class UserController extends Controller
 
     public function update(Request $request, User $user): RedirectResponse
     {
+        abort_if($user->residence_id !== $request->user()->residence_id, 403);
+
         $validated = $request->validate([
             'name'     => ['required', 'string', 'max:255'],
             'email'    => ['required', 'email', Rule::unique('users')->ignore($user->id)],
@@ -94,8 +98,10 @@ class UserController extends Controller
         return back();
     }
 
-    public function destroy(User $user): RedirectResponse
+    public function destroy(Request $request, User $user): RedirectResponse
     {
+        abort_if($user->residence_id !== $request->user()->residence_id, 403);
+
         $user->delete();
 
         return back();

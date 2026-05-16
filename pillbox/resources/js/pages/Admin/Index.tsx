@@ -22,7 +22,11 @@ type Resident = {
     id: number
     first_name: string
     last_name: string
+    birth_date: string
     room: string
+    doctor: string | null
+    status: string
+    users?: { id: number; name: string }[]
 }
 
 type Medication = {
@@ -46,6 +50,12 @@ const ROLE_LABELS: Record<string, string> = {
     admin: 'Admin',
     medico: 'Médico',
     gerocultora: 'Gerocultora',
+}
+
+const STATUS_LABELS: Record<string, string> = {
+    active:     'Activo',
+    inactive:   'Inactivo',
+    discharged: 'Alta',
 }
 
 const FORMAT_LABELS: Record<string, string> = {
@@ -273,12 +283,229 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
     )
 }
 
-// ── Tab Residentes (stub — misma estructura) ─────────────────────────────────
+// ── Tab Residentes ───────────────────────────────────────────────────────────
 function TabResidentes({ residents = [], gerocultoras = [] }: { residents: Resident[]; gerocultoras: { id: number; name: string }[] }) {
+    const [addOpen, setAddOpen] = useState(false)
+    const [editResident, setEditResident] = useState<Resident | null>(null)
+    const [assignResident, setAssignResident] = useState<Resident | null>(null)
+
+    const addForm = useForm({ first_name: '', last_name: '', birth_date: '', room: '', doctor: '', status: 'active' })
+    const editForm = useForm({ first_name: '', last_name: '', birth_date: '', room: '', doctor: '', status: 'active' })
+    const assignForm = useForm<{ gerocultora_ids: number[] }>({ gerocultora_ids: [] })
+
+    function openEdit(resident: Resident) {
+        editForm.setData({
+            first_name: resident.first_name,
+            last_name:  resident.last_name,
+            birth_date: resident.birth_date,
+            room:       resident.room,
+            doctor:     resident.doctor ?? '',
+            status:     resident.status,
+        })
+        setEditResident(resident)
+    }
+
+    function openAssign(resident: Resident) {
+        assignForm.setData({ gerocultora_ids: resident.users?.map((u) => u.id) ?? [] })
+        setAssignResident(resident)
+    }
+
+    function submitAdd(e: React.FormEvent) {
+        e.preventDefault()
+        addForm.post('/admin/residentes', { onSuccess: () => { setAddOpen(false); addForm.reset() } })
+    }
+
+    function submitEdit(e: React.FormEvent) {
+        e.preventDefault()
+        if (!editResident) { return }
+        editForm.put(`/admin/residentes/${editResident.id}`, { onSuccess: () => setEditResident(null) })
+    }
+
+    function submitAssign(e: React.FormEvent) {
+        e.preventDefault()
+        if (!assignResident) { return }
+        assignForm.post(`/admin/residentes/${assignResident.id}/gerocultoras`, { onSuccess: () => setAssignResident(null) })
+    }
+
+    function toggleGerocultora(id: number) {
+        const ids = assignForm.data.gerocultora_ids
+        assignForm.setData('gerocultora_ids', ids.includes(id) ? ids.filter((i) => i !== id) : [...ids, id])
+    }
+
+    function deleteResident(id: number) {
+        if (confirm('¿Eliminar este paciente?')) {
+            router.delete(`/admin/residentes/${id}`)
+        }
+    }
+
     return (
-        <div className="admin-stub">
-            <p>Tab Residentes — proximamente</p>
-            <p>{residents.length} residentes · {gerocultoras.length} gerocultoras disponibles</p>
+        <div className="admin-user-section">
+            <ul className="admin-user-list">
+                {residents.map((resident) => (
+                    <li key={resident.id} className="admin-user-card">
+                        <div className="contend-info">
+                            <div className="admin-user-avatar">
+                                <UserCircle size={58} />
+                            </div>
+                            <div className="admin-user-info">
+                                <p className="admin-user-name">{resident.first_name} {resident.last_name}</p>
+                                <p className="admin-user-email">
+                                    Hab. {resident.room}{resident.doctor ? ` · Dr. ${resident.doctor}` : ''}
+                                </p>
+                                <div className="admin-user-badges">
+                                    <Badge variant="secondary" className="badge-info">
+                                        {STATUS_LABELS[resident.status] ?? resident.status}
+                                    </Badge>
+                                    {resident.users && resident.users.length > 0 && (
+                                        <Badge variant="secondary" className="badge-info color">
+                                            {resident.users.length} gerocultora{resident.users.length !== 1 ? 's' : ''}
+                                        </Badge>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="admin-user-actions">
+                            <Button size="sm" className="bg-green-500 hover:bg-green-600 text-white boton" onClick={() => openAssign(resident)}>
+                                Gerocultoras
+                            </Button>
+                            <Button size="sm" className="bg-yellow-400 hover:bg-yellow-500 text-white boton" onClick={() => openEdit(resident)}>
+                                Modificar
+                            </Button>
+                            <Button size="sm" className="boton" variant="destructive" onClick={() => deleteResident(resident.id)}>
+                                Eliminar
+                            </Button>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+
+            <button className="admin-fab" onClick={() => setAddOpen(true)}>
+                <Plus size={24} />
+            </button>
+
+            {/* Modal Añadir */}
+            <Dialog open={addOpen} onOpenChange={setAddOpen}>
+                <DialogContent className="max-w-md modal-residente">
+                    <DialogHeader>
+                        <DialogTitle>Añadir paciente</DialogTitle>
+                    </DialogHeader>
+                    <div className="flex justify-center mb-2 modal-avatar">
+                        <UserCircle size={64} className="text-muted-foreground" />
+                    </div>
+                    <form onSubmit={submitAdd} className="flex flex-col gap-4 modal-form">
+                        <div className="grid gap-1 modal-field">
+                            <Label>Nombre</Label>
+                            <Input value={addForm.data.first_name} onChange={(e) => addForm.setData('first_name', e.target.value)} />
+                        </div>
+                        <div className="grid gap-1 modal-field">
+                            <Label>Apellidos</Label>
+                            <Input value={addForm.data.last_name} onChange={(e) => addForm.setData('last_name', e.target.value)} />
+                        </div>
+                        <div className="grid gap-1 modal-field">
+                            <Label>Habitación</Label>
+                            <Input value={addForm.data.room} onChange={(e) => addForm.setData('room', e.target.value)} />
+                        </div>
+                        <div className="grid gap-1 modal-field">
+                            <Label>Fecha de nacimiento</Label>
+                            <Input type="date" value={addForm.data.birth_date} onChange={(e) => addForm.setData('birth_date', e.target.value)} />
+                        </div>
+                        <div className="grid gap-1 modal-field">
+                            <Label>Médico responsable</Label>
+                            <Input value={addForm.data.doctor} onChange={(e) => addForm.setData('doctor', e.target.value)} />
+                        </div>
+                        <div className="grid gap-1 modal-field">
+                            <Label>Estado</Label>
+                            <Select value={addForm.data.status} onValueChange={(v) => addForm.setData('status', v)}>
+                                <SelectTrigger><SelectValue /></SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="active">Activo</SelectItem>
+                                    <SelectItem value="inactive">Inactivo</SelectItem>
+                                    <SelectItem value="discharged">Alta</SelectItem>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white mt-2 modal-submit" disabled={addForm.processing}>
+                            Guardar
+                        </Button>
+                    </form>
+                </DialogContent>
+            </Dialog>
+
+            {/* Modal Modificar */}
+            <Dialog open={!!editResident} onOpenChange={(o) => { if (!o) { setEditResident(null) } }}>
+                <DialogContent className="max-w-md modal-residente">
+                    <DialogHeader>
+                        <DialogTitle>Modificar paciente</DialogTitle>
+                    </DialogHeader>
+                    <div className="flex justify-center mb-2 modal-avatar">
+                        <UserCircle size={64} className="text-muted-foreground" />
+                    </div>
+                    <form onSubmit={submitEdit} className="flex flex-col gap-4 modal-form">
+                        <div className="grid gap-1 modal-field">
+                            <Label>Nombre</Label>
+                            <Input value={editForm.data.first_name} onChange={(e) => editForm.setData('first_name', e.target.value)} />
+                        </div>
+                        <div className="grid gap-1 modal-field">
+                            <Label>Apellidos</Label>
+                            <Input value={editForm.data.last_name} onChange={(e) => editForm.setData('last_name', e.target.value)} />
+                        </div>
+                        <div className="grid gap-1 modal-field">
+                            <Label>Habitación</Label>
+                            <Input value={editForm.data.room} onChange={(e) => editForm.setData('room', e.target.value)} />
+                        </div>
+                        <div className="grid gap-1 modal-field">
+                            <Label>Fecha de nacimiento</Label>
+                            <Input type="date" value={editForm.data.birth_date} onChange={(e) => editForm.setData('birth_date', e.target.value)} />
+                        </div>
+                        <div className="grid gap-1 modal-field">
+                            <Label>Médico responsable</Label>
+                            <Input value={editForm.data.doctor} onChange={(e) => editForm.setData('doctor', e.target.value)} />
+                        </div>
+                        <div className="grid gap-1 modal-field">
+                            <Label>Estado</Label>
+                            <Select value={editForm.data.status} onValueChange={(v) => editForm.setData('status', v)}>
+                                <SelectTrigger><SelectValue /></SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="active">Activo</SelectItem>
+                                    <SelectItem value="inactive">Inactivo</SelectItem>
+                                    <SelectItem value="discharged">Alta</SelectItem>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white mt-2 modal-submit" disabled={editForm.processing}>
+                            Guardar
+                        </Button>
+                    </form>
+                </DialogContent>
+            </Dialog>
+
+            {/* Modal Gerocultoras asignadas */}
+            <Dialog open={!!assignResident} onOpenChange={(o) => { if (!o) { setAssignResident(null) } }}>
+                <DialogContent className="max-w-md modal-gerocultoras">
+                    <DialogHeader>
+                        <DialogTitle>Gerocultoras — {assignResident?.first_name} {assignResident?.last_name}</DialogTitle>
+                    </DialogHeader>
+                    <form onSubmit={submitAssign} className="flex flex-col gap-3 modal-form">
+                        <div className="flex flex-col gap-2 max-h-72 overflow-y-auto modal-resident-list">
+                            {gerocultoras.map((g) => {
+                                const assigned = assignForm.data.gerocultora_ids.includes(g.id)
+                                return (
+                                    <div key={g.id} className={`flex items-center gap-3 rounded-lg border p-3 cursor-pointer transition-colors modal-resident-row ${assigned ? 'selected' : ''}`} onClick={() => toggleGerocultora(g.id)}>
+                                        <UserCircle size={36} className="text-muted-foreground shrink-0" />
+                                        <div className="flex-1 min-w-0 modal-resident-info">
+                                            <p className="font-medium text-sm modal-resident-name">{g.name}</p>
+                                        </div>
+                                        {assigned && <X size={16} className="text-green-600 shrink-0" />}
+                                    </div>
+                                )
+                            })}
+                        </div>
+                        <Button type="submit" className="bg-green-500 hover:bg-green-600 text-white mt-2 modal-submit" disabled={assignForm.processing}>
+                            Guardar
+                        </Button>
+                    </form>
+                </DialogContent>
+            </Dialog>
         </div>
     )
 }
