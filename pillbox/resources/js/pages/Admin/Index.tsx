@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useForm, router } from '@inertiajs/react'
-import { UserCircle, Plus, X } from 'lucide-react'
+import { UserCircle, Plus, X, Pill } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
@@ -569,6 +569,9 @@ function TabMedicamentos({ medications = [] }: { medications: Medication[] }) {
                 {medications.map((med) => (
                     <li key={med.id} className="admin-user-card">
                         <div className="contend-info">
+                            <div className="admin-user-avatar">
+                                <Pill size={58} />
+                            </div>
                             <div className="admin-user-info">
                                 <p className="admin-user-name">{med.name}</p>
                                 <p className="admin-user-email">
