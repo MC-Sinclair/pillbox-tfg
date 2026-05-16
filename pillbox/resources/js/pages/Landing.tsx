@@ -66,10 +66,10 @@ export default function Landing() {
         <div className="max-content" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '1.25rem', paddingBottom: '1.25rem' }}>
           <a href="#" className="nav-logo" aria-label="PillBox – inicio">PillBox</a>
           <div className="nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }}>
-            <a href="#problema" className="nav-link">Producto</a>
+            <a href="#solucion" className="nav-link">Solución</a>
             <a href="#features" className="nav-link">Funcionalidades</a>
-            <a href="#pricing" className="nav-link">Optimizacion</a>
-            <a href="#trust" className="nav-link">Recursos</a>
+            <a href="#pricing" className="nav-link">Impacto</a>
+            <a href="#trust" className="nav-link">Seguridad</a>
             <a href="#footer" className="nav-link">Contacto</a>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -89,13 +89,13 @@ export default function Landing() {
           <button aria-label="Cerrar menú" onClick={closeDrawer} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontSize: '1.5rem', lineHeight: 1, padding: '0.25rem' }}>×</button>
         </div>
         <nav style={{ display: 'flex', flexDirection: 'column' }}>
-          <a href="#problema" className="footer-link" onClick={closeDrawer} style={{ fontSize: '1.1rem', color: '#fff', padding: '0.75rem 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>Producto</a>
+          <a href="#solucion" className="footer-link" onClick={closeDrawer} style={{ fontSize: '1.1rem', color: '#fff', padding: '0.75rem 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>Solución</a>
           <a href="#features" className="footer-link" onClick={closeDrawer} style={{ fontSize: '1.1rem', color: '#fff', padding: '0.75rem 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>Funcionalidades</a>
-          <a href="#pricing"  className="footer-link" onClick={closeDrawer} style={{ fontSize: '1.1rem', color: '#fff', padding: '0.75rem 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>Precios</a>
-          <a href="#trust"    className="footer-link" onClick={closeDrawer} style={{ fontSize: '1.1rem', color: '#fff', padding: '0.75rem 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>Recursos</a>
+          <a href="#pricing"  className="footer-link" onClick={closeDrawer} style={{ fontSize: '1.1rem', color: '#fff', padding: '0.75rem 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>Impacto</a>
+          <a href="#trust"    className="footer-link" onClick={closeDrawer} style={{ fontSize: '1.1rem', color: '#fff', padding: '0.75rem 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>Seguridad</a>
           <a href="#footer"   className="footer-link" onClick={closeDrawer} style={{ fontSize: '1.1rem', color: '#fff', padding: '0.75rem 0' }}>Contacto</a>
         </nav>
-        <a href="#pricing" className="btn-primary" onClick={closeDrawer} style={{ marginTop: '2rem', justifyContent: 'center' }}>Solicitar demo</a>
+        <a href="/login" className="btn-primary" onClick={closeDrawer} style={{ marginTop: '2rem', justifyContent: 'center' }}>Login</a>
       </div>
 
       {/* ── HERO ───────────────────────────────────────────────────── */}
@@ -119,7 +119,7 @@ export default function Landing() {
               Pautas médicas activas → registros diarios generados, sin duplicidades, sin olvidos y sin papeleo.
             </p>
             <div className="reveal reveal-delay-3" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
-              <a href="#pricing" className="btn-primary">Solicitar demo →</a>
+              <a href="#footer" className="btn-primary">Habla con nosotros →</a>
               <a href="#features" className="btn-ghost">Ver cómo funciona ▶</a>
             </div>
           </div>
