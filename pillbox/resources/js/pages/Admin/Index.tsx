@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useForm, router } from '@inertiajs/react'
+import { useForm, router, usePage } from '@inertiajs/react'
 import { UserCircle, Plus, X, Pill } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
@@ -70,6 +70,9 @@ const FORMAT_LABELS: Record<string, string> = {
 
 // ── Tab Usuarios ─────────────────────────────────────────────────────────────
 function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents: Resident[] }) {
+    const { auth } = usePage().props as any
+    const currentUserId: number = auth?.user?.id
+
     const [addOpen, setAddOpen] = useState(false)
     const [editUser, setEditUser] = useState<User | null>(null)
     const [assignUser, setAssignUser] = useState<User | null>(null)
@@ -140,10 +143,10 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
                             <Button size="sm" className="bg-green-500 hover:bg-green-600 text-white boton" onClick={() => openAssign(user)}>
                                 Pacientes asignados
                             </Button>
-                            <Button size="sm" className="bg-yellow-400 hover:bg-yellow-500 text-white boton" onClick={() => openEdit(user)}>
+                            <Button size="sm" className="bg-yellow-400 hover:bg-yellow-500 text-white boton" disabled={user.id === currentUserId} onClick={() => openEdit(user)}>
                                 Modificar
                             </Button>
-                            <Button size="sm" className='boton' variant="destructive" onClick={() => deleteUser(user.id)}>
+                            <Button size="sm" className="boton" variant="destructive" disabled={user.id === currentUserId} onClick={() => deleteUser(user.id)}>
                                 Eliminar
                             </Button>
                         </div>
