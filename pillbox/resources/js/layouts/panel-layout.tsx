@@ -1,7 +1,6 @@
 import { Link, usePage } from '@inertiajs/react'
 import { LogOut } from 'lucide-react'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
 import { useInitials } from '@/hooks/use-initials'
 import { logout } from '@/routes'
 
@@ -26,11 +25,14 @@ export default function PanelLayout({ children }: { children: React.ReactNode })
                                 </AvatarFallback>
                             </Avatar>
                             <span id="panel-user-name">{auth.user.name}</span>
-                            <Link href={logout()} as="button" method="post">
-                                <Button variant="ghost" size="sm" className="gap-1.5 text-muted-foreground hover:text-foreground">
-                                    <LogOut className="size-4" />
-                                    <span className="hidden sm:inline">Salir</span>
-                                </Button>
+                            <Link
+                                href={logout()}
+                                as="button"
+                                method="post"
+                                className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground px-2 py-1 rounded"
+                            >
+                                <LogOut className="size-4" />
+                                <span className="hidden sm:inline">Salir</span>
                             </Link>
                         </div>
                     )}

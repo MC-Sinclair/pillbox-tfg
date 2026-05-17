@@ -27,7 +27,7 @@ class PanelController extends Controller
                         'administrations' => fn ($q) => $q->whereDate('scheduled_at', $today),
                     ]);
             }])
-            ->get(['id', 'first_name', 'last_name', 'room']);
+            ->get(['residents.id', 'first_name', 'last_name', 'room']);
 
         foreach ($residents as $resident) {
             foreach ($resident->prescriptions as $prescription) {
@@ -48,6 +48,7 @@ class PanelController extends Controller
         }
 
         $residents->load([
+            'prescriptions.medication',
             'prescriptions.administrations' => fn ($q) => $q->whereDate('scheduled_at', $today),
         ]);
 
