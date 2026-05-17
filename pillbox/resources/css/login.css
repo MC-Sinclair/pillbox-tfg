@@ -6,44 +6,42 @@
     padding: 1.5rem;
     background-color: #0f172a;
     position: relative;
-    overflow: hidden;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 .login-bg-img {
-    position: absolute;
+    position: fixed;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-    opacity: 0.52;
+    opacity: 0.55;
     z-index: 0;
     pointer-events: none;
     user-select: none;
 }
 
 .login-overlay {
-    position: absolute;
+    position: fixed;
     inset: 0;
-    background: rgba(15, 23, 42, 0.42);
+    background: rgba(15, 23, 42, 0.45);
     z-index: 1;
 }
 
-/* Card con glassmorphism */
 .login-card {
     position: relative;
     z-index: 2;
     width: 100%;
     max-width: 400px;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border: 1px solid rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
     padding: 2.25rem 2rem 2rem;
     box-shadow:
-        0 8px 40px rgba(0, 0, 0, 0.38),
+        0 8px 40px rgba(0, 0, 0, 0.4),
         0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -64,7 +62,7 @@
 .login-brand-name {
     font-size: 1.4rem;
     font-weight: 700;
-    color: #fafafa;
+    color: #f8fafc;
     letter-spacing: -0.02em;
 }
 
@@ -76,12 +74,54 @@
 .login-title {
     font-size: 1.1rem;
     font-weight: 600;
-    color: #1e293b;
+    color: #f1f5f9;
     margin: 0 0 0.3rem;
 }
 
 .login-desc {
     font-size: 0.85rem;
-    color: #acb3bd;
+    color: rgba(248, 250, 252, 0.65);
     margin: 0;
+}
+
+/* Inputs y labels dentro de la dark glass card */
+.login-card label {
+    color: rgba(248, 250, 252, 0.8) !important;
+    font-size: 0.85rem;
+}
+
+.login-card input {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: #f8fafc !important;
+}
+
+.login-card input::placeholder {
+    color: rgba(248, 250, 252, 0.35) !important;
+}
+
+.login-card input:focus {
+    border-color: rgba(255, 255, 255, 0.45) !important;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08) !important;
+}
+
+.login-card a:not(.login-brand) {
+    color: rgba(248, 250, 252, 0.7) !important;
+}
+
+.login-card a:not(.login-brand):hover {
+    color: #f8fafc !important;
+}
+
+.login-card [data-slot="checkbox"] {
+    border-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+.login-card button[type="submit"] {
+    background-color: #6366f1 !important;
+    color: #fff !important;
+}
+
+.login-card button[type="submit"]:hover {
+    background-color: #4f46e5 !important;
 }
