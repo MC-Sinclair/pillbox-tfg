@@ -100,17 +100,17 @@
     font-size: 0.85rem;
 }
 
-.login-card input {
+.login-card input:not([data-input-otp]) {
     background-color: rgba(255, 255, 255, 0.1) !important;
     border-color: rgba(255, 255, 255, 0.2) !important;
     color: #f8fafc !important;
 }
 
-.login-card input::placeholder {
+.login-card input:not([data-input-otp])::placeholder {
     color: rgba(248, 250, 252, 0.35) !important;
 }
 
-.login-card input:focus {
+.login-card input:not([data-input-otp]):focus {
     border-color: rgba(255, 255, 255, 0.45) !important;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08) !important;
 }
