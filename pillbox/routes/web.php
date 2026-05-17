@@ -12,7 +12,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:gerocultora'])->group(function () {
-    Route::get('/panel', [PanelController::class, 'index'])->name('panel.index');
+    Route::get('/panel',                                          [PanelController::class, 'index'])->name('panel.index');
+    Route::patch('/panel/administraciones/{administration}',      [PanelController::class, 'updateAdministration'])->name('panel.administraciones.update');
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {

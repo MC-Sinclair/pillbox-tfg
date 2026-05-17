@@ -3,6 +3,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import { initializeTheme } from '@/hooks/use-appearance';
 import AdminLayout from '@/layouts/admin-layout';
 import MedicoLayout from '@/layouts/medico-layout';
+import PanelLayout from '@/layouts/panel-layout';
 import AppLayout from '@/layouts/app-layout';
 import AuthLayout from '@/layouts/auth-layout';
 import SettingsLayout from '@/layouts/settings/layout';
@@ -20,6 +21,8 @@ createInertiaApp({
                 return AdminLayout;
             case name.startsWith('Medico/'):
                 return MedicoLayout;
+            case name.startsWith('Panel/'):
+                return PanelLayout;
             case name.startsWith('auth/'):
                 return AuthLayout;
             case name.startsWith('settings/'):
