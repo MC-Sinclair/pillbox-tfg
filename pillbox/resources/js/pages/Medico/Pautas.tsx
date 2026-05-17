@@ -1,5 +1,5 @@
 import '@/../css/medico.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useForm } from '@inertiajs/react'
 import { Plus, ClipboardList } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -28,6 +28,10 @@ type Prescription = {
 }
 
 const ROUTES = ['Oral', 'Sublingual', 'Intravenosa', 'Intramuscular', 'Subcutánea', 'Tópica', 'Inhalatoria', 'Rectal']
+
+function fmtDate(iso: string) {
+    return new Date(iso.substring(0, 10) + 'T12:00:00').toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })
+}
 
 type FormFields = {
     resident_id: string
@@ -61,6 +65,13 @@ function PautaModal({
     const form = useForm<FormFields>(initialData)
     const [newTime, setNewTime] = useState('')
 
+    useEffect(() => {
+        if (open) {
+            form.reset()
+            setNewTime('')
+        }
+    }, [open])
+
     function addSchedule() {
         if (!newTime || form.data.schedules.includes(newTime)) return
         form.setData('schedules', [...form.data.schedules, newTime].sort())
@@ -82,7 +93,7 @@ function PautaModal({
                 <DialogHeader>
                     <DialogTitle>{title}</DialogTitle>
                 </DialogHeader>
-                <form className="modal-form" onSubmit={submit}>
+                <form className="modal-form" onSubmit={submit} noValidate>
                     <div className="modal-field">
                         <label>Paciente</label>
                         <Select
@@ -98,7 +109,7 @@ function PautaModal({
                                 ))}
                             </SelectContent>
                         </Select>
-                        {form.errors.resident_id && <p className="modal-error">{form.errors.resident_id}</p>}
+                        <p className="modal-error">{form.errors.resident_id}</p>
                     </div>
 
                     <div className="modal-field">
@@ -116,7 +127,7 @@ function PautaModal({
                                 ))}
                             </SelectContent>
                         </Select>
-                        {form.errors.medication_id && <p className="modal-error">{form.errors.medication_id}</p>}
+                        <p className="modal-error">{form.errors.medication_id}</p>
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
@@ -127,9 +138,8 @@ function PautaModal({
                                 placeholder="Ej: 500mg"
                                 value={form.data.dose}
                                 onChange={e => form.setData('dose', e.target.value)}
-                                required
                             />
-                            {form.errors.dose && <p className="modal-error">{form.errors.dose}</p>}
+                            <p className="modal-error">{form.errors.dose}</p>
                         </div>
                         <div className="modal-field">
                             <label>Vía de administración</label>
@@ -167,7 +177,7 @@ function PautaModal({
                                 <Plus className="size-3.5" /> Añadir
                             </Button>
                         </div>
-                        {form.errors.schedules && <p className="modal-error">{form.errors.schedules}</p>}
+                        <p className="modal-error">{form.errors.schedules}</p>
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
@@ -177,9 +187,8 @@ function PautaModal({
                                 type="date"
                                 value={form.data.start_date}
                                 onChange={e => form.setData('start_date', e.target.value)}
-                                required
                             />
-                            {form.errors.start_date && <p className="modal-error">{form.errors.start_date}</p>}
+                            <p className="modal-error">{form.errors.start_date}</p>
                         </div>
                         <div className="modal-field">
                             <label>Fecha fin (opcional)</label>
@@ -188,7 +197,7 @@ function PautaModal({
                                 value={form.data.end_date}
                                 onChange={e => form.setData('end_date', e.target.value)}
                             />
-                            {form.errors.end_date && <p className="modal-error">{form.errors.end_date}</p>}
+                            <p className="modal-error">{form.errors.end_date}</p>
                         </div>
                     </div>
 
@@ -233,8 +242,14 @@ export default function Pautas({
     medications: Medication[]
 }) {
     const [addOpen, setAddOpen] = useState(false)
+    const [addKey, setAddKey] = useState(0)
     const [editTarget, setEditTarget] = useState<Prescription | null>(null)
     const deleteForm = useForm({})
+
+    function openAdd() {
+        setAddKey(k => k + 1)
+        setAddOpen(true)
+    }
 
     function openEdit(p: Prescription) {
         setEditTarget(p)
@@ -273,7 +288,7 @@ export default function Pautas({
                                 </span>
                                 <div className="medico-card-badges">
                                     {p.schedules.map(t => (
-                                        <Badge key={t} variant="outline" style={{ fontSize: '0.75rem' }}>{t}</Badge>
+                                        <Badge key={t} variant="outline" style={{ fontSize: '0.75rem', color: '#1e293b', borderColor: '#cbd5e1' }}>{t}</Badge>
                                     ))}
                                     <Badge
                                         style={{
@@ -287,7 +302,7 @@ export default function Pautas({
                                     </Badge>
                                 </div>
                                 <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.1rem' }}>
-                                    {p.start_date} — {p.end_date ?? 'indefinido'}
+                                    {fmtDate(p.start_date)} — {p.end_date ? fmtDate(p.end_date) : 'indefinido'}
                                     {p.user && ` · Dr. ${p.user.name}`}
                                 </span>
                             </div>
@@ -313,11 +328,12 @@ export default function Pautas({
                 </ul>
             )}
 
-            <button className="medico-fab" onClick={() => setAddOpen(true)} title="Nueva pauta">
+            <button className="medico-fab" onClick={openAdd} title="Nueva pauta">
                 <Plus size={22} />
             </button>
 
             <PautaModal
+                key={addKey}
                 open={addOpen}
                 onClose={() => setAddOpen(false)}
                 title="Nueva pauta"

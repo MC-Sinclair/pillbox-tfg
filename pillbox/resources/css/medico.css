@@ -248,6 +248,34 @@
     padding: 1.75rem !important;
     max-width: 520px !important;
     width: calc(100% - 2rem) !important;
+    max-height: 75vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+}
+
+.modal-pauta .modal-form,
+.modal-medico-med .modal-form {
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+    padding-right: 0.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+
+.modal-pauta .modal-form::-webkit-scrollbar,
+.modal-medico-med .modal-form::-webkit-scrollbar {
+    width: 4px;
+}
+.modal-pauta .modal-form::-webkit-scrollbar-track,
+.modal-medico-med .modal-form::-webkit-scrollbar-track {
+    background: transparent;
+}
+.modal-pauta .modal-form::-webkit-scrollbar-thumb,
+.modal-medico-med .modal-form::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 2px;
 }
 
 .modal-pauta [data-slot="dialog-title"],
@@ -318,7 +346,8 @@
 .modal-error {
     font-size: 0.78rem;
     color: #ef4444;
-    margin-top: 0.15rem;
+    min-height: 1rem;
+    display: block;
 }
 
 .modal-submit {
@@ -377,6 +406,13 @@
 
 .schedule-add-row input[type="time"] {
     flex: 1;
+}
+
+.schedule-add-row button {
+    background-color: #f1f5f9 !important;
+    color: var(--text) !important;
+    border: 1px solid var(--border) !important;
+    font-size: 0.82rem !important;
 }
 
 /* ── Stub ────────────────────────────────────────────────────────────────── */

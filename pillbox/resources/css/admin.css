@@ -275,6 +275,46 @@
     padding: 1.75rem !important;
     max-width: 480px !important;
     width: calc(100% - 2rem) !important;
+    max-height: 75vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+}
+
+.modal-usuario .modal-form,
+.modal-pacientes .modal-form,
+.modal-residente .modal-form,
+.modal-gerocultoras .modal-form,
+.modal-medicamento .modal-form {
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+    padding-right: 0.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+
+.modal-usuario .modal-form::-webkit-scrollbar,
+.modal-pacientes .modal-form::-webkit-scrollbar,
+.modal-residente .modal-form::-webkit-scrollbar,
+.modal-gerocultoras .modal-form::-webkit-scrollbar,
+.modal-medicamento .modal-form::-webkit-scrollbar {
+    width: 4px;
+}
+.modal-usuario .modal-form::-webkit-scrollbar-track,
+.modal-pacientes .modal-form::-webkit-scrollbar-track,
+.modal-residente .modal-form::-webkit-scrollbar-track,
+.modal-gerocultoras .modal-form::-webkit-scrollbar-track,
+.modal-medicamento .modal-form::-webkit-scrollbar-track {
+    background: transparent;
+}
+.modal-usuario .modal-form::-webkit-scrollbar-thumb,
+.modal-pacientes .modal-form::-webkit-scrollbar-thumb,
+.modal-residente .modal-form::-webkit-scrollbar-thumb,
+.modal-gerocultoras .modal-form::-webkit-scrollbar-thumb,
+.modal-medicamento .modal-form::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 2px;
 }
 
 /* Título del modal */
@@ -347,7 +387,8 @@
 .modal-error {
     font-size: 0.78rem;
     color: #ef4444;
-    margin-top: 0.15rem;
+    min-height: 1rem;
+    display: block;
 }
 
 .modal-submit {

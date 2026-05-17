@@ -167,25 +167,25 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
                     <div className="flex justify-center mb-4 modal-avatar">
                         <UserCircle size={64} className="text-muted-foreground" />
                     </div>
-                    <form onSubmit={submitAdd} className="flex flex-col gap-4 modal-form">
+                    <form noValidate onSubmit={submitAdd} className="flex flex-col gap-4 modal-form">
                         <div className="grid gap-1 modal-field">
                             <Label>Nombre</Label>
-                            <Input required value={addForm.data.name} onChange={(e) => addForm.setData('name', e.target.value)} />
+                            <Input value={addForm.data.name} onChange={(e) => addForm.setData('name', e.target.value)} />
                             {addForm.errors.name && <p className="modal-error">{addForm.errors.name}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Email</Label>
-                            <Input required type="email" value={addForm.data.email} onChange={(e) => addForm.setData('email', e.target.value)} />
+                            <Input type="email" value={addForm.data.email} onChange={(e) => addForm.setData('email', e.target.value)} />
                             {addForm.errors.email && <p className="modal-error">{addForm.errors.email}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Contraseña</Label>
-                            <Input required type="password" value={addForm.data.password} onChange={(e) => addForm.setData('password', e.target.value)} />
+                            <Input type="password" value={addForm.data.password} onChange={(e) => addForm.setData('password', e.target.value)} />
                             {addForm.errors.password && <p className="modal-error">{addForm.errors.password}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Rol</Label>
-                            <Select required value={addForm.data.role} onValueChange={(v) => addForm.setData('role', v)}>
+                            <Select value={addForm.data.role} onValueChange={(v) => addForm.setData('role', v)}>
                                 <SelectTrigger><SelectValue placeholder="Seleccionar rol" /></SelectTrigger>
                                 <SelectContent>
                                     <SelectItem value="admin">Admin</SelectItem>
@@ -221,20 +221,20 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
                     <div className="flex justify-center mb-4 modal-avatar">
                         <UserCircle size={64} className="text-muted-foreground" />
                     </div>
-                    <form onSubmit={submitEdit} className="flex flex-col gap-4 modal-form">
+                    <form noValidate onSubmit={submitEdit} className="flex flex-col gap-4 modal-form">
                         <div className="grid gap-1 modal-field">
                             <Label>Nombre</Label>
-                            <Input required value={editForm.data.name} onChange={(e) => editForm.setData('name', e.target.value)} />
+                            <Input value={editForm.data.name} onChange={(e) => editForm.setData('name', e.target.value)} />
                             {editForm.errors.name && <p className="modal-error">{editForm.errors.name}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Email</Label>
-                            <Input required type="email" value={editForm.data.email} onChange={(e) => editForm.setData('email', e.target.value)} />
+                            <Input type="email" value={editForm.data.email} onChange={(e) => editForm.setData('email', e.target.value)} />
                             {editForm.errors.email && <p className="modal-error">{editForm.errors.email}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Rol</Label>
-                            <Select required value={editForm.data.role} onValueChange={(v) => editForm.setData('role', v)}>
+                            <Select value={editForm.data.role} onValueChange={(v) => editForm.setData('role', v)}>
                                 <SelectTrigger><SelectValue /></SelectTrigger>
                                 <SelectContent>
                                     <SelectItem value="admin">Admin</SelectItem>
@@ -267,7 +267,7 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
                     <DialogHeader>
                         <DialogTitle>Pacientes asignados — {assignUser?.name}</DialogTitle>
                     </DialogHeader>
-                    <form onSubmit={submitAssign} className="flex flex-col gap-3 modal-form">
+                    <form noValidate onSubmit={submitAssign} className="flex flex-col gap-3 modal-form">
                         <div className="flex flex-col gap-2 max-h-72 overflow-y-auto modal-resident-list">
                             {residents.map((r) => {
                                 const assigned = assignForm.data.resident_ids.includes(r.id)
@@ -402,25 +402,25 @@ function TabResidentes({ residents = [], gerocultoras = [] }: { residents: Resid
                     <div className="flex justify-center mb-2 modal-avatar">
                         <UserCircle size={64} className="text-muted-foreground" />
                     </div>
-                    <form onSubmit={submitAdd} className="flex flex-col gap-4 modal-form">
+                    <form noValidate onSubmit={submitAdd} className="flex flex-col gap-4 modal-form">
                         <div className="grid gap-1 modal-field">
                             <Label>Nombre</Label>
-                            <Input required value={addForm.data.first_name} onChange={(e) => addForm.setData('first_name', e.target.value)} />
+                            <Input value={addForm.data.first_name} onChange={(e) => addForm.setData('first_name', e.target.value)} />
                             {addForm.errors.first_name && <p className="modal-error">{addForm.errors.first_name}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Apellidos</Label>
-                            <Input required value={addForm.data.last_name} onChange={(e) => addForm.setData('last_name', e.target.value)} />
+                            <Input value={addForm.data.last_name} onChange={(e) => addForm.setData('last_name', e.target.value)} />
                             {addForm.errors.last_name && <p className="modal-error">{addForm.errors.last_name}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Habitación</Label>
-                            <Input required value={addForm.data.room} onChange={(e) => addForm.setData('room', e.target.value)} />
+                            <Input value={addForm.data.room} onChange={(e) => addForm.setData('room', e.target.value)} />
                             {addForm.errors.room && <p className="modal-error">{addForm.errors.room}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Fecha de nacimiento</Label>
-                            <Input required type="date" value={addForm.data.birth_date} onChange={(e) => addForm.setData('birth_date', e.target.value)} />
+                            <Input type="date" value={addForm.data.birth_date} onChange={(e) => addForm.setData('birth_date', e.target.value)} />
                             {addForm.errors.birth_date && <p className="modal-error">{addForm.errors.birth_date}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
@@ -455,25 +455,25 @@ function TabResidentes({ residents = [], gerocultoras = [] }: { residents: Resid
                     <div className="flex justify-center mb-2 modal-avatar">
                         <UserCircle size={64} className="text-muted-foreground" />
                     </div>
-                    <form onSubmit={submitEdit} className="flex flex-col gap-4 modal-form">
+                    <form noValidate onSubmit={submitEdit} className="flex flex-col gap-4 modal-form">
                         <div className="grid gap-1 modal-field">
                             <Label>Nombre</Label>
-                            <Input required value={editForm.data.first_name} onChange={(e) => editForm.setData('first_name', e.target.value)} />
+                            <Input value={editForm.data.first_name} onChange={(e) => editForm.setData('first_name', e.target.value)} />
                             {editForm.errors.first_name && <p className="modal-error">{editForm.errors.first_name}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Apellidos</Label>
-                            <Input required value={editForm.data.last_name} onChange={(e) => editForm.setData('last_name', e.target.value)} />
+                            <Input value={editForm.data.last_name} onChange={(e) => editForm.setData('last_name', e.target.value)} />
                             {editForm.errors.last_name && <p className="modal-error">{editForm.errors.last_name}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Habitación</Label>
-                            <Input required value={editForm.data.room} onChange={(e) => editForm.setData('room', e.target.value)} />
+                            <Input value={editForm.data.room} onChange={(e) => editForm.setData('room', e.target.value)} />
                             {editForm.errors.room && <p className="modal-error">{editForm.errors.room}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Fecha de nacimiento</Label>
-                            <Input required type="date" value={editForm.data.birth_date} onChange={(e) => editForm.setData('birth_date', e.target.value)} />
+                            <Input type="date" value={editForm.data.birth_date} onChange={(e) => editForm.setData('birth_date', e.target.value)} />
                             {editForm.errors.birth_date && <p className="modal-error">{editForm.errors.birth_date}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
@@ -505,7 +505,7 @@ function TabResidentes({ residents = [], gerocultoras = [] }: { residents: Resid
                     <DialogHeader>
                         <DialogTitle>Gerocultoras — {assignResident?.first_name} {assignResident?.last_name}</DialogTitle>
                     </DialogHeader>
-                    <form onSubmit={submitAssign} className="flex flex-col gap-3 modal-form">
+                    <form noValidate onSubmit={submitAssign} className="flex flex-col gap-3 modal-form">
                         <div className="flex flex-col gap-2 max-h-72 overflow-y-auto modal-resident-list">
                             {gerocultoras.map((g) => {
                                 const assigned = assignForm.data.gerocultora_ids.includes(g.id)
@@ -609,10 +609,10 @@ function TabMedicamentos({ medications = [] }: { medications: Medication[] }) {
                     <DialogHeader>
                         <DialogTitle>Añadir medicamento</DialogTitle>
                     </DialogHeader>
-                    <form onSubmit={submitAdd} className="flex flex-col gap-4 modal-form">
+                    <form noValidate onSubmit={submitAdd} className="flex flex-col gap-4 modal-form">
                         <div className="grid gap-1 modal-field">
                             <Label>Nombre</Label>
-                            <Input required value={addForm.data.name} onChange={(e) => addForm.setData('name', e.target.value)} />
+                            <Input value={addForm.data.name} onChange={(e) => addForm.setData('name', e.target.value)} />
                             {addForm.errors.name && <p className="modal-error">{addForm.errors.name}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
@@ -627,7 +627,7 @@ function TabMedicamentos({ medications = [] }: { medications: Medication[] }) {
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Formato</Label>
-                            <Select required value={addForm.data.format} onValueChange={(v) => addForm.setData('format', v)}>
+                            <Select value={addForm.data.format} onValueChange={(v) => addForm.setData('format', v)}>
                                 <SelectTrigger><SelectValue /></SelectTrigger>
                                 <SelectContent>
                                     {Object.entries(FORMAT_LABELS).map(([val, label]) => (
@@ -655,10 +655,10 @@ function TabMedicamentos({ medications = [] }: { medications: Medication[] }) {
                     <DialogHeader>
                         <DialogTitle>Modificar medicamento</DialogTitle>
                     </DialogHeader>
-                    <form onSubmit={submitEdit} className="flex flex-col gap-4 modal-form">
+                    <form noValidate onSubmit={submitEdit} className="flex flex-col gap-4 modal-form">
                         <div className="grid gap-1 modal-field">
                             <Label>Nombre</Label>
-                            <Input required value={editForm.data.name} onChange={(e) => editForm.setData('name', e.target.value)} />
+                            <Input value={editForm.data.name} onChange={(e) => editForm.setData('name', e.target.value)} />
                             {editForm.errors.name && <p className="modal-error">{editForm.errors.name}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
@@ -673,7 +673,7 @@ function TabMedicamentos({ medications = [] }: { medications: Medication[] }) {
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Formato</Label>
-                            <Select required value={editForm.data.format} onValueChange={(v) => editForm.setData('format', v)}>
+                            <Select value={editForm.data.format} onValueChange={(v) => editForm.setData('format', v)}>
                                 <SelectTrigger><SelectValue /></SelectTrigger>
                                 <SelectContent>
                                     {Object.entries(FORMAT_LABELS).map(([val, label]) => (
