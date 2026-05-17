@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/png" href="/PillBoxLogo.png">
+        <link rel="preload" as="image" href="/pastillero.png">
         <title>PillBox</title>
         @viteReactRefresh
         @vite(['resources/css/app.css', 'resources/js/app.tsx'])

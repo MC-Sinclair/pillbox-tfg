@@ -17,10 +17,7 @@ export default function AuthSimpleLayout({
                 className="login-bg-img"
             />
             <div className="login-overlay" />
-            <div
-                className="login-card"
-                style={{ backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}
-            >
+            <div className="login-card">
                 <Link href={home()} className="login-brand">
                     <img src="/PillBoxLogo.png" alt="PillBox" className="login-logo" />
                     <span className="login-brand-name">PillBox</span>

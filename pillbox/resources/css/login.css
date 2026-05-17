@@ -1,5 +1,9 @@
 .login-root {
     min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
     background-color: #0f172a;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
@@ -25,24 +29,30 @@
 }
 
 .login-card {
-    position: fixed;
-    inset: 0;
-    margin: auto;
+    position: relative;
     z-index: 2;
-    width: calc(100% - 2rem);
+    width: 100%;
     max-width: 400px;
-    height: fit-content;
-    max-height: calc(100dvh - 2rem);
-    overflow-y: auto;
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
     padding: 2.25rem 2rem 2rem;
     box-shadow:
         0 8px 40px rgba(0, 0, 0, 0.4),
         0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.login-card::before {
+    content: '';
+    position: absolute;
+    inset: -40px;
+    background-image: url('/pastillero.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    filter: blur(22px) brightness(0.6);
+    z-index: -1;
 }
 
 .login-brand {
