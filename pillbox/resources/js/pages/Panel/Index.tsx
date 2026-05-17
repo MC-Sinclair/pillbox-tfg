@@ -6,7 +6,7 @@ type Administration = {
     id: number
     scheduled_at: string
     administered_at: string | null
-    status: 'pending' | 'administered' | 'refused' | 'difficulty'
+    status: 'pending' | 'administered' | 'refused' | 'difficulty' | 'missed'
     notes: string | null
     user_id: number | null
 }
@@ -32,6 +32,7 @@ const STATUS_LABELS = {
     administered: 'Administrado',
     refused:      'Rechazado',
     difficulty:   'Dificultad',
+    missed:       'No administrado',
 }
 
 function mark(adminId: number, status: string) {
@@ -55,11 +56,13 @@ function AdminRow({ prescription, time }: { prescription: Prescription; time: st
 
     if (!admin) return null
 
-    const isDone = admin.status !== 'pending'
+    const isDone    = admin.status !== 'pending' && admin.status !== 'missed'
+    const isMissed  = admin.status === 'missed'
+    const isPending = admin.status === 'pending'
 
     return (
-        <div className="panel-admin-row">
-            <span className="panel-admin-time">{time}</span>
+        <div className="panel-admin-row" style={isMissed ? { backgroundColor: '#fff7f7' } : undefined}>
+            <span className="panel-admin-time" style={isMissed ? { color: '#ef4444' } : undefined}>{time}</span>
 
             <div className="panel-admin-info">
                 <div className="panel-admin-med">
@@ -85,15 +88,22 @@ function AdminRow({ prescription, time }: { prescription: Prescription; time: st
                     </>
                 ) : (
                     <>
+                        {isMissed && (
+                            <span className="status-badge status-missed">No administrado</span>
+                        )}
                         <button className="btn-status btn-administered" onClick={() => mark(admin.id, 'administered')}>
                             ✓ Administrado
                         </button>
-                        <button className="btn-status btn-refused" onClick={() => mark(admin.id, 'refused')}>
-                            ✗ Rechazado
-                        </button>
-                        <button className="btn-status btn-difficulty" onClick={() => mark(admin.id, 'difficulty')}>
-                            ⚠ Dificultad
-                        </button>
+                        {isPending && (
+                            <>
+                                <button className="btn-status btn-refused" onClick={() => mark(admin.id, 'refused')}>
+                                    ✗ Rechazado
+                                </button>
+                                <button className="btn-status btn-difficulty" onClick={() => mark(admin.id, 'difficulty')}>
+                                    ⚠ Dificultad
+                                </button>
+                            </>
+                        )}
                     </>
                 )}
             </div>

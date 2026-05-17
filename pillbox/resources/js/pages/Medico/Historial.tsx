@@ -21,6 +21,7 @@ const STATUS_LABELS: Record<string, string> = {
     administered: 'Administrado',
     refused:      'Rechazado',
     difficulty:   'Dificultad',
+    missed:       'No administrado',
 }
 
 const STATUS_COLORS: Record<string, { bg: string; color: string }> = {
@@ -28,6 +29,7 @@ const STATUS_COLORS: Record<string, { bg: string; color: string }> = {
     administered: { bg: '#dcfce7', color: '#166534' },
     refused:      { bg: '#fee2e2', color: '#991b1b' },
     difficulty:   { bg: '#ffedd5', color: '#9a3412' },
+    missed:       { bg: '#fce8e8', color: '#b91c1c' },
 }
 
 function fmt(dt: string | null) {

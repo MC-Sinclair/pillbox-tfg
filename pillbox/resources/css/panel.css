@@ -239,6 +239,7 @@
 .status-administered { background-color: #dcfce7; color: #166534; }
 .status-refused       { background-color: #fee2e2; color: #991b1b; }
 .status-difficulty    { background-color: #ffedd5; color: #9a3412; }
+.status-missed        { background-color: #fce8e8; color: #b91c1c; }
 
 /* ── Stub sin residentes ─────────────────────────────────────────────────── */
 .panel-stub {
