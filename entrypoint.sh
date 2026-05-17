@@ -46,8 +46,9 @@ a2dismod mpm_event 2>/dev/null || true
 a2enmod mpm_prefork 2>/dev/null || true
 
 echo "Configurando cron para el scheduler de Laravel..."
-echo "* * * * * root /usr/local/bin/php /var/www/html/pillbox/artisan schedule:run >> /dev/null 2>&1" > /etc/cron.d/laravel-scheduler
-chmod 0644 /etc/cron.d/laravel-scheduler
+mkdir -p /etc/cron.d
+echo "* * * * * root /usr/local/bin/php /var/www/html/pillbox/artisan schedule:run >> /dev/null 2>&1" > /etc/cron.d/laravel-scheduler || true
+chmod 0644 /etc/cron.d/laravel-scheduler 2>/dev/null || true
 service cron start 2>/dev/null || cron 2>/dev/null || true
 
 echo "Iniciando Apache..."
