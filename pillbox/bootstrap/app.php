@@ -18,7 +18,10 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->trustProxies(at: '*');
 
-        $middleware->alias(['role' => EnsureRole::class]);
+        $middleware->alias([
+            'role'       => EnsureRole::class,
+            'two.factor' => \App\Http\Middleware\RequiresTwoFactor::class,
+        ]);
 
         $middleware->encryptCookies(except: ['appearance', 'sidebar_state']);
 

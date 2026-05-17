@@ -3,20 +3,25 @@
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Medico;
 use App\Http\Controllers\PanelController;
+use App\Http\Controllers\TwoFactorChallengeController;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'Landing')->name('home');
 
 Route::middleware(['auth'])->group(function () {
     Route::inertia('dashboard', 'dashboard')->name('dashboard');
+
+    Route::get('/two-factor-challenge',        [TwoFactorChallengeController::class, 'show'])->name('two-factor.challenge');
+    Route::post('/two-factor-challenge',       [TwoFactorChallengeController::class, 'store'])->name('two-factor.store');
+    Route::post('/two-factor-challenge/resend',[TwoFactorChallengeController::class, 'resend'])->name('two-factor.resend');
 });
 
-Route::middleware(['auth', 'role:gerocultora'])->group(function () {
+Route::middleware(['auth', 'two.factor', 'role:gerocultora'])->group(function () {
     Route::get('/panel',                                          [PanelController::class, 'index'])->name('panel.index');
     Route::patch('/panel/administraciones/{administration}',      [PanelController::class, 'updateAdministration'])->name('panel.administraciones.update');
 });
 
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'two.factor', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/usuarios',                        [Admin\UserController::class, 'index'])->name('usuarios.index');
     Route::post('/usuarios',                       [Admin\UserController::class, 'store'])->name('usuarios.store');
     Route::put('/usuarios/{user}',                 [Admin\UserController::class, 'update'])->name('usuarios.update');
@@ -35,7 +40,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::delete('/medicamentos/{medication}', [Admin\MedicationController::class, 'destroy'])->name('medicamentos.destroy');
 });
 
-Route::middleware(['auth', 'role:medico'])->prefix('medico')->name('medico.')->group(function () {
+Route::middleware(['auth', 'two.factor', 'role:medico'])->prefix('medico')->name('medico.')->group(function () {
     Route::get('/pautas',                        [Medico\PrescriptionController::class, 'index'])->name('pautas.index');
     Route::post('/pautas',                       [Medico\PrescriptionController::class, 'store'])->name('pautas.store');
     Route::put('/pautas/{prescription}',         [Medico\PrescriptionController::class, 'update'])->name('pautas.update');
