@@ -1,11 +1,6 @@
 .login-root {
     min-height: 100dvh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
     background-color: #0f172a;
-    position: relative;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
@@ -30,10 +25,15 @@
 }
 
 .login-card {
-    position: relative;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 2;
-    width: 100%;
+    width: calc(100% - 2rem);
     max-width: 400px;
+    max-height: calc(100dvh - 2rem);
+    overflow-y: auto;
     background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
