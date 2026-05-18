@@ -61,7 +61,7 @@ export default function Medicamentos({ medications = [] }: { medications: Medica
                                 </span>
                                 <div className="medico-card-badges">
                                     {m.format && (
-                                        <Badge variant="outline" style={{ fontSize: '0.72rem' }}>{m.format}</Badge>
+                                        <Badge variant="outline" style={{ fontSize: '0.72rem', color: 'var(--text)', borderColor: 'var(--border)' }}>{m.format}</Badge>
                                     )}
                                 </div>
                                 {m.description && (
