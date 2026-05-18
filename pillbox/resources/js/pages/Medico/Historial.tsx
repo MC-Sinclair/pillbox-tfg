@@ -32,9 +32,16 @@ const STATUS_COLORS: Record<string, { bg: string; color: string }> = {
     missed:       { bg: '#fce8e8', color: '#b91c1c' },
 }
 
+const LOCALE_OPTS: Intl.DateTimeFormatOptions = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }
+
 function fmt(dt: string | null) {
     if (!dt) return '—'
-    return new Date(dt).toLocaleString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+    return new Date(dt).toLocaleString('es-ES', LOCALE_OPTS)
+}
+
+function fmtUTC(dt: string | null) {
+    if (!dt) return '—'
+    return new Date(dt).toLocaleString('es-ES', { ...LOCALE_OPTS, timeZone: 'UTC' })
 }
 
 export default function Historial({ administrations = [] }: { administrations: Administration[] }) {
@@ -110,7 +117,7 @@ export default function Historial({ administrations = [] }: { administrations: A
                                     </td>
                                     <td>{a.prescription.medication.name}</td>
                                     <td style={{ color: 'var(--text-muted)' }}>{a.prescription.dose}</td>
-                                    <td style={{ color: 'var(--text-muted)' }}>{fmt(a.scheduled_at)}</td>
+                                    <td style={{ color: 'var(--text-muted)' }}>{fmtUTC(a.scheduled_at)}</td>
                                     <td style={{ color: 'var(--text-muted)' }}>{fmt(a.administered_at)}</td>
                                     <td>
                                         <Badge style={{ fontSize: '0.72rem', backgroundColor: colors.bg, color: colors.color, border: 'none' }}>
