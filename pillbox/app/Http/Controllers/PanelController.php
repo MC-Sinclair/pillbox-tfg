@@ -13,7 +13,7 @@ class PanelController extends Controller
 {
     public function index(Request $request): Response
     {
-        $user  = $request->user();
+        $user = $request->user();
         $today = now()->toDateString();
 
         $residents = $user->residents()
@@ -39,8 +39,8 @@ class PanelController extends Controller
                     if (! in_array($time, $existingTimes)) {
                         Administration::create([
                             'prescription_id' => $prescription->id,
-                            'scheduled_at'    => $today.' '.$time.':00',
-                            'status'          => 'pending',
+                            'scheduled_at' => $today.' '.$time.':00',
+                            'status' => 'pending',
                         ]);
                     }
                 }
@@ -54,7 +54,7 @@ class PanelController extends Controller
 
         return Inertia::render('Panel/Index', [
             'residents' => $residents,
-            'today'     => $today,
+            'today' => $today,
         ]);
     }
 
@@ -67,14 +67,14 @@ class PanelController extends Controller
 
         $validated = $request->validate([
             'status' => ['required', Rule::in(['pending', 'administered', 'refused', 'difficulty'])],
-            'notes'  => ['nullable', 'string', 'max:500'],
+            'notes' => ['nullable', 'string', 'max:500'],
         ]);
 
         $administration->update([
-            'status'          => $validated['status'],
-            'notes'           => $validated['notes'] ?? null,
-            'user_id'         => $request->user()->id,
-            'administered_at' => $validated['status'] === 'administered' ? now() : null,
+            'status' => $validated['status'],
+            'notes' => $validated['notes'] ?? null,
+            'user_id' => $request->user()->id,
+            'administered_at' => $validated['status'] !== 'pending' ? now() : null,
         ]);
 
         return back();
