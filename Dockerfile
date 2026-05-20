@@ -1,8 +1,8 @@
-FROM php:8.3-apache-bookworm
+FROM php:8.3-apache
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* \
     && apt-get update && apt-get install -y --no-install-recommends \
-    git zip unzip libzip-dev libonig-dev curl ca-certificates \
+    zip unzip libzip-dev libonig-dev \
     && docker-php-ext-install pdo pdo_mysql zip opcache \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
