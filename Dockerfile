@@ -1,4 +1,4 @@
-FROM php:8.3-apache
+FROM php:8.3-apache-bookworm
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* \
     && apt-get update && apt-get install -y --no-install-recommends \
