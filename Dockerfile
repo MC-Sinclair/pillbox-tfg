@@ -2,12 +2,14 @@ FROM php:8.3-apache
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* \
     && apt-get update && apt-get install -y --no-install-recommends \
-    git zip unzip libzip-dev libonig-dev \
-    curl ca-certificates gnupg \
-    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y --no-install-recommends nodejs \
+    git zip unzip libzip-dev libonig-dev curl ca-certificates \
     && docker-php-ext-install pdo pdo_mysql zip opcache \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+ENV NODE_VERSION=20.19.2
+RUN curl -fsSL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz" \
+    | tar -xz -C /usr/local --strip-components=1 \
+    --exclude=CHANGELOG.md --exclude=LICENSE --exclude=README.md
 
 RUN echo "opcache.enable=1" >> /usr/local/etc/php/conf.d/opcache.ini
 
