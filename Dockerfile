@@ -1,10 +1,11 @@
 FROM php:8.3-apache
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* \
+    && apt-get update && apt-get install -y --no-install-recommends \
     git zip unzip libzip-dev libonig-dev \
-    curl \
+    curl ca-certificates gnupg \
     && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs \
+    && apt-get install -y --no-install-recommends nodejs \
     && docker-php-ext-install pdo pdo_mysql zip opcache \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
