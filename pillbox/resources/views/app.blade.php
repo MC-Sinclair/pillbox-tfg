@@ -4,7 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="color-scheme" content="light">
-        <link rel="icon" type="image/png" href="/PillBoxLogo.png">
+        <link rel="icon" type="image/png" href="/PillBoxLogo.png"      media="(prefers-color-scheme: dark)">
+        <link rel="icon" type="image/png" href="/PillBoxLogoBlack.png" media="(prefers-color-scheme: light)">
         <link rel="preload" as="image" href="/pastillero.png">
         <title>PillBox</title>
         @viteReactRefresh
