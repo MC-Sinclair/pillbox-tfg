@@ -469,12 +469,128 @@
     background-color: #f8fafc;
 }
 
+/* ── Hamburger ───────────────────────────────────────────────────────────── */
+.medico-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    flex-shrink: 0;
+}
+
+.medico-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+/* ── Drawer móvil ────────────────────────────────────────────────────────── */
+#medico-drawer {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: min(300px, 85vw);
+    height: 100vh;
+    background: rgba(7, 16, 31, 0.95);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    z-index: 200;
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+#medico-drawer.open {
+    right: 0;
+}
+
+#medico-drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.60);
+    z-index: 199;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+#medico-drawer-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.medico-drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.medico-drawer-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--header-text);
+    letter-spacing: -0.01em;
+}
+
+.medico-drawer-close {
+    background: none;
+    border: none;
+    color: var(--header-text);
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: 1;
+    padding: 0.25rem;
+    opacity: 0.7;
+}
+
+.medico-drawer-close:hover {
+    opacity: 1;
+}
+
+.medico-drawer-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.medico-drawer-link {
+    font-size: 1.1rem;
+    color: rgba(248, 250, 252, 0.7);
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    text-decoration: none;
+    transition: color var(--transition);
+    font-weight: 500;
+}
+
+.medico-drawer-link:last-child {
+    border-bottom: none;
+}
+
+.medico-drawer-link:hover,
+.medico-drawer-link.active {
+    color: var(--header-text);
+}
+
+.medico-drawer-link.active {
+    font-weight: 600;
+}
+
 /* ── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
     #medico-header-inner { padding: 0 1rem; }
     #medico-logo span { display: none; }
     #medico-user-name { display: none; }
-    .medico-tab { padding: 0.35rem 0.65rem; font-size: 0.8rem; }
+    .medico-tabs { display: none; }
+    .medico-hamburger { display: flex; }
     .medico-page { padding: 1.25rem 1rem 6rem; }
     .medico-card { flex-wrap: wrap; gap: 0.75rem; }
     .medico-card-actions {
@@ -487,8 +603,10 @@
 }
 
 @media (max-width: 480px) {
-    .medico-tabs { gap: 0.1rem; }
-    .medico-tab { padding: 0.3rem 0.5rem; font-size: 0.75rem; }
     .medico-card-actions .boton { flex: 1; min-width: fit-content; justify-content: center; }
     .medico-fab { bottom: 1.25rem; right: 1.25rem; width: 3rem; height: 3rem; }
+}
+
+@media (min-width: 769px) {
+    #medico-drawer { display: none; }
 }
