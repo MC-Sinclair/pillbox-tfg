@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="color-scheme" content="light">
         <link rel="icon" type="image/png" href="/PillBoxLogo.png">
         <link rel="preload" as="image" href="/pastillero.png">
         <title>PillBox</title>
