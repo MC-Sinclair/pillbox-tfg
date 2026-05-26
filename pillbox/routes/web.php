@@ -47,7 +47,9 @@ Route::middleware(['auth', 'two.factor', 'role:medico'])->prefix('medico')->name
     Route::delete('/pautas/{prescription}',      [Medico\PrescriptionController::class, 'destroy'])->name('pautas.destroy');
 
     Route::get('/historial',    [Medico\HistorialController::class,  'index'])->name('historial.index');
-    Route::get('/medicamentos', [Medico\MedicationController::class, 'index'])->name('medicamentos.index');
+    Route::get('/medicamentos',                [Medico\MedicationController::class, 'index'])->name('medicamentos.index');
+    Route::post('/medicamentos',               [Medico\MedicationController::class, 'store'])->name('medicamentos.store');
+    Route::put('/medicamentos/{medication}',   [Medico\MedicationController::class, 'update'])->name('medicamentos.update');
 });
 
 require __DIR__.'/settings.php';
