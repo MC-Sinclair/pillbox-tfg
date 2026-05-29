@@ -15,6 +15,7 @@ class MedicationController extends Controller
     public function index(Request $request): Response
     {
         $medications = Medication::where('residence_id', $request->user()->residence_id)
+            ->withCount(['prescriptions as active_prescriptions_count' => fn ($q) => $q->where('active', true)])
             ->orderBy('name')
             ->get();
 
@@ -62,6 +63,10 @@ class MedicationController extends Controller
     public function destroy(Request $request, Medication $medication): RedirectResponse
     {
         abort_if($medication->residence_id !== $request->user()->residence_id, 403);
+
+        if ($medication->prescriptions()->where('active', true)->exists()) {
+            return back()->withErrors(['medication' => 'No se puede eliminar un medicamento que tiene pautas activas.']);
+        }
 
         $medication->delete();
 

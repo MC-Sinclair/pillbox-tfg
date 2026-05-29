@@ -36,6 +36,7 @@ type Medication = {
     active_ingredient: string
     format: string
     description: string
+    active_prescriptions_count: number
 }
 
 type Props = {
@@ -43,6 +44,7 @@ type Props = {
     users?: User[]
     residents?: Resident[]
     gerocultoras?: { id: number; name: string }[]
+    medicos?: { id: number; name: string }[]
     medications?: Medication[]
 }
 
@@ -294,7 +296,7 @@ function TabUsuarios({ users = [], residents = [] }: { users: User[]; residents:
 }
 
 // ── Tab Residentes ───────────────────────────────────────────────────────────
-function TabResidentes({ residents = [], gerocultoras = [] }: { residents: Resident[]; gerocultoras: { id: number; name: string }[] }) {
+function TabResidentes({ residents = [], gerocultoras = [], medicos = [] }: { residents: Resident[]; gerocultoras: { id: number; name: string }[]; medicos: { id: number; name: string }[] }) {
     const [addOpen, setAddOpen] = useState(false)
     const [editResident, setEditResident] = useState<Resident | null>(null)
     const [assignResident, setAssignResident] = useState<Resident | null>(null)
@@ -425,7 +427,15 @@ function TabResidentes({ residents = [], gerocultoras = [] }: { residents: Resid
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Médico responsable</Label>
-                            <Input value={addForm.data.doctor} onChange={(e) => addForm.setData('doctor', e.target.value)} />
+                            <Select value={addForm.data.doctor} onValueChange={(v) => addForm.setData('doctor', v)}>
+                                <SelectTrigger><SelectValue placeholder="Sin asignar" /></SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="">Sin asignar</SelectItem>
+                                    {medicos.map((m) => (
+                                        <SelectItem key={m.id} value={m.name}>{m.name}</SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
                             {addForm.errors.doctor && <p className="modal-error">{addForm.errors.doctor}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
@@ -478,7 +488,15 @@ function TabResidentes({ residents = [], gerocultoras = [] }: { residents: Resid
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Médico responsable</Label>
-                            <Input value={editForm.data.doctor} onChange={(e) => editForm.setData('doctor', e.target.value)} />
+                            <Select value={editForm.data.doctor} onValueChange={(v) => editForm.setData('doctor', v)}>
+                                <SelectTrigger><SelectValue placeholder="Sin asignar" /></SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="">Sin asignar</SelectItem>
+                                    {medicos.map((m) => (
+                                        <SelectItem key={m.id} value={m.name}>{m.name}</SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
                             {editForm.errors.doctor && <p className="modal-error">{editForm.errors.doctor}</p>}
                         </div>
                         <div className="grid gap-1 modal-field">
@@ -591,7 +609,14 @@ function TabMedicamentos({ medications = [] }: { medications: Medication[] }) {
                             <Button size="sm" className="bg-yellow-400 hover:bg-yellow-500 text-white boton" onClick={() => openEdit(med)}>
                                 Modificar
                             </Button>
-                            <Button size="sm" className="boton" variant="destructive" onClick={() => deleteMedication(med.id)}>
+                            <Button
+                                size="sm"
+                                className="boton"
+                                variant="destructive"
+                                disabled={med.active_prescriptions_count > 0}
+                                title={med.active_prescriptions_count > 0 ? 'Tiene pautas activas asignadas' : undefined}
+                                onClick={() => deleteMedication(med.id)}
+                            >
                                 Eliminar
                             </Button>
                         </div>
@@ -699,11 +724,11 @@ function TabMedicamentos({ medications = [] }: { medications: Medication[] }) {
 }
 
 // ── Page ─────────────────────────────────────────────────────────────────────
-export default function AdminIndex({ tab, users = [], residents = [], gerocultoras = [], medications = [] }: Props) {
+export default function AdminIndex({ tab, users = [], residents = [], gerocultoras = [], medicos = [], medications = [] }: Props) {
     return (
         <div className="admin-page">
             {tab === 'usuarios' && <TabUsuarios users={users} residents={residents} />}
-            {tab === 'residentes' && <TabResidentes residents={residents} gerocultoras={gerocultoras} />}
+            {tab === 'residentes' && <TabResidentes residents={residents} gerocultoras={gerocultoras} medicos={medicos} />}
             {tab === 'medicamentos' && <TabMedicamentos medications={medications} />}
         </div>
     )

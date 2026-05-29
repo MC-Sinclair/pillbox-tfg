@@ -28,10 +28,17 @@ class ResidentController extends Controller
             ->orderBy('name')
             ->get(['id', 'name']);
 
+        $medicos = User::where('residence_id', $residenceId)
+            ->where('role', 'medico')
+            ->where('active', true)
+            ->orderBy('name')
+            ->get(['id', 'name']);
+
         return Inertia::render('Admin/Index', [
             'tab'          => 'residentes',
             'residents'    => $residents,
             'gerocultoras' => $gerocultoras,
+            'medicos'      => $medicos,
         ]);
     }
 

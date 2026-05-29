@@ -29,6 +29,17 @@ type Prescription = {
 
 const ROUTES = ['Oral', 'Sublingual', 'Intravenosa', 'Intramuscular', 'Subcutánea', 'Tópica', 'Inhalatoria', 'Rectal']
 
+const DOSE_UNITS: Record<string, string[]> = {
+    tablet:    ['mg', 'g', 'UI', 'comprimido(s)'],
+    capsule:   ['mg', 'g', 'UI', 'cápsula(s)'],
+    syrup:     ['ml', 'mg', 'mg/5ml', 'mg/ml'],
+    injection: ['mg', 'ml', 'mcg', 'UI'],
+    drops:     ['gotas', 'ml', 'mg', 'mcg'],
+    patch:     ['mg/día', 'mcg/h', 'mg'],
+    other:     ['mg', 'ml', 'mcg', 'g', 'UI', 'gotas', 'unidad(es)'],
+}
+const DEFAULT_UNITS = ['mg', 'ml', 'mcg', 'g', 'UI', 'gotas', 'comprimido(s)', 'unidad(es)']
+
 function fmtDate(iso: string) {
     return new Date(iso.substring(0, 10) + 'T12:00:00').toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })
 }
@@ -64,13 +75,36 @@ function PautaModal({
 }) {
     const form = useForm<FormFields>(initialData)
     const [newTime, setNewTime] = useState('')
+    const [doseValue, setDoseValue] = useState('')
+    const [doseUnit, setDoseUnit]   = useState('')
 
     useEffect(() => {
         if (open) {
             form.reset()
             setNewTime('')
+            const match = initialData.dose.match(/^([\d.,]+)\s*(.*)$/)
+            if (match) {
+                setDoseValue(match[1])
+                setDoseUnit(match[2].trim())
+            } else {
+                setDoseValue('')
+                setDoseUnit('')
+            }
         }
     }, [open])
+
+    const selectedFormat = medications.find(m => String(m.id) === form.data.medication_id)?.format ?? ''
+    const availableUnits = DOSE_UNITS[selectedFormat] ?? DEFAULT_UNITS
+
+    function handleDoseValue(v: string) {
+        setDoseValue(v)
+        form.setData('dose', doseUnit ? `${v} ${doseUnit}`.trim() : v)
+    }
+
+    function handleDoseUnit(u: string) {
+        setDoseUnit(u)
+        form.setData('dose', `${doseValue} ${u}`.trim())
+    }
 
     function addSchedule() {
         if (!newTime || form.data.schedules.includes(newTime)) return
@@ -133,12 +167,27 @@ function PautaModal({
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                         <div className="modal-field">
                             <label>Dosis</label>
-                            <input
-                                type="text"
-                                placeholder="Ej: 500mg"
-                                value={form.data.dose}
-                                onChange={e => form.setData('dose', e.target.value)}
-                            />
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+                                <input
+                                    type="number"
+                                    min="0"
+                                    step="any"
+                                    placeholder="Cantidad"
+                                    value={doseValue}
+                                    onChange={e => handleDoseValue(e.target.value)}
+                                />
+                                <Select value={doseUnit} onValueChange={handleDoseUnit}>
+                                    <SelectTrigger><SelectValue placeholder="Unidad" /></SelectTrigger>
+                                    <SelectContent>
+                                        {availableUnits.map(u => (
+                                            <SelectItem key={u} value={u}>{u}</SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                            </div>
+                            {doseValue && !doseUnit && (
+                                <p style={{ fontSize: '0.75rem', color: '#f59e0b', margin: '0.15rem 0 0' }}>Selecciona una unidad de medida</p>
+                            )}
                             <p className="modal-error">{form.errors.dose}</p>
                         </div>
                         <div className="modal-field">
