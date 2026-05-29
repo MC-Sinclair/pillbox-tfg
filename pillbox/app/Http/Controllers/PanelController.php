@@ -48,8 +48,15 @@ class PanelController extends Controller
         }
 
         $residents->load([
-            'prescriptions.medication',
-            'prescriptions.administrations' => fn ($q) => $q->whereDate('scheduled_at', $today),
+            'prescriptions' => function ($q) use ($today) {
+                $q->where('active', true)
+                    ->where('start_date', '<=', $today)
+                    ->where(fn ($q) => $q->whereNull('end_date')->orWhere('end_date', '>=', $today))
+                    ->with([
+                        'medication:id,name,brand',
+                        'administrations' => fn ($q) => $q->whereDate('scheduled_at', $today),
+                    ]);
+            },
         ]);
 
         return Inertia::render('Panel/Index', [

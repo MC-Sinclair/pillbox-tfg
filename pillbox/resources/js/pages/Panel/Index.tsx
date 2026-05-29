@@ -50,9 +50,14 @@ function fmtDate(iso: string) {
 }
 
 function AdminRow({ prescription, time }: { prescription: Prescription; time: string }) {
-    const admin = prescription.administrations.find(
-        a => a.scheduled_at.substring(11, 16) === time
-    )
+    const admin = prescription.administrations.find(a => {
+        const raw = a.scheduled_at
+        // Handle both "YYYY-MM-DD HH:MM:SS" and ISO "YYYY-MM-DDTHH:MM:SS..." formats
+        const hhmm = raw.includes('T')
+            ? new Date(raw).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Europe/Madrid' })
+            : raw.substring(11, 16)
+        return hhmm === time
+    })
 
     if (!admin) return null
 
