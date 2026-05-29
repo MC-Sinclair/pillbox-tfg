@@ -75,21 +75,22 @@ function PautaModal({
 }) {
     const form = useForm<FormFields>(initialData)
     const [newTime, setNewTime] = useState('')
-    const [doseValue, setDoseValue] = useState('')
-    const [doseUnit, setDoseUnit]   = useState('')
+
+    const parseDose = (dose: string) => {
+        const match = dose.match(/^([\d.,]+)\s*(.*)$/)
+        return match ? { value: match[1], unit: match[2].trim() } : { value: '', unit: '' }
+    }
+
+    const [doseValue, setDoseValue] = useState(() => parseDose(initialData.dose).value)
+    const [doseUnit, setDoseUnit]   = useState(() => parseDose(initialData.dose).unit)
 
     useEffect(() => {
         if (open) {
             form.reset()
             setNewTime('')
-            const match = initialData.dose.match(/^([\d.,]+)\s*(.*)$/)
-            if (match) {
-                setDoseValue(match[1])
-                setDoseUnit(match[2].trim())
-            } else {
-                setDoseValue('')
-                setDoseUnit('')
-            }
+            const { value, unit } = parseDose(initialData.dose)
+            setDoseValue(value)
+            setDoseUnit(unit)
         }
     }, [open])
 
@@ -394,6 +395,7 @@ export default function Pautas({
 
             {editTarget && (
                 <PautaModal
+                    key={editTarget.id}
                     open={!!editTarget}
                     onClose={() => setEditTarget(null)}
                     title="Modificar pauta"
