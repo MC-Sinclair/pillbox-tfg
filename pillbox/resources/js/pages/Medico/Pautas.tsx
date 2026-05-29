@@ -164,46 +164,45 @@ function PautaModal({
                         <p className="modal-error">{form.errors.medication_id}</p>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                        <div className="modal-field">
-                            <label>Dosis</label>
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
-                                <input
-                                    type="number"
-                                    min="0"
-                                    step="any"
-                                    placeholder="Cantidad"
-                                    value={doseValue}
-                                    onChange={e => handleDoseValue(e.target.value)}
-                                />
-                                <Select value={doseUnit} onValueChange={handleDoseUnit}>
-                                    <SelectTrigger><SelectValue placeholder="Unidad" /></SelectTrigger>
-                                    <SelectContent>
-                                        {availableUnits.map(u => (
-                                            <SelectItem key={u} value={u}>{u}</SelectItem>
-                                        ))}
-                                    </SelectContent>
-                                </Select>
-                            </div>
-                            {doseValue && !doseUnit && (
-                                <p style={{ fontSize: '0.75rem', color: '#f59e0b', margin: '0.15rem 0 0' }}>Selecciona una unidad de medida</p>
-                            )}
-                            <p className="modal-error">{form.errors.dose}</p>
-                        </div>
-                        <div className="modal-field">
-                            <label>Vía de administración</label>
-                            <Select
-                                value={form.data.route}
-                                onValueChange={v => form.setData('route', v)}
-                            >
-                                <SelectTrigger><SelectValue placeholder="Seleccionar vía" /></SelectTrigger>
+                    <div className="modal-field">
+                        <label>Dosis</label>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+                            <input
+                                type="number"
+                                min="0"
+                                step="any"
+                                placeholder="Cantidad"
+                                value={doseValue}
+                                onChange={e => handleDoseValue(e.target.value)}
+                            />
+                            <Select value={doseUnit} onValueChange={handleDoseUnit}>
+                                <SelectTrigger><SelectValue placeholder="Unidad" /></SelectTrigger>
                                 <SelectContent>
-                                    {ROUTES.map(r => (
-                                        <SelectItem key={r} value={r}>{r}</SelectItem>
+                                    {availableUnits.map(u => (
+                                        <SelectItem key={u} value={u}>{u}</SelectItem>
                                     ))}
                                 </SelectContent>
                             </Select>
                         </div>
+                        {doseValue && !doseUnit && (
+                            <p style={{ fontSize: '0.75rem', color: '#f59e0b', margin: '0.15rem 0 0' }}>Selecciona una unidad de medida</p>
+                        )}
+                        <p className="modal-error">{form.errors.dose}</p>
+                    </div>
+
+                    <div className="modal-field">
+                        <label>Vía de administración</label>
+                        <Select
+                            value={form.data.route}
+                            onValueChange={v => form.setData('route', v)}
+                        >
+                            <SelectTrigger><SelectValue placeholder="Seleccionar vía" /></SelectTrigger>
+                            <SelectContent>
+                                {ROUTES.map(r => (
+                                    <SelectItem key={r} value={r}>{r}</SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
                     </div>
 
                     <div className="modal-field">
