@@ -40,8 +40,12 @@ const DOSE_UNITS: Record<string, string[]> = {
 }
 const DEFAULT_UNITS = ['mg', 'ml', 'mcg', 'g', 'UI', 'gotas', 'comprimido(s)', 'unidad(es)']
 
+function toMadridDate(iso: string): string {
+    return new Date(iso).toLocaleDateString('en-CA', { timeZone: 'Europe/Madrid' })
+}
+
 function fmtDate(iso: string) {
-    return new Date(iso.substring(0, 10) + 'T12:00:00').toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })
+    return new Date(iso).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'Europe/Madrid' })
 }
 
 type FormFields = {
@@ -405,8 +409,8 @@ export default function Pautas({
                         dose:          editTarget.dose,
                         route:         editTarget.route ?? '',
                         schedules:     editTarget.schedules,
-                        start_date:    editTarget.start_date.substring(0, 10),
-                        end_date:      editTarget.end_date ? editTarget.end_date.substring(0, 10) : '',
+                        start_date:    toMadridDate(editTarget.start_date),
+                        end_date:      editTarget.end_date ? toMadridDate(editTarget.end_date) : '',
                         notes:         editTarget.notes ?? '',
                         active:        editTarget.active,
                     }}
