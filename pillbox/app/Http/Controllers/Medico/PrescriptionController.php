@@ -76,7 +76,7 @@ class PrescriptionController extends Controller
             'user_id' => $request->user()->id,
         ]);
 
-        return redirect()->route('pautas.index');
+        return redirect()->route('medico.pautas.index');
     }
 
     public function update(Request $request, Prescription $prescription): RedirectResponse
@@ -100,7 +100,7 @@ class PrescriptionController extends Controller
 
         $prescription->update($validated);
 
-        return redirect()->route('pautas.index');
+        return redirect()->route('medico.pautas.index');
     }
 
     public function destroy(Request $request, Prescription $prescription): RedirectResponse
