@@ -403,8 +403,8 @@ export default function Pautas({
                         dose:          editTarget.dose,
                         route:         editTarget.route ?? '',
                         schedules:     editTarget.schedules,
-                        start_date:    editTarget.start_date,
-                        end_date:      editTarget.end_date ?? '',
+                        start_date:    editTarget.start_date.substring(0, 10),
+                        end_date:      editTarget.end_date ? editTarget.end_date.substring(0, 10) : '',
                         notes:         editTarget.notes ?? '',
                         active:        editTarget.active,
                     }}
