@@ -108,7 +108,7 @@ export default function Legal() {
                         <h3 style={H3_STYLE}>7. Derechos del usuario</h3>
                         <p style={P_STYLE}>
                             Puedes ejercer tus derechos de acceso, rectificación, supresión, portabilidad y oposición enviando un correo a{' '}
-                            <a href="mailto:contacto@pillbox.es" style={{ color: '#4da8ff' }}>contacto@pillbox.es</a>.
+                            <a href="mailto:pillbox.res@gmail.com" style={{ color: '#4da8ff' }}>pillbox.res@gmail.com</a>.
                         </p>
                     </section>
 
@@ -150,7 +150,7 @@ export default function Legal() {
                     <section id="aviso" style={{ ...SECTION_STYLE, marginBottom: 0 }}>
                         <h2 style={H2_STYLE}>Aviso legal</h2>
                         <p style={P_STYLE}>
-                            PillBox es un proyecto de Trabajo de Fin de Grado desarrollado en el IES María Moliner (Zaragoza) en el marco del ciclo formativo de Desarrollo de Aplicaciones Web. No constituye una empresa ni entidad jurídica. Todos los derechos sobre el código fuente y el diseño pertenecen a su autor. Para cualquier consulta: <a href="mailto:contacto@pillbox.es" style={{ color: '#4da8ff' }}>contacto@pillbox.es</a>
+                            PillBox es un proyecto de Trabajo de Fin de Grado desarrollado en el IES María Moliner (Zaragoza) en el marco del ciclo formativo de Desarrollo de Aplicaciones Web. No constituye una empresa ni entidad jurídica. Todos los derechos sobre el código fuente y el diseño pertenecen a su autor. Para cualquier consulta: <a href="mailto:pillbox.res@gmail.com" style={{ color: '#4da8ff' }}>pillbox.res@gmail.com</a>
                         </p>
                     </section>
 

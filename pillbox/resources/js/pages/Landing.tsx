@@ -90,7 +90,7 @@ export default function Landing() {
         aria-label="Navegación principal"
         className={navScrolled ? 'scrolled' : ''}
         style={navScrolled ? {
-          background: 'rgba(8, 20, 55, 0.82)',
+          background: 'rgba(94, 101, 124, 0.32)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
           boxShadow: '0 1px 0 rgba(255, 255, 255, 0.07)',
@@ -140,10 +140,6 @@ export default function Landing() {
         <div className="hero-left-vignette" aria-hidden={true} />
         <div className="hero-content">
           <div style={{ maxWidth: '680px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            <div className="hero-chip reveal">
-              <span className="hero-chip-dot" aria-hidden={true} />
-              Nuevo · Módulo multisede disponible
-            </div>
             <h1 className="hero-headline reveal reveal-delay-1">
               Cada pastilla,<br />registrada.<br />Cada pauta,<br />cumplida.
             </h1>
@@ -386,7 +382,7 @@ export default function Landing() {
             <div>
               <div className="footer-heading">Contacto</div>
               <p className="footer-tagline" style={{ marginBottom: '1.25rem' }}>¿Quieres ver PillBox en tu residencia?</p>
-              <a href="mailto:contacto@pillbox.es" className="footer-link">contacto@pillbox.es</a>
+              <a href="mailto:pillbox.res@gmail.com" className="footer-link">pillbox.res@gmail.com</a>
               <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.75rem', alignItems: 'center' }}>
                 <a href="https://www.linkedin.com/in/pillb0x/" className="social-icon" aria-label="LinkedIn de PillBox" target="_blank" rel="noopener noreferrer">
                   <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
