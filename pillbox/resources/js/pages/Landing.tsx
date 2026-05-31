@@ -1,6 +1,39 @@
 import '../../css/landing.css'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+function CookieBanner() {
+  const [visible, setVisible] = useState(() => !localStorage.getItem('pb_cookies'))
+
+  function accept() { localStorage.setItem('pb_cookies', 'all'); setVisible(false) }
+  function essential() { localStorage.setItem('pb_cookies', 'essential'); setVisible(false) }
+
+  if (!visible) return null
+
+  return (
+    <div style={{
+      position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 9999,
+      padding: '1.1rem 2rem',
+      background: 'rgba(7, 24, 62, 0.94)',
+      backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+      borderTop: '1px solid rgba(255,255,255,0.12)',
+      display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'space-between',
+    }}>
+      <p style={{ margin: 0, fontSize: '0.875rem', color: 'rgba(255,255,255,0.78)', maxWidth: '640px', lineHeight: 1.6 }}>
+        Usamos cookies esenciales para el funcionamiento de la plataforma (sesión y seguridad). No empleamos cookies de rastreo ni publicidad.{' '}
+        <a href="/legal#privacidad" style={{ color: '#4da8ff', textDecoration: 'underline' }}>Política de privacidad</a>
+      </p>
+      <div style={{ display: 'flex', gap: '0.75rem', flexShrink: 0 }}>
+        <button onClick={essential} style={{ padding: '0.5rem 1.1rem', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.2)', background: 'transparent', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', fontSize: '0.875rem', fontFamily: 'inherit' }}>
+          Solo esenciales
+        </button>
+        <button onClick={accept} style={{ padding: '0.5rem 1.25rem', borderRadius: '6px', border: 'none', background: '#2764c0', color: '#fff', cursor: 'pointer', fontSize: '0.875rem', fontWeight: 600, fontFamily: 'inherit' }}>
+          Aceptar
+        </button>
+      </div>
+    </div>
+  )
+}
+
 export default function Landing() {
   const [navScrolled, setNavScrolled] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
@@ -336,19 +369,19 @@ export default function Landing() {
             </div>
             <div>
               <div className="footer-heading">Legal</div>
-              <a href="#" className="footer-link">Política de privacidad</a>
-              <a href="#" className="footer-link">Términos de uso</a>
-              <a href="#" className="footer-link">Aviso legal</a>
+              <a href="/legal#privacidad" className="footer-link">Política de privacidad</a>
+              <a href="/legal#terminos" className="footer-link">Términos de uso</a>
+              <a href="/legal#aviso" className="footer-link">Aviso legal</a>
             </div>
             <div>
               <div className="footer-heading">Contacto</div>
               <p className="footer-tagline" style={{ marginBottom: '1.25rem' }}>¿Quieres ver PillBox en tu residencia?</p>
               <a href="mailto:contacto@pillbox.es" className="footer-link">contacto@pillbox.es</a>
               <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.75rem', alignItems: 'center' }}>
-                <a href="#" className="social-icon" aria-label="LinkedIn de PillBox">
+                <a href="https://www.linkedin.com/in/pillb0x/" className="social-icon" aria-label="LinkedIn de PillBox" target="_blank" rel="noopener noreferrer">
                   <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
                 </a>
-                <a href="#" className="social-icon" aria-label="GitHub de PillBox">
+                <a href="https://github.com/MC-Sinclair/pillbox-tfg" className="social-icon" aria-label="GitHub de PillBox" target="_blank" rel="noopener noreferrer">
                   <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" /></svg>
                 </a>
               </div>
@@ -357,12 +390,14 @@ export default function Landing() {
           <div className="footer-bottom">
             <span className="footer-copy">© 2026 PillBox</span>
             <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-              <a href="#" className="footer-copy footer-bottom-link">Política de privacidad</a>
-              <a href="#" className="footer-copy footer-bottom-link">Términos de uso</a>
+              <a href="/legal#privacidad" className="footer-copy footer-bottom-link">Política de privacidad</a>
+              <a href="/legal#terminos" className="footer-copy footer-bottom-link">Términos de uso</a>
             </div>
           </div>
         </div>
       </footer>
+
+      <CookieBanner />
     </>
   )
 }
