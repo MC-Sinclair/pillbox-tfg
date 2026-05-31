@@ -312,18 +312,31 @@ export default function Landing() {
 
       {/* ── TRUST ──────────────────────────────────────────────────── */}
       <section id="trust" aria-labelledby="trust-heading">
-        <div className="max-content" style={{ paddingTop: '3.5rem', paddingBottom: '3.5rem' }}>
-          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '2rem', justifyContent: 'space-between' }}>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.1rem', fontWeight: 600, color: 'white', maxWidth: '260px', lineHeight: 1.6 }}>
-              Infraestructura diseñada para cumplir con la normativa española y europea.
-            </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', alignItems: 'center', flex: 1, justifyContent: 'flex-end' }}>
-              {['LOPDGDD', 'Servidores UE', 'Cifrado AES-256', 'Copias de seguridad cada 6 h', 'Auditoría de accesos', 'Arquitectura validada en TFG'].map((label) => (
-                <span key={label} className="trust-chip reveal">
-                  <span className="trust-chip-icon" aria-hidden={true} />{label}
-                </span>
-              ))}
-            </div>
+        <div className="max-content" style={{ paddingTop: '5rem', paddingBottom: '5rem' }}>
+          <h2 id="trust-heading" className="font-heading reveal"
+            style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', color: '#fff', marginBottom: '0.5rem', lineHeight: 1.2 }}>
+            Seguridad y cumplimiento normativo
+          </h2>
+          <p className="reveal" style={{ fontFamily: 'var(--font-body)', fontSize: '1rem', color: 'rgba(200,225,255,0.55)', marginBottom: '2rem', marginTop: 0 }}>
+            Infraestructura diseñada para entornos clínicos reales.
+          </p>
+          <div>
+            {([
+              { label: 'LOPDGDD y RGPD', desc: 'Los datos de los residentes se tratan conforme al Reglamento General de Protección de Datos y la Ley Orgánica española de Protección de Datos. Cada tratamiento tiene base legal documentada.' },
+              { label: 'Servidores en la Unión Europea', desc: 'Infraestructura desplegada en Railway, región europe-west4 (Países Bajos). Los datos no salen en ningún momento del Espacio Económico Europeo.' },
+              { label: 'Cifrado en tránsito y en reposo', desc: 'Toda comunicación entre cliente y servidor viaja por TLS 1.3. Los datos almacenados están cifrados con AES-256 a nivel de disco.' },
+              { label: 'Copias de seguridad automáticas', desc: 'Backups programados cada 6 horas. En caso de incidencia, los datos pueden restaurarse a cualquier punto de recuperación reciente.' },
+              { label: 'Auditoría completa de accesos', desc: 'Cada administración farmacológica queda sellada con usuario, fecha y hora exacta. El historial es completo, trazable y no editable por el personal operativo.' },
+              { label: 'Control de acceso por roles', desc: 'Acceso estrictamente restringido por rol: Administrador, Médico y Gerocultor. Cada usuario ve y puede actuar únicamente dentro de su ámbito.' },
+            ] as { label: string; desc: string }[]).map((item, i) => (
+              <div key={item.label} className="reveal" style={{ display: 'flex', gap: '1.25rem', padding: '1.25rem 0', borderBottom: i < 5 ? '1px solid rgba(255,255,255,0.07)' : undefined }}>
+                <span style={{ color: 'var(--color-warm)', fontWeight: 700, fontSize: '1.15rem', flexShrink: 0, lineHeight: 1.4 }}>✓</span>
+                <div>
+                  <div style={{ color: '#fff', fontWeight: 600, fontSize: '0.95rem', marginBottom: '0.3rem' }}>{item.label}</div>
+                  <div style={{ color: 'rgba(200,225,255,0.58)', fontSize: '0.875rem', lineHeight: 1.7 }}>{item.desc}</div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
