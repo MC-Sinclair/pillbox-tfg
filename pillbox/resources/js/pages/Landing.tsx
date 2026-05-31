@@ -322,18 +322,16 @@ export default function Landing() {
           </p>
           <div>
             {([
-              { label: 'LOPDGDD y RGPD', desc: 'Los datos de los residentes se tratan conforme al Reglamento General de Protección de Datos y la Ley Orgánica española de Protección de Datos. Cada tratamiento tiene base legal documentada.' },
               { label: 'Servidores en la Unión Europea', desc: 'Infraestructura desplegada en Railway, región europe-west4 (Países Bajos). Los datos no salen en ningún momento del Espacio Económico Europeo.' },
-              { label: 'Cifrado en tránsito y en reposo', desc: 'Toda comunicación entre cliente y servidor viaja por TLS 1.3. Los datos almacenados están cifrados con AES-256 a nivel de disco.' },
-              { label: 'Copias de seguridad automáticas', desc: 'Backups programados cada 6 horas. En caso de incidencia, los datos pueden restaurarse a cualquier punto de recuperación reciente.' },
+              { label: 'Cifrado en tránsito y en reposo', desc: 'Toda comunicación entre cliente y servidor viaja por HTTPS/TLS. Los datos almacenados están cifrados con AES-256 a nivel de disco.' },
               { label: 'Auditoría completa de accesos', desc: 'Cada administración farmacológica queda sellada con usuario, fecha y hora exacta. El historial es completo, trazable y no editable por el personal operativo.' },
               { label: 'Control de acceso por roles', desc: 'Acceso estrictamente restringido por rol: Administrador, Médico y Gerocultor. Cada usuario ve y puede actuar únicamente dentro de su ámbito.' },
             ] as { label: string; desc: string }[]).map((item, i) => (
-              <div key={item.label} className="reveal" style={{ display: 'flex', gap: '1.25rem', padding: '1.25rem 0', borderBottom: i < 5 ? '1px solid rgba(255,255,255,0.07)' : undefined }}>
+              <div key={item.label} className="reveal" style={{ display: 'flex', gap: '1.25rem', padding: '1.25rem 0', borderBottom: i < 3 ? '1px solid rgba(255,255,255,0.07)' : undefined }}>
                 <span style={{ color: 'var(--color-warm)', fontWeight: 700, fontSize: '1.15rem', flexShrink: 0, lineHeight: 1.4 }}>✓</span>
                 <div>
                   <div style={{ color: '#fff', fontWeight: 600, fontSize: '0.95rem', marginBottom: '0.3rem' }}>{item.label}</div>
-                  <div style={{ color: 'rgba(200,225,255,0.58)', fontSize: '0.875rem', lineHeight: 1.7 }}>{item.desc}</div>
+                  <div style={{ color: 'rgba(210,232,255,0.82)', fontSize: '0.875rem', lineHeight: 1.7 }}>{item.desc}</div>
                 </div>
               </div>
             ))}
