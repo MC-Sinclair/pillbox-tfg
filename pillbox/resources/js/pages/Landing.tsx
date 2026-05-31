@@ -90,10 +90,10 @@ export default function Landing() {
         aria-label="Navegación principal"
         className={navScrolled ? 'scrolled' : ''}
         style={navScrolled ? {
-          background: 'rgba(216, 218, 222, 0.17)',
+          background: 'rgba(8, 20, 55, 0.82)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          boxShadow: '0 1px 0 rgba(255, 255, 255, 0.08)',
+          boxShadow: '0 1px 0 rgba(255, 255, 255, 0.07)',
         } : {}}
       >
         <div className="max-content" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '1.25rem', paddingBottom: '1.25rem' }}>
@@ -209,94 +209,104 @@ export default function Landing() {
             Cinco funcionalidades que cubren todo el ciclo
           </h2>
 
-          <div className="feature-row reveal">
-            <div className="feature-text">
-              <div className="feature-label">01 — Generación</div>
-              <h3 className="feature-title">Generación automática diaria</h3>
-              <p className="feature-desc">Cada noche PillBox crea los registros del día siguiente a partir de las pautas activas. Los gerocultores llegan al turno con la hoja ya preparada.</p>
-            </div>
-            <div className="feature-visual">
-              <div className="feature-mockup">
-                <div className="mockup-topbar"><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-title-bar" /><div className="mockup-badge" style={{ marginLeft: 'auto' }} /></div>
-                <div className="mockup-divider" />
-                <div className="mockup-row" style={{ marginTop: '0.25rem' }}><div className="mockup-cell" style={{ maxWidth: '90px' }} /><div className="mockup-cell accent" /><div className="mockup-cell" /><div className="mockup-cell accent" /></div>
-                <div className="mockup-row"><div className="mockup-cell" style={{ maxWidth: '90px' }} /><div className="mockup-cell" /><div className="mockup-cell accent" /><div className="mockup-cell accent" /></div>
-                <div className="mockup-row"><div className="mockup-cell" style={{ maxWidth: '90px' }} /><div className="mockup-cell accent-full" /><div className="mockup-cell accent-full" /><div className="mockup-cell accent-full" /></div>
-                <div className="mockup-divider" />
-                <div className="mockup-row" style={{ marginTop: 'auto' }}><div className="mockup-cell accent-full" style={{ maxWidth: '160px', height: '8px' }} /></div>
+          <div className="feature-card liquid-glass reveal">
+            <div className="feature-row">
+              <div className="feature-text">
+                <div className="feature-label">01 — Generación</div>
+                <h3 className="feature-title">Registros del día, generados solos</h3>
+                <p className="feature-desc">Al abrir el panel, PillBox crea automáticamente las administraciones del día para cada pauta activa. El médico define el tratamiento una vez; el sistema prepara el trabajo de cada turno sin intervención manual.</p>
               </div>
-            </div>
-          </div>
-
-          <div className="feature-row reversed reveal">
-            <div className="feature-text">
-              <div className="feature-label">02 — Firma</div>
-              <h3 className="feature-title">Firma digital por turno</h3>
-              <p className="feature-desc">Cada administración se confirma con firma digital vinculada al usuario autenticado. Elimina firmas de terceros y discordancias.</p>
-            </div>
-            <div className="feature-visual">
-              <div className="feature-mockup">
-                <div className="mockup-topbar"><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-title-bar" /></div>
-                <div className="mockup-divider" />
-                <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.3)', margin: '0.25rem 0', letterSpacing: '0.05em', fontFamily: 'monospace' }}>TURNO MAÑANA · 08:00 – 14:00</div>
-                <div className="mockup-signature-row"><div className="mockup-sig-box filled" /><div className="mockup-sig-box filled" /><div className="mockup-sig-box" /><div className="mockup-sig-box filled" /></div>
-                <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.3)', margin: '0.5rem 0 0.25rem', letterSpacing: '0.05em', fontFamily: 'monospace' }}>TURNO TARDE · 14:00 – 22:00</div>
-                <div className="mockup-signature-row"><div className="mockup-sig-box" /><div className="mockup-sig-box filled" /><div className="mockup-sig-box filled" /><div className="mockup-sig-box" /></div>
-              </div>
-            </div>
-          </div>
-
-          <div className="feature-row reveal">
-            <div className="feature-text">
-              <div className="feature-label">03 — Supervisión</div>
-              <h3 className="feature-title">Panel del médico</h3>
-              <p className="feature-desc">Vista centralizada de pautas activas, alertas de incidencias y evolución por residente. El facultativo puede modificar o pausar una pauta en tiempo real.</p>
-            </div>
-            <div className="feature-visual">
-              <div className="feature-mockup">
-                <div className="mockup-topbar"><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-title-bar" /></div>
-                <div className="mockup-divider" />
-                <div className="mockup-chart-row" style={{ marginTop: '0.5rem' }}>
-                  <div className="mockup-chart-bar" style={{ height: '60%' }} /><div className="mockup-chart-bar" style={{ height: '75%', background: 'rgba(255,255,255,0.32)' }} /><div className="mockup-chart-bar" style={{ height: '50%' }} /><div className="mockup-chart-bar" style={{ height: '90%', background: 'rgba(255,255,255,0.44)' }} /><div className="mockup-chart-bar" style={{ height: '65%' }} /><div className="mockup-chart-bar" style={{ height: '80%' }} /><div className="mockup-chart-bar" style={{ height: '45%' }} />
-                </div>
-                <div className="mockup-divider" style={{ marginTop: '0.5rem' }} />
-                <div className="mockup-row"><div className="mockup-cell" style={{ maxWidth: '110px' }} /><div className="mockup-cell accent" style={{ maxWidth: '50px' }} /></div>
-              </div>
-            </div>
-          </div>
-
-          <div className="feature-row reversed reveal">
-            <div className="feature-text">
-              <div className="feature-label">04 — Alertas</div>
-              <h3 className="feature-title">Avisos de no administración</h3>
-              <p className="feature-desc">Si una dosis no ha sido firmada antes del cierre de turno, PillBox genera un aviso automático. Ninguna medicación se cae del radar.</p>
-            </div>
-            <div className="feature-visual">
-              <div className="feature-mockup">
-                <div className="mockup-topbar"><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-title-bar" /></div>
-                <div className="mockup-divider" />
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.25rem' }}>
-                  <div className="mockup-alert-row"><div className="mockup-alert-dot" /><div className="mockup-alert-line" /><div style={{ width: '40px', height: '7px', borderRadius: '3px', background: 'rgba(255,160,50,0.25)' }} /></div>
-                  <div className="mockup-alert-row"><div className="mockup-alert-dot" /><div className="mockup-alert-line" style={{ width: '60%' }} /></div>
+              <div className="feature-visual">
+                <div className="feature-mockup">
+                  <div className="mockup-topbar"><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-title-bar" /><div className="mockup-badge" style={{ marginLeft: 'auto' }} /></div>
+                  <div className="mockup-divider" />
+                  <div className="mockup-row" style={{ marginTop: '0.25rem' }}><div className="mockup-cell" style={{ maxWidth: '90px' }} /><div className="mockup-cell accent" /><div className="mockup-cell" /><div className="mockup-cell accent" /></div>
+                  <div className="mockup-row"><div className="mockup-cell" style={{ maxWidth: '90px' }} /><div className="mockup-cell" /><div className="mockup-cell accent" /><div className="mockup-cell accent" /></div>
+                  <div className="mockup-row"><div className="mockup-cell" style={{ maxWidth: '90px' }} /><div className="mockup-cell accent-full" /><div className="mockup-cell accent-full" /><div className="mockup-cell accent-full" /></div>
+                  <div className="mockup-divider" />
+                  <div className="mockup-row" style={{ marginTop: 'auto' }}><div className="mockup-cell accent-full" style={{ maxWidth: '160px', height: '8px' }} /></div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="feature-row reveal">
-            <div className="feature-text">
-              <div className="feature-label">05 — Pro Multisede</div>
-              <h3 className="feature-title">Multisede</h3>
-              <p className="feature-desc">Gestiona varias residencias desde un único panel. Cada sede mantiene sus datos aislados (LOPDGDD), con métricas agregadas para el responsable corporativo.</p>
+          <div className="feature-card liquid-glass reveal">
+            <div className="feature-row reversed">
+              <div className="feature-text">
+                <div className="feature-label">02 — Registro</div>
+                <h3 className="feature-title">Cada dosis, registrada y firmada</h3>
+                <p className="feature-desc">La gerocultura marca cada administración como realizada, rechazada o con dificultad. El registro queda vinculado al usuario autenticado y a la hora exacta, creando trazabilidad completa de quién hizo qué y cuándo.</p>
+              </div>
+              <div className="feature-visual">
+                <div className="feature-mockup">
+                  <div className="mockup-topbar"><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-title-bar" /></div>
+                  <div className="mockup-divider" />
+                  <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.3)', margin: '0.25rem 0', letterSpacing: '0.05em', fontFamily: 'monospace' }}>TURNO MAÑANA · 08:00 – 14:00</div>
+                  <div className="mockup-signature-row"><div className="mockup-sig-box filled" /><div className="mockup-sig-box filled" /><div className="mockup-sig-box" /><div className="mockup-sig-box filled" /></div>
+                  <div style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.3)', margin: '0.5rem 0 0.25rem', letterSpacing: '0.05em', fontFamily: 'monospace' }}>TURNO TARDE · 14:00 – 22:00</div>
+                  <div className="mockup-signature-row"><div className="mockup-sig-box" /><div className="mockup-sig-box filled" /><div className="mockup-sig-box filled" /><div className="mockup-sig-box" /></div>
+                </div>
+              </div>
             </div>
-            <div className="feature-visual">
-              <div className="feature-mockup">
-                <div className="mockup-topbar"><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-title-bar" /></div>
-                <div className="mockup-divider" />
-                <div className="mockup-multi-col" style={{ marginTop: '0.4rem' }}>
-                  <div className="mockup-multi-card active"><div style={{ height: '6px', background: 'rgba(255,255,255,0.40)', borderRadius: '2px' }} /><div style={{ height: '6px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px' }} /></div>
-                  <div className="mockup-multi-card"><div style={{ height: '6px', background: 'rgba(255,255,255,0.12)', borderRadius: '2px' }} /><div style={{ height: '6px', background: 'rgba(255,255,255,0.06)', borderRadius: '2px' }} /></div>
-                  <div className="mockup-multi-card"><div style={{ height: '6px', background: 'rgba(255,255,255,0.12)', borderRadius: '2px' }} /><div style={{ height: '6px', background: 'rgba(255,255,255,0.06)', borderRadius: '2px' }} /></div>
+          </div>
+
+          <div className="feature-card liquid-glass reveal">
+            <div className="feature-row">
+              <div className="feature-text">
+                <div className="feature-label">03 — Pautas</div>
+                <h3 className="feature-title">Pautas médicas en tiempo real</h3>
+                <p className="feature-desc">El médico crea, modifica o desactiva pautas farmacológicas por residente: medicamento, dosis, vía, horarios y período de vigencia. Cualquier cambio se aplica de inmediato en el panel de las gerocultoras.</p>
+              </div>
+              <div className="feature-visual">
+                <div className="feature-mockup">
+                  <div className="mockup-topbar"><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-title-bar" /></div>
+                  <div className="mockup-divider" />
+                  <div className="mockup-chart-row" style={{ marginTop: '0.5rem' }}>
+                    <div className="mockup-chart-bar" style={{ height: '60%' }} /><div className="mockup-chart-bar" style={{ height: '75%', background: 'rgba(255,255,255,0.32)' }} /><div className="mockup-chart-bar" style={{ height: '50%' }} /><div className="mockup-chart-bar" style={{ height: '90%', background: 'rgba(255,255,255,0.44)' }} /><div className="mockup-chart-bar" style={{ height: '65%' }} /><div className="mockup-chart-bar" style={{ height: '80%' }} /><div className="mockup-chart-bar" style={{ height: '45%' }} />
+                  </div>
+                  <div className="mockup-divider" style={{ marginTop: '0.5rem' }} />
+                  <div className="mockup-row"><div className="mockup-cell" style={{ maxWidth: '110px' }} /><div className="mockup-cell accent" style={{ maxWidth: '50px' }} /></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="feature-card liquid-glass reveal">
+            <div className="feature-row reversed">
+              <div className="feature-text">
+                <div className="feature-label">04 — Incidencias</div>
+                <h3 className="feature-title">Ninguna dosis sin registrar</h3>
+                <p className="feature-desc">Las administraciones no completadas se marcan automáticamente como «No administrado» y se destacan visualmente en rojo en el panel. Cada incidencia queda en el historial: accesible, auditable y con fecha.</p>
+              </div>
+              <div className="feature-visual">
+                <div className="feature-mockup">
+                  <div className="mockup-topbar"><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-title-bar" /></div>
+                  <div className="mockup-divider" />
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.25rem' }}>
+                    <div className="mockup-alert-row"><div className="mockup-alert-dot" /><div className="mockup-alert-line" /><div style={{ width: '40px', height: '7px', borderRadius: '3px', background: 'rgba(255,160,50,0.25)' }} /></div>
+                    <div className="mockup-alert-row"><div className="mockup-alert-dot" /><div className="mockup-alert-line" style={{ width: '60%' }} /></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="feature-card liquid-glass reveal">
+            <div className="feature-row">
+              <div className="feature-text">
+                <div className="feature-label">05 — Administración</div>
+                <h3 className="feature-title">Gestión completa de la residencia</h3>
+                <p className="feature-desc">El administrador gestiona usuarios (médicos, gerocultoras), el catálogo de residentes, la asignación de gerocultoras a pacientes y el inventario de medicamentos, todo desde una interfaz centralizada con roles diferenciados.</p>
+              </div>
+              <div className="feature-visual">
+                <div className="feature-mockup">
+                  <div className="mockup-topbar"><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-dot" /><div className="mockup-title-bar" /></div>
+                  <div className="mockup-divider" />
+                  <div className="mockup-multi-col" style={{ marginTop: '0.4rem' }}>
+                    <div className="mockup-multi-card active"><div style={{ height: '6px', background: 'rgba(255,255,255,0.40)', borderRadius: '2px' }} /><div style={{ height: '6px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px' }} /></div>
+                    <div className="mockup-multi-card"><div style={{ height: '6px', background: 'rgba(255,255,255,0.12)', borderRadius: '2px' }} /><div style={{ height: '6px', background: 'rgba(255,255,255,0.06)', borderRadius: '2px' }} /></div>
+                    <div className="mockup-multi-card"><div style={{ height: '6px', background: 'rgba(255,255,255,0.12)', borderRadius: '2px' }} /><div style={{ height: '6px', background: 'rgba(255,255,255,0.06)', borderRadius: '2px' }} /></div>
+                  </div>
                 </div>
               </div>
             </div>

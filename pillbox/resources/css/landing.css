@@ -524,14 +524,15 @@ body {
 .feature-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 5rem;
+  gap: 4rem;
   align-items: center;
-  padding: 2.5rem 0;
-  border-bottom: 1px solid rgba(77, 168, 255, 0.12);
+  padding: 0;
 }
 
-.feature-row:last-child {
-  border-bottom: none;
+.feature-card {
+  border-radius: 20px;
+  padding: 2.5rem 2.75rem;
+  margin-bottom: 1.25rem;
 }
 
 .feature-row.reversed .feature-text {
@@ -1210,7 +1211,11 @@ body {
 @media (max-width: 767px) {
   .feature-row {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
+  }
+
+  .feature-card {
+    padding: 1.75rem 1.5rem;
   }
 
   .feature-row.reversed .feature-text {
