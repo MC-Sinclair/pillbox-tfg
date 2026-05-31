@@ -101,8 +101,8 @@ export default function Landing() {
           <div className="nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }}>
             <a href="#solucion" className="nav-link">Solución</a>
             <a href="#features" className="nav-link">Funcionalidades</a>
-            <a href="#pricing" className="nav-link">Impacto</a>
             <a href="#trust" className="nav-link">Seguridad</a>
+            <a href="#pricing" className="nav-link">Impacto</a>
             <a href="#footer" className="nav-link">Contacto</a>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -124,8 +124,8 @@ export default function Landing() {
         <nav style={{ display: 'flex', flexDirection: 'column' }}>
           <a href="#solucion" className="footer-link" onClick={closeDrawer} style={{ fontSize: '1.1rem', color: '#fff', padding: '0.75rem 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>Solución</a>
           <a href="#features" className="footer-link" onClick={closeDrawer} style={{ fontSize: '1.1rem', color: '#fff', padding: '0.75rem 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>Funcionalidades</a>
-          <a href="#pricing"  className="footer-link" onClick={closeDrawer} style={{ fontSize: '1.1rem', color: '#fff', padding: '0.75rem 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>Impacto</a>
           <a href="#trust"    className="footer-link" onClick={closeDrawer} style={{ fontSize: '1.1rem', color: '#fff', padding: '0.75rem 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>Seguridad</a>
+          <a href="#pricing"  className="footer-link" onClick={closeDrawer} style={{ fontSize: '1.1rem', color: '#fff', padding: '0.75rem 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>Impacto</a>
           <a href="#footer"   className="footer-link" onClick={closeDrawer} style={{ fontSize: '1.1rem', color: '#fff', padding: '0.75rem 0' }}>Contacto</a>
         </nav>
         <a href="/login" className="btn-primary" onClick={closeDrawer} style={{ marginTop: '2rem', justifyContent: 'center' }}>Login</a>
@@ -351,7 +351,7 @@ export default function Landing() {
           </p>
           <div className="impact-rows">
             {([
-              { num: '90', unit: 'min', label: 'Ahorradas por gerocultura en cada turno', quote: 'Son 90 minutos que no van a una hoja de cálculo. Van a sentarse con Dolores, que hoy no ha querido hablar con nadie.' },
+              { num: '90', unit: 'min', label: 'Ahorradas por gerocultura en cada turno', quote: 'Son 90 minutos que no van a una hoja de cálculo. Van a la atención directa al residente, que es para lo que está formado ese profesional.' },
               { num: '3', unit: 'clics', label: 'Para acceder al historial farmacológico completo de un residente', quote: 'Porque cuando el médico necesita decidir, cada segundo que se pierde buscando papel es un riesgo real.' },
               { num: '0', unit: '', label: 'Errores de duplicidad en la administración documentados', quote: 'Ningún residente recibe dos veces la misma dosis. Eso no es eficiencia. Es seguridad.' },
               { num: '600+', unit: '', label: 'Dosis gestionadas cada día, sin papel, sin ambigüedad', quote: 'Cada una, registrada. Cada firma, vinculada a una persona. Cada turno, auditado y sin fisuras.' },
