@@ -8,14 +8,14 @@ Plataforma web de gestión de administración farmacológica para residencias de
 
 ## Stack tecnológico
 
-| Capa | Tecnología |
-|---|---|
-| Backend | PHP 8.3 · Laravel 13 |
-| Frontend | React 19 · Inertia.js v3 · Tailwind CSS v4 |
-| Base de datos | MySQL 8.0 |
-| Autenticación | Laravel Fortify + 2FA TOTP |
-| Infraestructura local | Docker · Apache |
-| Despliegue | Railway (europe-west4) |
+| Capa                  | Tecnología                                  |
+| --------------------- | -------------------------------------------- |
+| Backend               | PHP 8.3 · Laravel 13                        |
+| Frontend              | React 19 · Inertia.js v3 · Tailwind CSS v4 |
+| Base de datos         | MySQL 8.0                                    |
+| Autenticación        | Laravel Fortify + 2FA TOTP                   |
+| Infraestructura local | Docker · Apache                             |
+| Despliegue            | Railway (europe-west4)                       |
 
 ---
 
@@ -100,6 +100,7 @@ docker compose up -d --build
 ```
 
 El `entrypoint.sh` ejecuta automáticamente al primer arranque:
+
 1. `composer install`
 2. `npm install && npm run build`
 3. `php artisan key:generate`
@@ -109,10 +110,10 @@ El `entrypoint.sh` ejecuta automáticamente al primer arranque:
 
 ### 4. Acceder a la aplicación
 
-| Servicio | URL |
-|---|---|
+| Servicio    | URL                   |
+| ----------- | --------------------- |
 | Aplicación | http://localhost:8080 |
-| phpMyAdmin | http://localhost:8081 |
+| phpMyAdmin  | http://localhost:8081 |
 
 ### 5. Crear usuarios adicionales
 
@@ -122,14 +123,14 @@ Desde el panel de administración (`/admin/usuarios`) con el usuario admin cread
 
 ## Variables de entorno relevantes
 
-| Variable | Descripción |
-|---|---|
-| `APP_KEY` | Clave de cifrado (generada automáticamente) |
-| `APP_URL` | URL base de la aplicación |
-| `DB_HOST` | Host de MySQL (`mysql` en Docker) |
-| `DB_DATABASE` | Nombre de la base de datos |
-| `ADMIN_EMAIL` | Email del administrador inicial |
-| `ADMIN_PASSWORD` | Contraseña del administrador inicial |
+| Variable           | Descripción                                 |
+| ------------------ | -------------------------------------------- |
+| `APP_KEY`        | Clave de cifrado (generada automáticamente) |
+| `APP_URL`        | URL base de la aplicación                   |
+| `DB_HOST`        | Host de MySQL (`mysql` en Docker)          |
+| `DB_DATABASE`    | Nombre de la base de datos                   |
+| `ADMIN_EMAIL`    | Email del administrador inicial              |
+| `ADMIN_PASSWORD` | Contraseña del administrador inicial        |
 
 ---
 
@@ -164,18 +165,18 @@ Docker-laravel/
 
 ## Rutas principales
 
-| Método | Ruta | Rol | Descripción |
-|---|---|---|---|
-| GET | `/` | Público | Landing page |
-| GET | `/legal` | Público | Política de privacidad y términos |
-| GET | `/login` | Público | Autenticación |
-| GET | `/panel` | gerocultora | Panel de administración diaria |
-| GET | `/admin/residentes` | admin | Gestión de residentes |
-| GET | `/admin/usuarios` | admin | Gestión de usuarios |
-| GET | `/admin/medicamentos` | admin | Catálogo de medicamentos |
-| GET | `/medico/pautas` | medico | Gestión de pautas |
-| GET | `/medico/historial` | medico | Historial de administraciones |
-| GET | `/medico/medicamentos` | medico | Catálogo de medicamentos |
+| Método | Ruta                     | Rol         | Descripción                        |
+| ------- | ------------------------ | ----------- | ----------------------------------- |
+| GET     | `/`                    | Público    | Landing page                        |
+| GET     | `/legal`               | Público    | Política de privacidad y términos |
+| GET     | `/login`               | Público    | Autenticación                      |
+| GET     | `/panel`               | gerocultora | Panel de administración diaria     |
+| GET     | `/admin/residentes`    | admin       | Gestión de residentes              |
+| GET     | `/admin/usuarios`      | admin       | Gestión de usuarios                |
+| GET     | `/admin/medicamentos`  | admin       | Catálogo de medicamentos           |
+| GET     | `/medico/pautas`       | medico      | Gestión de pautas                  |
+| GET     | `/medico/historial`    | medico      | Historial de administraciones       |
+| GET     | `/medico/medicamentos` | medico      | Catálogo de medicamentos           |
 
 ---
 
@@ -196,7 +197,7 @@ El `entrypoint.sh` gestiona las migraciones y la compilación de assets automát
 
 ## Contexto académico
 
-**Centro:** IES María Moliner — Zaragoza
+**Centro:** IES María Moliner — Segovia
 **Ciclo:** Desarrollo de Aplicaciones Web (DAW)
 **Tipo:** Trabajo de Fin de Grado (TFG)
 **GitHub:** [github.com/MC-Sinclair/pillbox-tfg](https://github.com/MC-Sinclair/pillbox-tfg)
