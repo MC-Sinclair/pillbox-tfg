@@ -427,10 +427,10 @@ function TabResidentes({ residents = [], gerocultoras = [], medicos = [] }: { re
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Médico responsable</Label>
-                            <Select value={addForm.data.doctor} onValueChange={(v) => addForm.setData('doctor', v)}>
+                            <Select value={addForm.data.doctor || '__none__'} onValueChange={(v) => addForm.setData('doctor', v === '__none__' ? '' : v)}>
                                 <SelectTrigger><SelectValue placeholder="Sin asignar" /></SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="">Sin asignar</SelectItem>
+                                    <SelectItem value="__none__">Sin asignar</SelectItem>
                                     {medicos.map((m) => (
                                         <SelectItem key={m.id} value={m.name}>{m.name}</SelectItem>
                                     ))}
@@ -488,10 +488,10 @@ function TabResidentes({ residents = [], gerocultoras = [], medicos = [] }: { re
                         </div>
                         <div className="grid gap-1 modal-field">
                             <Label>Médico responsable</Label>
-                            <Select value={editForm.data.doctor} onValueChange={(v) => editForm.setData('doctor', v)}>
+                            <Select value={editForm.data.doctor || '__none__'} onValueChange={(v) => editForm.setData('doctor', v === '__none__' ? '' : v)}>
                                 <SelectTrigger><SelectValue placeholder="Sin asignar" /></SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="">Sin asignar</SelectItem>
+                                    <SelectItem value="__none__">Sin asignar</SelectItem>
                                     {medicos.map((m) => (
                                         <SelectItem key={m.id} value={m.name}>{m.name}</SelectItem>
                                     ))}
