@@ -1,4 +1,5 @@
 import '../../css/landing.css'
+import React, { useEffect } from 'react'
 
 const SECTION_STYLE: React.CSSProperties = {
     marginBottom: '3.5rem',
@@ -37,8 +38,19 @@ const DIVIDER: React.CSSProperties = {
 }
 
 export default function Legal() {
+    useEffect(() => {
+        const html = document.documentElement
+        const prev = html.className
+        html.classList.remove('dark')
+        html.style.colorScheme = 'dark'
+        return () => {
+            html.className = prev
+            html.style.colorScheme = ''
+        }
+    }, [])
+
     return (
-        <>
+        <div style={{ background: '#18458d', minHeight: '100vh', color: '#fff' }}>
             {/* ── NAVBAR ── */}
             <nav
                 id="navbar"
@@ -164,6 +176,6 @@ export default function Legal() {
                     <a href="/" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>Inicio</a>
                 </span>
             </footer>
-        </>
+        </div>
     )
 }
